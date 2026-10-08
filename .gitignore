@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# Secrets
+.env
+.env.*
+!.env.example
+sim/certs/
+
+# Node / web
+node_modules/
+web/dist/
+
+# CDK
+infra/cdk.out/
+cdk.context.json
+
+# OS / editor
+.DS_Store
+.idea/
