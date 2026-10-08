@@ -14,3 +14,37 @@ once, then work offline.
 ### GitHub over HTTPS
 The machine had no SSH key registered with GitHub, so the first push failed. The repo uses HTTPS with the
 GitHub CLI as its credential helper (`git config credential.helper '!gh auth git-credential'`).
+
+### The CO₂ normaliser has to be "a day at 1,500 ppm", not "an always-closed room"
+The spec normalises the CO₂ term by an always-closed room's discomfort points. On a severe day that
+baseline sits near 5,000 ppm, and the points grow by 10 per 1,000 ppm above 2,000, so the normaliser is
+huge and keeping the class at 1,700 ppm all morning looks almost free. (This was one of the lessons from
+the pre-event practice prototype, which is not in this repo.) Khidki normalises by "every occupied minute
+at 1,500 ppm" (1 point per minute), so 1% of an always-open PM dose trades against 1% of a day at 1,500 ppm.
+
+### Separable interpolation made the DP 2.4× faster
+Given the action, CO₂ and PM evolve independently, so bilinear interpolation of the value function is two
+1-D passes (along PM, then along CO₂) instead of four 2-D gathers. In float32 that took one DP solve from
+0.51 s to about 0.22 s for a purifier room (8 actions), and the whole attention-budget search from 4.5 s to
+1.9 s. Same plans, bit for bit on the test day.
+
+### The smallest μ that meets the budget still chatters
+Bisecting for the *smallest* switch penalty that fits 6 changes gave plans like "open both at 07:50, close
+at 08:00, open both at 08:05, open one at 08:10": legal, and maddening for a teacher. Those flips bought
+under 1% of PM dose. A floor on μ (each interruption costs 0.2% of the day's normalised cost) turns that
+into "open one side at 07:45, both at 08:45" for +0.5% PM. Budget and floor together: never more than 6,
+and never a change that isn't worth it.
+
+### A purifier room's PM lever is bounded by CO₂
+44 children need about 3.3 air changes per hour to stay under 1,500 ppm. With a 350 m³/h purifier at that
+ventilation, indoor PM is still about 64% of outdoor, against about 84% fully open with the purifier on.
+So "cut PM by 30% against always-open + purifier" was an impossible test. Khidki gets 17% with zero minutes
+above 1,500 ppm. The test now checks the physics-backed claim, and the benchmark will report it honestly.
+
+### Small spec adaptations
+- Four window states, not three: closed, cracked, one side open (6 h⁻¹), both sides open (10 h⁻¹). The
+  partial-open story needs "one side" and "both sides" to be different states.
+- 35-minute periods, so that 8 periods, a 20-minute assembly at 07:30 and a 10:10 to 10:40 recess fit a
+  07:30 to 13:00 day on a 5-minute grid.
+- One extra reason code, `AIR_REFRESHED` ("CO₂ is down, close to keep the smog out"), for closing after a
+  purge, which none of the spec's codes described.
