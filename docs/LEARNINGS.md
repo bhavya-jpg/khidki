@@ -110,3 +110,18 @@ policy's `@en`/`@hi` annotations become the bilingual explanation, so "PE moved 
 A strict "within one unit of the last digit" rule rejected "about 1,620 ppm" for a measured 1,623. Trailing
 zeros now mark a rounded number, allowed within half its rounding unit *and* 3% of the tool value, so
 1,600 for 1,623 passes but 100 for 95 doesn't.
+
+### The benchmark said "trade-off", not "win", and that's the honest headline
+Across 48 real Delhi days, Khidki never clearly beats a CO₂ alarm on PM2.5 *and* CO₂ at once (Pareto-dominates
+on 1 of 48 days in the room without a purifier). What it does do, day after day:
+- **Balanced:** 74% fewer minutes above 1,500 ppm (17 vs 65 a day; fewer on 44 of 48 days), with about a quarter
+  of the requests to the teacher (4 vs 15), for ~4 points more PM2.5 of an always-open dose.
+- **PM-weighted (α 0.9):** lands on the alarm's PM *and* CO₂ (88% vs 89%, 63 vs 65 minutes) with a third of the
+  requests and less than half the cold air (34 vs 81 °C·min).
+Physics explains it: 44 children need ~3.3 air changes an hour, at which indoor PM is already ~94% of outdoor,
+so window timing barely moves PM without a purifier. The value is fewer stuffy minutes and fewer
+interruptions, verified. We report it that way.
+
+### `hash()` made the benchmark non-reproducible
+Seeds were `hash((date, room))`, and Python randomises string hashing per process, so two runs disagreed
+(Khidki's minutes above 1,500 ppm went from 12.6 to 16.0). Seeds now come from `zlib.crc32`.

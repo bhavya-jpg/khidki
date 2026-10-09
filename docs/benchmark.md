@@ -13,37 +13,37 @@ minutes and counts every request against its daily budget of 6, including ones t
 
 | Policy | PM2.5 dose (% of always open) | Min > 1,500 ppm | Min > 1,000 ppm | Peak CO₂ | Cold exposure (°C·min) | Requests to teacher |
 |---|---|---|---|---|---|---|
-| Always closed | 66.9 | 231.7 | 242.7 | 3883 | 0.0 | 0.0 |
-| Always open | 100.0 | 0.0 | 0.0 | 882 | 0.0 | 1.0 |
-| CO₂ alarm | 87.3 | 61.3 | 190.7 | 2176 | 0.0 | 13.3 |
-| Temperature-led teacher | 100.0 | 0.0 | 0.0 | 882 | 0.0 | 1.0 |
-| Khidki | 90.7 | 36.0 | 75.7 | 1783 | 0.0 | 5.7 |
-| Khidki, teacher always acts | 95.2 | 0.0 | 37.0 | 1152 | 0.0 | 5.3 |
-| Khidki, PM weight 0.6 | 92.9 | 9.3 | 57.0 | 1657 | 0.0 | 5.0 |
-| Khidki, PM weight 0.7 | 92.7 | 14.7 | 88.0 | 1691 | 0.0 | 5.3 |
-| Khidki, PM weight 0.8 | 93.2 | 3.7 | 53.0 | 1589 | 0.0 | 4.7 |
-| Khidki, PM weight 0.9 | 90.0 | 26.0 | 64.7 | 2236 | 0.0 | 5.3 |
+| Always closed | 64.8 | 266.3 | 277.2 | 4075 | 0.0 | 0.0 |
+| Always open | 100.0 | 0.0 | 0.0 | 880 | 205.7 | 1.0 |
+| CO₂ alarm | 89.1 | 65.3 | 220.3 | 2181 | 80.6 | 14.9 |
+| Temperature-led teacher | 80.0 | 128.7 | 142.5 | 3105 | 0.0 | 1.0 |
+| Khidki | 92.9 | 17.3 | 90.4 | 1713 | 86.3 | 4.0 |
+| Khidki, teacher always acts | 94.6 | 1.6 | 75.2 | 1354 | 91.1 | 3.7 |
+| Khidki, PM weight 0.6 | 92.4 | 19.2 | 105.2 | 1897 | 76.0 | 4.9 |
+| Khidki, PM weight 0.7 | 91.4 | 27.6 | 122.7 | 2013 | 67.3 | 5.0 |
+| Khidki, PM weight 0.8 | 90.9 | 36.2 | 133.6 | 2095 | 58.9 | 5.2 |
+| Khidki, PM weight 0.9 | 88.4 | 62.8 | 145.2 | 2385 | 34.2 | 5.4 |
 
-**Khidki (Balanced) vs CO₂ alarm, day by day:** fewer minutes above 1,500 ppm on 2 of 3 days (tied on 0); median PM2.5 difference +4.4 points of an always-open dose; median requests 0.43× the alarm's.
-Khidki Pareto-dominates the alarm (better or equal on both PM and CO₂) on 0 of 3 days; the alarm dominates Khidki on 0.
+**Khidki (Balanced) vs CO₂ alarm, day by day:** fewer minutes above 1,500 ppm on 44 of 48 days (tied on 0); median PM2.5 difference +4.2 points of an always-open dose; median requests 0.28× the alarm's.
+Khidki Pareto-dominates the alarm (better or equal on both PM and CO₂) on 1 of 48 days; the alarm dominates Khidki on 1.
 
 ## Class with a purifier (38 children)
 
 | Policy | PM2.5 dose (% of always open) | Min > 1,500 ppm | Min > 1,000 ppm | Peak CO₂ | Cold exposure (°C·min) | Requests to teacher |
 |---|---|---|---|---|---|---|
-| Always closed | 37.7 | 227.7 | 240.7 | 3434 | 0.0 | 6.0 |
-| Always open | 100.0 | 0.0 | 0.0 | 831 | 0.0 | 7.0 |
-| CO₂ alarm | 74.4 | 33.7 | 173.3 | 1819 | 0.0 | 18.7 |
-| Temperature-led teacher | 100.0 | 0.0 | 0.0 | 831 | 0.0 | 7.0 |
-| Khidki | 84.5 | 7.3 | 187.3 | 1412 | 0.0 | 5.7 |
-| Khidki, teacher always acts | 83.4 | 0.0 | 211.0 | 1087 | 0.0 | 6.0 |
-| Khidki, PM weight 0.6 | 81.0 | 7.3 | 186.0 | 1579 | 0.0 | 5.7 |
-| Khidki, PM weight 0.7 | 77.9 | 21.3 | 179.0 | 1975 | 0.0 | 6.0 |
-| Khidki, PM weight 0.8 | 78.6 | 41.3 | 194.3 | 2206 | 0.0 | 6.0 |
-| Khidki, PM weight 0.9 | 67.1 | 114.7 | 224.7 | 1950 | 0.0 | 5.7 |
+| Always closed | 35.2 | 262.5 | 275.5 | 3600 | 0.0 | 4.4 |
+| Always open | 100.0 | 0.0 | 0.0 | 828 | 205.7 | 5.4 |
+| CO₂ alarm | 73.2 | 57.4 | 211.3 | 2057 | 70.6 | 18.6 |
+| Temperature-led teacher | 65.0 | 125.3 | 139.7 | 2759 | 0.0 | 5.4 |
+| Khidki | 82.6 | 11.7 | 251.0 | 1609 | 73.3 | 5.1 |
+| Khidki, teacher always acts | 82.8 | 2.4 | 260.2 | 1342 | 75.5 | 5.1 |
+| Khidki, PM weight 0.6 | 81.8 | 11.5 | 247.8 | 1621 | 66.5 | 5.0 |
+| Khidki, PM weight 0.7 | 79.6 | 25.8 | 242.2 | 1907 | 55.4 | 5.4 |
+| Khidki, PM weight 0.8 | 77.6 | 40.3 | 252.7 | 2068 | 39.8 | 5.9 |
+| Khidki, PM weight 0.9 | 65.9 | 148.6 | 258.1 | 2186 | 35.5 | 5.7 |
 
-**Khidki (Balanced) vs CO₂ alarm, day by day:** fewer minutes above 1,500 ppm on 3 of 3 days (tied on 0); median PM2.5 difference +11.7 points of an always-open dose; median requests 0.3× the alarm's.
-Khidki Pareto-dominates the alarm (better or equal on both PM and CO₂) on 0 of 3 days; the alarm dominates Khidki on 0.
+**Khidki (Balanced) vs CO₂ alarm, day by day:** fewer minutes above 1,500 ppm on 46 of 48 days (tied on 0); median PM2.5 difference +10.0 points of an always-open dose; median requests 0.3× the alarm's.
+Khidki Pareto-dominates the alarm (better or equal on both PM and CO₂) on 0 of 48 days; the alarm dominates Khidki on 1.
 
 ## What this does and doesn't show
 

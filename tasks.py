@@ -78,7 +78,6 @@ def not_yet(phase: str) -> Callable[[list[str]], int]:
 
 for _name, _phase, _help in [
     ("sim", "Phase 2", "Run the classroom simulator against local or cloud"),
-    ("bench", "Phase 7", "Run the policy benchmark over replay days"),
     ("cdk-synth", "Phase 4", "Synthesize the CDK app"),
     ("deploy", "Phase 4", "Deploy all stacks to AWS (ap-south-1)"),
     ("provision-device", "Phase 4", "Create an IoT thing and certificates for a room"),
@@ -116,6 +115,13 @@ def local(args: list[str]) -> int:
         for proc in (api, web):
             if proc and proc.poll() is None:
                 proc.terminate()
+
+
+@command("Run the 48-day benchmark (Khidki vs baselines) and write docs/benchmark.md + chart")
+def bench(args: list[str]) -> int:
+    print("Running the benchmark on every replay day (a few minutes)...")
+    rc = run([uv(), "run", "python", "bench/run_benchmark.py", *args])
+    return rc or run([uv(), "run", "python", "bench/report.py"])
 
 
 @command("Cache real Delhi outdoor-air replay days from Open-Meteo")

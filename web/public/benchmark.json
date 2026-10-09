@@ -2,225 +2,225 @@
  "label": "Simulation on a modelled classroom driven by real outdoor air (CAMS via Open-Meteo, East Delhi, school days 15 Oct to 19 Dec 2025). Not a field trial.",
  "rooms": {
   "no_purifier": {
-   "days": 3,
+   "days": 48,
    "policies": {
     "ALWAYS_CLOSED": {
-     "pm_dose_ug": 75.5,
-     "pm_pct_of_always_open": 66.9,
-     "co2_min_over_1500": 231.7,
-     "co2_min_over_1000": 242.7,
+     "pm_dose_ug": 142.3,
+     "pm_pct_of_always_open": 64.8,
+     "co2_min_over_1500": 266.3,
+     "co2_min_over_1000": 277.2,
      "cold_deg_min": 0.0,
      "requests": 0.0,
-     "max_co2": 3883
+     "max_co2": 4075
     },
     "ALWAYS_OPEN": {
-     "pm_dose_ug": 112.3,
+     "pm_dose_ug": 219.1,
      "pm_pct_of_always_open": 100.0,
      "co2_min_over_1500": 0.0,
      "co2_min_over_1000": 0.0,
-     "cold_deg_min": 0.0,
+     "cold_deg_min": 205.7,
      "requests": 1.0,
-     "max_co2": 882
+     "max_co2": 880
     },
     "CO2_ALARM": {
-     "pm_dose_ug": 98.3,
-     "pm_pct_of_always_open": 87.3,
-     "co2_min_over_1500": 61.3,
-     "co2_min_over_1000": 190.7,
-     "cold_deg_min": 0.0,
-     "requests": 13.3,
-     "max_co2": 2176
+     "pm_dose_ug": 196.5,
+     "pm_pct_of_always_open": 89.1,
+     "co2_min_over_1500": 65.3,
+     "co2_min_over_1000": 220.3,
+     "cold_deg_min": 80.6,
+     "requests": 14.9,
+     "max_co2": 2181
     },
     "TEMPERATURE_TEACHER": {
-     "pm_dose_ug": 112.3,
-     "pm_pct_of_always_open": 100.0,
-     "co2_min_over_1500": 0.0,
-     "co2_min_over_1000": 0.0,
+     "pm_dose_ug": 170.0,
+     "pm_pct_of_always_open": 80.0,
+     "co2_min_over_1500": 128.7,
+     "co2_min_over_1000": 142.5,
      "cold_deg_min": 0.0,
      "requests": 1.0,
-     "max_co2": 882
+     "max_co2": 3105
     },
     "KHIDKI": {
-     "pm_dose_ug": 102.1,
-     "pm_pct_of_always_open": 90.7,
-     "co2_min_over_1500": 36.0,
-     "co2_min_over_1000": 75.7,
-     "cold_deg_min": 0.0,
-     "requests": 5.7,
-     "max_co2": 1783
+     "pm_dose_ug": 204.2,
+     "pm_pct_of_always_open": 92.9,
+     "co2_min_over_1500": 17.3,
+     "co2_min_over_1000": 90.4,
+     "cold_deg_min": 86.3,
+     "requests": 4.0,
+     "max_co2": 1713
     },
     "KHIDKI_100": {
-     "pm_dose_ug": 106.9,
-     "pm_pct_of_always_open": 95.2,
-     "co2_min_over_1500": 0.0,
-     "co2_min_over_1000": 37.0,
-     "cold_deg_min": 0.0,
-     "requests": 5.3,
-     "max_co2": 1152
+     "pm_dose_ug": 207.2,
+     "pm_pct_of_always_open": 94.6,
+     "co2_min_over_1500": 1.6,
+     "co2_min_over_1000": 75.2,
+     "cold_deg_min": 91.1,
+     "requests": 3.7,
+     "max_co2": 1354
     },
     "KHIDKI_a0.6": {
-     "pm_dose_ug": 104.5,
-     "pm_pct_of_always_open": 92.9,
-     "co2_min_over_1500": 9.3,
-     "co2_min_over_1000": 57.0,
-     "cold_deg_min": 0.0,
-     "requests": 5.0,
-     "max_co2": 1657
+     "pm_dose_ug": 202.3,
+     "pm_pct_of_always_open": 92.4,
+     "co2_min_over_1500": 19.2,
+     "co2_min_over_1000": 105.2,
+     "cold_deg_min": 76.0,
+     "requests": 4.9,
+     "max_co2": 1897
     },
     "KHIDKI_a0.7": {
-     "pm_dose_ug": 103.8,
-     "pm_pct_of_always_open": 92.7,
-     "co2_min_over_1500": 14.7,
-     "co2_min_over_1000": 88.0,
-     "cold_deg_min": 0.0,
-     "requests": 5.3,
-     "max_co2": 1691
+     "pm_dose_ug": 201.1,
+     "pm_pct_of_always_open": 91.4,
+     "co2_min_over_1500": 27.6,
+     "co2_min_over_1000": 122.7,
+     "cold_deg_min": 67.3,
+     "requests": 5.0,
+     "max_co2": 2013
     },
     "KHIDKI_a0.8": {
-     "pm_dose_ug": 104.6,
-     "pm_pct_of_always_open": 93.2,
-     "co2_min_over_1500": 3.7,
-     "co2_min_over_1000": 53.0,
-     "cold_deg_min": 0.0,
-     "requests": 4.7,
-     "max_co2": 1589
+     "pm_dose_ug": 198.9,
+     "pm_pct_of_always_open": 90.9,
+     "co2_min_over_1500": 36.2,
+     "co2_min_over_1000": 133.6,
+     "cold_deg_min": 58.9,
+     "requests": 5.2,
+     "max_co2": 2095
     },
     "KHIDKI_a0.9": {
-     "pm_dose_ug": 101.0,
-     "pm_pct_of_always_open": 90.0,
-     "co2_min_over_1500": 26.0,
-     "co2_min_over_1000": 64.7,
-     "cold_deg_min": 0.0,
-     "requests": 5.3,
-     "max_co2": 2236
+     "pm_dose_ug": 192.9,
+     "pm_pct_of_always_open": 88.4,
+     "co2_min_over_1500": 62.8,
+     "co2_min_over_1000": 145.2,
+     "cold_deg_min": 34.2,
+     "requests": 5.4,
+     "max_co2": 2385
     }
    },
-   "khidki_pareto_dominates_alarm_days": 0,
-   "alarm_pareto_dominates_khidki_days": 0,
+   "khidki_pareto_dominates_alarm_days": 1,
+   "alarm_pareto_dominates_khidki_days": 1,
    "sweep_pareto_dominates_alarm_days": {
-    "KHIDKI_a0.6": 0,
-    "KHIDKI_a0.7": 0,
-    "KHIDKI_a0.8": 0,
-    "KHIDKI_a0.9": 1
+    "KHIDKI_a0.6": 6,
+    "KHIDKI_a0.7": 2,
+    "KHIDKI_a0.8": 5,
+    "KHIDKI_a0.9": 5
    }
   },
   "purifier": {
-   "days": 3,
+   "days": 48,
    "policies": {
     "ALWAYS_CLOSED": {
-     "pm_dose_ug": 36.1,
-     "pm_pct_of_always_open": 37.7,
-     "co2_min_over_1500": 227.7,
-     "co2_min_over_1000": 240.7,
+     "pm_dose_ug": 64.4,
+     "pm_pct_of_always_open": 35.2,
+     "co2_min_over_1500": 262.5,
+     "co2_min_over_1000": 275.5,
      "cold_deg_min": 0.0,
-     "requests": 6.0,
-     "max_co2": 3434
+     "requests": 4.4,
+     "max_co2": 3600
     },
     "ALWAYS_OPEN": {
-     "pm_dose_ug": 95.6,
+     "pm_dose_ug": 185.7,
      "pm_pct_of_always_open": 100.0,
      "co2_min_over_1500": 0.0,
      "co2_min_over_1000": 0.0,
-     "cold_deg_min": 0.0,
-     "requests": 7.0,
-     "max_co2": 831
+     "cold_deg_min": 205.7,
+     "requests": 5.4,
+     "max_co2": 828
     },
     "CO2_ALARM": {
-     "pm_dose_ug": 71.4,
-     "pm_pct_of_always_open": 74.4,
-     "co2_min_over_1500": 33.7,
-     "co2_min_over_1000": 173.3,
-     "cold_deg_min": 0.0,
-     "requests": 18.7,
-     "max_co2": 1819
+     "pm_dose_ug": 137.0,
+     "pm_pct_of_always_open": 73.2,
+     "co2_min_over_1500": 57.4,
+     "co2_min_over_1000": 211.3,
+     "cold_deg_min": 70.6,
+     "requests": 18.6,
+     "max_co2": 2057
     },
     "TEMPERATURE_TEACHER": {
-     "pm_dose_ug": 95.6,
-     "pm_pct_of_always_open": 100.0,
-     "co2_min_over_1500": 0.0,
-     "co2_min_over_1000": 0.0,
+     "pm_dose_ug": 112.0,
+     "pm_pct_of_always_open": 65.0,
+     "co2_min_over_1500": 125.3,
+     "co2_min_over_1000": 139.7,
      "cold_deg_min": 0.0,
-     "requests": 7.0,
-     "max_co2": 831
+     "requests": 5.4,
+     "max_co2": 2759
     },
     "KHIDKI": {
-     "pm_dose_ug": 80.8,
-     "pm_pct_of_always_open": 84.5,
-     "co2_min_over_1500": 7.3,
-     "co2_min_over_1000": 187.3,
-     "cold_deg_min": 0.0,
-     "requests": 5.7,
-     "max_co2": 1412
+     "pm_dose_ug": 154.0,
+     "pm_pct_of_always_open": 82.6,
+     "co2_min_over_1500": 11.7,
+     "co2_min_over_1000": 251.0,
+     "cold_deg_min": 73.3,
+     "requests": 5.1,
+     "max_co2": 1609
     },
     "KHIDKI_100": {
-     "pm_dose_ug": 79.8,
-     "pm_pct_of_always_open": 83.4,
-     "co2_min_over_1500": 0.0,
-     "co2_min_over_1000": 211.0,
-     "cold_deg_min": 0.0,
-     "requests": 6.0,
-     "max_co2": 1087
+     "pm_dose_ug": 154.1,
+     "pm_pct_of_always_open": 82.8,
+     "co2_min_over_1500": 2.4,
+     "co2_min_over_1000": 260.2,
+     "cold_deg_min": 75.5,
+     "requests": 5.1,
+     "max_co2": 1342
     },
     "KHIDKI_a0.6": {
-     "pm_dose_ug": 77.6,
-     "pm_pct_of_always_open": 81.0,
-     "co2_min_over_1500": 7.3,
-     "co2_min_over_1000": 186.0,
-     "cold_deg_min": 0.0,
-     "requests": 5.7,
-     "max_co2": 1579
+     "pm_dose_ug": 152.4,
+     "pm_pct_of_always_open": 81.8,
+     "co2_min_over_1500": 11.5,
+     "co2_min_over_1000": 247.8,
+     "cold_deg_min": 66.5,
+     "requests": 5.0,
+     "max_co2": 1621
     },
     "KHIDKI_a0.7": {
-     "pm_dose_ug": 74.1,
-     "pm_pct_of_always_open": 77.9,
-     "co2_min_over_1500": 21.3,
-     "co2_min_over_1000": 179.0,
-     "cold_deg_min": 0.0,
-     "requests": 6.0,
-     "max_co2": 1975
+     "pm_dose_ug": 148.5,
+     "pm_pct_of_always_open": 79.6,
+     "co2_min_over_1500": 25.8,
+     "co2_min_over_1000": 242.2,
+     "cold_deg_min": 55.4,
+     "requests": 5.4,
+     "max_co2": 1907
     },
     "KHIDKI_a0.8": {
-     "pm_dose_ug": 75.5,
-     "pm_pct_of_always_open": 78.6,
-     "co2_min_over_1500": 41.3,
-     "co2_min_over_1000": 194.3,
-     "cold_deg_min": 0.0,
-     "requests": 6.0,
-     "max_co2": 2206
+     "pm_dose_ug": 144.6,
+     "pm_pct_of_always_open": 77.6,
+     "co2_min_over_1500": 40.3,
+     "co2_min_over_1000": 252.7,
+     "cold_deg_min": 39.8,
+     "requests": 5.9,
+     "max_co2": 2068
     },
     "KHIDKI_a0.9": {
-     "pm_dose_ug": 64.1,
-     "pm_pct_of_always_open": 67.1,
-     "co2_min_over_1500": 114.7,
-     "co2_min_over_1000": 224.7,
-     "cold_deg_min": 0.0,
+     "pm_dose_ug": 123.2,
+     "pm_pct_of_always_open": 65.9,
+     "co2_min_over_1500": 148.6,
+     "co2_min_over_1000": 258.1,
+     "cold_deg_min": 35.5,
      "requests": 5.7,
-     "max_co2": 1950
+     "max_co2": 2186
     }
    },
    "khidki_pareto_dominates_alarm_days": 0,
-   "alarm_pareto_dominates_khidki_days": 0,
+   "alarm_pareto_dominates_khidki_days": 1,
    "sweep_pareto_dominates_alarm_days": {
     "KHIDKI_a0.6": 0,
-    "KHIDKI_a0.7": 0,
-    "KHIDKI_a0.8": 0,
-    "KHIDKI_a0.9": 1
+    "KHIDKI_a0.7": 1,
+    "KHIDKI_a0.8": 4,
+    "KHIDKI_a0.9": 3
    }
   }
  },
  "paired": {
   "no_purifier": {
-   "days": 3,
-   "co2_better_days": 2,
+   "days": 48,
+   "co2_better_days": 44,
    "co2_tie_days": 0,
-   "median_pm_diff_pts": 4.4,
-   "median_request_ratio": 0.43
+   "median_pm_diff_pts": 4.2,
+   "median_request_ratio": 0.28
   },
   "purifier": {
-   "days": 3,
-   "co2_better_days": 3,
+   "days": 48,
+   "co2_better_days": 46,
    "co2_tie_days": 0,
-   "median_pm_diff_pts": 11.7,
+   "median_pm_diff_pts": 10.0,
    "median_request_ratio": 0.3
   }
  }

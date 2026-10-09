@@ -123,7 +123,7 @@ def chart(summary: dict[str, Any]) -> Path:
             f"Khidki, {k['requests']:.0f} requests/day",
             (k["pm_pct_of_always_open"], k["co2_min_over_1500"]),
             textcoords="offset points",
-            xytext=(-10, 10),
+            xytext=(-14, -4),
             ha="right",
             color=INK,
             fontsize=9,
@@ -145,7 +145,8 @@ def chart(summary: dict[str, Any]) -> Path:
             f"CO₂ alarm, {a['requests']:.0f} requests/day",
             (a["pm_pct_of_always_open"], a["co2_min_over_1500"]),
             textcoords="offset points",
-            xytext=(8, -14),
+            xytext=(-14, 12),
+            ha="right",
             color=INK,
             fontsize=9,
             fontweight="bold",
@@ -155,7 +156,8 @@ def chart(summary: dict[str, Any]) -> Path:
         ax.set_ylabel("Minutes above 1,500 ppm CO₂ per day (lower is better)")
         ax.set_xlim(30, 105)
         ax.set_ylim(-10, 290)
-    axes[0].legend(loc="upper right", frameon=False, labelcolor=INK2)
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="lower center", ncol=3, frameon=False, labelcolor=INK2)
     fig.suptitle(
         "Mean over 48 school days. Simulated classroom, real Delhi outdoor air (CAMS, Oct to Dec 2025). "
         "Not a field trial.",
@@ -164,7 +166,7 @@ def chart(summary: dict[str, Any]) -> Path:
         x=0.01,
         ha="left",
     )
-    fig.tight_layout(rect=(0, 0, 1, 0.95))
+    fig.tight_layout(rect=(0, 0.07, 1, 0.95))
     out = RESULTS / "pareto.png"
     fig.savefig(out, dpi=150, facecolor=CHALK)
     shutil.copy(out, ROOT / "docs" / "benchmark-pareto.png")
