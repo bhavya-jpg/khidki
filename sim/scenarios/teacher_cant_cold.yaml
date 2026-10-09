@@ -1,0 +1,10 @@
+name: teacher_cant_cold
+description: A cold December morning. The teacher says "can't right now, too cold" to the first opening.
+date: "2025-12-04"
+start: "07:00"
+speed: 10
+teacher:
+  mode: auto
+  p_follow: 1.0
+  delay_s: [30, 60]
+  cant_first: cold

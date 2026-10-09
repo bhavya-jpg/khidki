@@ -1,0 +1,14 @@
+name: forecast_spike
+description: Outdoor PM2.5 jumps 60% above the forecast mid-morning (a smoke plume). Khidki re-plans.
+date: "2025-11-24"
+start: "07:00"
+speed: 10
+teacher:
+  mode: auto
+  p_follow: 0.9
+  delay_s: [30, 90]
+events:
+  - at: "09:30"
+    kind: outdoor_spike
+    factor: 1.6
+    duration_min: 90

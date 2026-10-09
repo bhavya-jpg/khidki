@@ -74,3 +74,22 @@ sensitive to the scale than absolute doses.
 ### `&&` only guards the line it's on
 A commit went in with three lint errors because `git commit` sat on its own line after a failing
 `ruff check && ...` chain. Fixed in the next commit; checks and commit now run under `set -e`.
+
+### The tracer-gas trick has blind spots, and the simulator found them
+Running a whole simulated morning surfaced three verification bugs the unit tests didn't:
+1. **Closing near outdoor CO₂.** Right after closing, indoor CO₂ is only ~200 ppm above outdoor. The
+   slope is dominated by the children's breath, and a sensor's ±3% calibration error shifts the fitted λ
+   enough to read "closed" as "cracked". Khidki marked two real closings as "not changed". Fix: when an
+   instruction makes the room *less* open, verify against the boundary with the next more-open state, and
+   treat closed and cracked as one class. What matters is that the room is no longer open.
+2. **Direction matters.** "Go from both sides to one side" passed as verified while both sides were still
+   open, because the check only asked "is λ at least 70% of the target?". Verification now takes the
+   previous state.
+3. **An empty room at outdoor CO₂ says nothing.** During PE the class was outside; Khidki asked to close the
+   windows (nobody there) and "verified" it from a flat line. Now nudges only go out while the class is in
+   the room or just leaving, and an empty room near outdoor CO₂ is "inconclusive".
+
+### The attention budget leaked in the live loop
+Each re-plan got "6 minus instructions already issued". With 0 left, the bisection can't find a 0-change
+plan when CO₂ is climbing, and fell back to a plan with changes, so a 7th instruction went out. Now the
+optimizer holds the current state when the budget can't be met, and the engine refuses to issue past it.

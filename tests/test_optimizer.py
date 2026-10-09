@@ -141,3 +141,10 @@ def test_always_closed_is_terrible_for_co2() -> None:
     aa = action_arrays(ROOM)
     run = run_policy(ROOM, drive, aa, Fixed("ALWAYS_CLOSED", Window.CLOSED), 500.0, 120.0)
     assert run.kpis.max_co2 > 2500
+
+
+def test_spent_budget_holds_current_state() -> None:
+    drive = severe_morning(ROOM)
+    aa = action_arrays(ROOM)
+    res = optimize(ROOM, drive, aa, 1800.0, 120.0, 0, max_changes=0)
+    assert res.kpis.window_changes == 0

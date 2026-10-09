@@ -118,25 +118,32 @@ class Verification:
     inferred: WindowGuess
 
 
-def verify_ventilation(instructed: Window, fit: AchFit, fingerprint: dict[Window, float]) -> Verification:
-    """Did the room's air-change rate move to what the instruction should give?
+def verify_ventilation(
+    instructed: Window, fit: AchFit, fingerprint: dict[Window, float], previous: Window | None = None
+) -> Verification:
+    """Did the room's air-change rate move the way the instruction asked?
 
-    Opening: VERIFIED at ≥ 70% of the expected λ; PARTIAL if clearly above "cracked" but short of that
-    (e.g. only one side opened); otherwise NOT_CHANGED. Closing: VERIFIED once λ is at or below "cracked".
+    More open than before: VERIFIED at ≥ 70% of the expected λ; PARTIAL if clearly above "cracked" but short
+    of that (e.g. only one side opened); otherwise NOT_CHANGED.
+
+    Less open than before: VERIFIED once λ is below the boundary between the target state and the next more
+    open one. Closed and cracked share a boundary on purpose: just after closing, indoor CO₂ is close to
+    outdoor and a sensor's ±3% calibration error is enough to make "closed" look like "cracked". What matters
+    is that the room is no longer open.
     """
+    order = list(WINDOW_ORDER)
     expected = fingerprint[instructed]
     guess = classify_window(fit.lam, fingerprint)
     lam = fit.lam
-    if instructed in (Window.CLOSED, Window.CRACKED):
-        ok = (
-            lam <= np.sqrt(fingerprint[Window.CRACKED] * fingerprint[Window.OPEN_ONE])
-            if instructed == Window.CRACKED
-            else lam <= np.sqrt(fingerprint[Window.CLOSED] * fingerprint[Window.CRACKED])
-        )
+    prev = previous if previous is not None else Window.CLOSED
+    if order.index(instructed) < order.index(prev):
+        upper_of = Window.CRACKED if instructed == Window.CLOSED else instructed
+        nxt = order[order.index(upper_of) + 1]
+        ok = lam <= float(np.sqrt(fingerprint[upper_of] * fingerprint[nxt]))
         verdict = Verdict.VERIFIED if ok else Verdict.NOT_CHANGED
     elif lam >= 0.7 * expected:
         verdict = Verdict.VERIFIED
-    elif lam >= 1.5 * fingerprint[Window.CRACKED] or lam >= 0.35 * expected:
+    elif lam >= 1.5 * fingerprint[Window.CRACKED]:
         verdict = Verdict.PARTIAL
     else:
         verdict = Verdict.NOT_CHANGED

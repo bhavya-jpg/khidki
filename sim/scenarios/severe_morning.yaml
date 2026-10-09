@@ -1,0 +1,9 @@
+name: severe_morning
+description: A real "Very poor" Delhi day (CAMS replay, 18 Nov 2025). The teacher follows most instructions.
+date: "2025-11-18"
+start: "07:00"
+speed: 10
+teacher:
+  mode: auto          # auto: the simulated teacher responds; ui: a person taps the buttons
+  p_follow: 0.85
+  delay_s: [30, 120]

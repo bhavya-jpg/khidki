@@ -322,6 +322,9 @@ def optimize(
                 hi, best_idx, best_mu = mid, mid_idx, mid
             else:
                 lo = mid
+    if dose.count_changes(best_idx, prev_idx) > max_changes:
+        # The budget is spent (or unreachable): hold the current state rather than ask for more changes.
+        best_idx = np.full(len(drive), prev_idx, dtype=np.int64)
     sim = simulate(params, drive, aa, best_idx, co2_0, pm_0)
     kpis = dose.compute_kpis(drive, sim, aa, best_idx, prev_idx, cfg.ir_m3_h)
     return OptResult(

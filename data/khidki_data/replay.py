@@ -10,6 +10,7 @@ import json
 from dataclasses import dataclass
 from functools import cache
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 
@@ -61,16 +62,18 @@ def load_day(date: str) -> ReplayDay:
     return ReplayDay(date=date, hourly=Hourly.from_json(json.loads(path.read_text())))
 
 
-def _interp(day: ReplayDay, name: str, t_min: np.ndarray, default: float) -> np.ndarray:
-    x, h = day.series(name), day.hour_min
+def _interp_series(hour_min: np.ndarray, x: np.ndarray, t_min: np.ndarray, default: float) -> np.ndarray:
     ok = np.isfinite(x)
     if not ok.any():
         return np.full(len(t_min), default)
-    return np.asarray(np.interp(t_min, h[ok], x[ok]), dtype=np.float64)
+    return np.asarray(np.interp(t_min, hour_min[ok], x[ok]), dtype=np.float64)
 
 
-def drive_for_day(
-    day: ReplayDay,
+def build_drive(
+    hour_min: np.ndarray,
+    pm25: np.ndarray,
+    temp: np.ndarray,
+    co2: np.ndarray,
     params: RoomParams,
     *,
     assembly_outdoor: bool = False,
@@ -80,9 +83,9 @@ def drive_for_day(
     start_min: int | None = None,
     dt_min: int = PLAN_DT_MIN,
 ) -> DriveSeries:
-    """Outdoor series interpolated to the plan grid, with occupancy from the timetable and today's decisions.
-
-    Open-Meteo hourly values are hour-beginning; interpolating between them is a reasonable 5-minute proxy."""
+    """Hourly outdoor series interpolated to the plan grid, with occupancy from the timetable and today's
+    activity decisions. Open-Meteo hourly values are hour-beginning; linear interpolation between them is a
+    reasonable 5-minute proxy."""
     t = plan_grid(start_min=start_min) if start_min is not None else plan_grid()
     if dt_min != PLAN_DT_MIN:
         t = np.arange(t[0], t[-1] + PLAN_DT_MIN, dt_min, dtype=np.int64)
@@ -95,14 +98,25 @@ def drive_for_day(
         pe_period=pe_period,
         pe_outdoor=pe_outdoor,
     )
-    co2 = _interp(day, "carbon_dioxide", t, 450.0)
-    co2 = np.where((co2 > 350) & (co2 < 700), co2, 450.0)
+    c = _interp_series(hour_min, co2, t, 450.0)
+    c = np.where((c > 350) & (c < 700), c, 450.0)
     return DriveSeries(
         t_min=t,
         dt_min=dt_min,
-        pm_out=np.maximum(_interp(day, "pm2_5", t, 150.0), 0.0),
-        co2_out=co2,
-        temp_out=_interp(day, "temperature_2m", t, 20.0),
+        pm_out=np.maximum(_interp_series(hour_min, pm25, t, 150.0), 0.0),
+        co2_out=c,
+        temp_out=_interp_series(hour_min, temp, t, 20.0),
         n_children=kids,
         n_adults=adults,
+    )
+
+
+def drive_for_day(day: ReplayDay, params: RoomParams, **kwargs: Any) -> DriveSeries:
+    return build_drive(
+        day.hour_min,
+        day.series("pm2_5"),
+        day.series("temperature_2m"),
+        day.series("carbon_dioxide"),
+        params,
+        **kwargs,
     )

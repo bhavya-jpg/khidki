@@ -1,0 +1,8 @@
+name: partial_open
+description: The teacher taps "I've opened them" but only opens the road side. Khidki should notice from CO₂.
+date: "2025-11-18"
+start: "07:30"
+speed: 10
+teacher:
+  mode: ui
+  partial_first_open: true   # the first "open both sides" only opens one side (λ = 0.45 × both-sides)

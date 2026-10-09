@@ -77,7 +77,6 @@ def not_yet(phase: str) -> Callable[[list[str]], int]:
 
 
 for _name, _phase, _help in [
-    ("local", "Phase 2", "Run the whole app locally (no AWS account needed)"),
     ("sim", "Phase 2", "Run the classroom simulator against local or cloud"),
     ("bench", "Phase 7", "Run the policy benchmark over replay days"),
     ("cdk-synth", "Phase 4", "Synthesize the CDK app"),
@@ -91,6 +90,32 @@ for _name, _phase, _help in [
     ("arch-diagram", "Phase 8", "Render the architecture diagram"),
 ]:
     COMMANDS.setdefault(_name, (not_yet(_phase), _help))
+
+
+@command("Run Khidki locally: API + simulator on :8000 and the web app on :5173 (no AWS account needed)")
+def local(args: list[str]) -> int:
+    import os
+
+    scenario = args[0] if args else "severe_morning"
+    env = {**os.environ, "KHIDKI_SCENARIO": scenario}
+    print(f"Starting local mode with scenario '{scenario}'. API: http://localhost:8000/v1/health")
+    api = subprocess.Popen(
+        [uv(), "run", "uvicorn", "khidki_local.app:app", "--port", "8000"], cwd=ROOT, env=env
+    )
+    web = None
+    if (ROOT / "web" / "package.json").exists():
+        if not (ROOT / "web" / "node_modules").exists():
+            run(["npm", "install"], cwd=ROOT / "web")
+        print("Web app: http://localhost:5173/teacher/6B")
+        web = subprocess.Popen(["npm", "run", "dev"], cwd=ROOT / "web")
+    try:
+        return api.wait()
+    except KeyboardInterrupt:
+        return 0
+    finally:
+        for proc in (api, web):
+            if proc and proc.poll() is None:
+                proc.terminate()
 
 
 @command("Cache real Delhi outdoor-air replay days from Open-Meteo")

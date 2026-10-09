@@ -59,10 +59,32 @@ def test_full_open_verified_and_nothing_changed_caught() -> None:
     assert verify_ventilation(Window.OPEN_BOTH, fit_ach(t_h, z, 450, src), FP).verdict == Verdict.NOT_CHANGED
 
 
-def test_closing_verified() -> None:
+def test_closing_verified_even_near_outdoor_co2() -> None:
+    """Just after closing, CO₂ is near outdoor and closed vs cracked is unresolvable: accept either."""
     rng = np.random.default_rng(5)
-    t_h, z, src = noisy_curve(FP[Window.CLOSED], 900.0, True, rng)
-    assert verify_ventilation(Window.CLOSED, fit_ach(t_h, z, 450, src), FP).verdict == Verdict.VERIFIED
+    for c0 in (650.0, 900.0):
+        for _ in range(10):
+            t_h, z, src = noisy_curve(FP[Window.CLOSED], c0, True, rng)
+            v = verify_ventilation(Window.CLOSED, fit_ach(t_h, z, 450, src), FP, previous=Window.OPEN_ONE)
+            assert v.verdict == Verdict.VERIFIED
+
+
+def test_reducing_but_still_wide_open_is_not_verified() -> None:
+    """Asked to go from both sides to one side; nothing changed. Must not pass as done."""
+    rng = np.random.default_rng(6)
+    t_h, z, src = noisy_curve(FP[Window.OPEN_BOTH], 900.0, True, rng)
+    v = verify_ventilation(Window.OPEN_ONE, fit_ach(t_h, z, 450, src), FP, previous=Window.OPEN_BOTH)
+    assert v.verdict == Verdict.NOT_CHANGED
+    t_h, z, src = noisy_curve(FP[Window.OPEN_ONE], 900.0, True, rng)
+    v = verify_ventilation(Window.OPEN_ONE, fit_ach(t_h, z, 450, src), FP, previous=Window.OPEN_BOTH)
+    assert v.verdict == Verdict.VERIFIED
+
+
+def test_closing_not_done_is_caught() -> None:
+    rng = np.random.default_rng(8)
+    t_h, z, src = noisy_curve(FP[Window.OPEN_ONE], 1200.0, True, rng)
+    v = verify_ventilation(Window.CLOSED, fit_ach(t_h, z, 450, src), FP, previous=Window.OPEN_ONE)
+    assert v.verdict == Verdict.NOT_CHANGED
 
 
 def test_tracker_hysteresis() -> None:
