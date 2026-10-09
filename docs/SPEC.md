@@ -1,3 +1,5 @@
+> **Scope was cut on Oct 9 — see docs/SCOPE.md, which overrides this file where they conflict.**
+
 # KHIDKI (खिड़की) — Complete Build Spec for Claude Code
 
 > **"Open the window at the right minute."**
