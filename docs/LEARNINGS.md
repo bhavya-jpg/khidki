@@ -73,7 +73,9 @@ sensitive to the scale than absolute doses.
 
 ### `&&` only guards the line it's on
 A commit went in with three lint errors because `git commit` sat on its own line after a failing
-`ruff check && ...` chain. Fixed in the next commit; checks and commit now run under `set -e`.
+`ruff check && ...` chain. Then it happened again under `set -e`, which the agent's shell wrapper doesn't
+honour. The real fix is a git pre-commit hook (local hooks, no network): ruff, ruff format, mypy on core
+and the web typecheck run on every commit, and a failing check blocks it.
 
 ### The tracer-gas trick has blind spots, and the simulator found them
 Running a whole simulated morning surfaced three verification bugs the unit tests didn't:

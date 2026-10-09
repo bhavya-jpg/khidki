@@ -1,17 +1,26 @@
+# Local hooks: no network needed (the venue network is slow). Runs on every commit.
 repos:
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.9
+  - repo: local
     hooks:
       - id: ruff
-        args: [--fix]
+        name: ruff check
+        entry: uv run --offline ruff check
+        language: system
+        types: [python]
       - id: ruff-format
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
-    hooks:
-      - id: check-yaml
-      - id: check-json
-      - id: end-of-file-fixer
-      - id: trailing-whitespace
-      - id: check-added-large-files
-        args: [--maxkb=1500]
-      - id: detect-private-key
+        name: ruff format --check
+        entry: uv run --offline ruff format --check
+        language: system
+        types: [python]
+      - id: mypy-core
+        name: mypy (core)
+        entry: uv run --offline mypy
+        language: system
+        pass_filenames: false
+        files: ^core/
+      - id: web-typecheck
+        name: tsc (web)
+        entry: bash -c 'cd web && npx tsc -b'
+        language: system
+        pass_filenames: false
+        files: ^web/src/

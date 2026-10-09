@@ -28,4 +28,5 @@ def test_room_now_matches_types() -> None:
     view = engine.room_now("6B")
     assert set(view) == ts_keys("RoomNow")
     assert set(view["clock"]) == ts_keys("ClockView")
-    assert set(view["card"]) == (ts_keys("KeepCard") if view["card"]["kind"] == "keep" else ts_keys("ActionCard"))
+    card_type = "KeepCard" if view["card"]["kind"] == "keep" else "ActionCard"
+    assert set(view["card"]) == ts_keys(card_type)
