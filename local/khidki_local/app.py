@@ -30,6 +30,22 @@ from khidki_sim.driver import SimDriver, outdoor_for
 VERSION = "0.2.0"
 
 
+def make_store() -> Any:
+    """Memory by default. KHIDKI_STORE=dynamo uses DynamoDB: real AWS, or LocalStack when
+    AWS_ENDPOINT_URL=http://localhost:4566 (the table is created if it doesn't exist)."""
+    if os.environ.get("KHIDKI_STORE") != "dynamo":
+        return MemoryStore()
+    import boto3
+
+    from khidki_services.dynamo import DynamoStore, create_table
+
+    name = os.environ.get("KHIDKI_TABLE", "Khidki")
+    ddb = boto3.resource("dynamodb", endpoint_url=os.environ.get("AWS_ENDPOINT_URL"))
+    if name not in [t.name for t in ddb.tables.all()]:
+        create_table(name, ddb)
+    return DynamoStore(name, ddb)
+
+
 class Runtime:
     """Holds the engine and simulator; one lock serialises the loop and API calls."""
 
@@ -48,7 +64,7 @@ class Runtime:
             self.clock = SimClock()
             self.clock.start_demo(sc.date, sc.start, speed or sc.speed)
             outdoor = outdoor_for(sc)
-            self.engine = Engine(MemoryStore(), self.clock, outdoor)
+            self.engine = Engine(make_store(), self.clock, outdoor)
             self.engine.seed()
             self.sim = SimDriver.start_of_day(self.engine, sc, outdoor)
             self.running = True

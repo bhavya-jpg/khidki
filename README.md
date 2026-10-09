@@ -22,6 +22,19 @@ Then open <http://localhost:5173/teacher/6B>. The classroom is simulated (labell
 air is a real Delhi day from November 2025. Scenarios: `severe_morning`, `partial_open` (you tap the
 buttons; only one side really opens), `teacher_cant_cold`, `forecast_spike`, `purifier_room`.
 
+Local mode keeps data in memory. To run it on DynamoDB instead, either on your AWS account or fully offline
+on [LocalStack](https://github.com/localstack/localstack):
+
+```bash
+docker run -d -p 4566:4566 localstack/localstack
+KHIDKI_STORE=dynamo AWS_ENDPOINT_URL=http://localhost:4566 AWS_DEFAULT_REGION=ap-south-1 \
+  AWS_ACCESS_KEY_ID=test AWS_SECRET_ACCESS_KEY=test python tasks.py local
+```
+
+The policies are [Cedar](https://www.cedarpolicy.com/) (`core/khidki_core/policy/khidki.cedar`), and "Ask
+Khidki" is a [Strands Agents](https://strandsagents.com/) agent; set `KHIDKI_BEDROCK=1` to let it phrase answers
+with Amazon Bedrock, otherwise it answers from verified templates.
+
 ```bash
 python tasks.py test             # Python tests
 python tasks.py lint             # ruff + mypy
