@@ -244,7 +244,9 @@ def ingest_route() -> dict[str, Any]:
     readings = body.get("readings", [body]) if isinstance(body, dict) else []
     e = runtime.engine(metrics)
     rooms: set[str] = set()
-    for r in readings[:50]:
+    readings = readings[:50]
+    last_index = {str(r.get("room_id", "")): i for i, r in enumerate(readings)}
+    for i, r in enumerate(readings):
         rid = str(r.get("room_id", ""))
         try:
             e.room_cfg(rid)
@@ -261,6 +263,7 @@ def ingest_route() -> dict[str, Any]:
                 "pm25": r.get("pm25"),
                 "simulated": bool(r.get("simulated", True)),
             },
+            infer=i == last_index[rid],
         )
         rooms.add(rid)
     e.tick(room_ids=sorted(rooms))

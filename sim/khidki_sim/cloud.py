@@ -196,7 +196,13 @@ class CloudSim:
         started = time.time()
         while minutes is None or time.time() - started < minutes * 60:
             try:
-                self.step_until(self.sim_now())
+                now = self.sim_now()
+                self.step_until(now)
+                lag_min = (now - self.t) / 60
+                if lag_min > 3:
+                    print(
+                        f"  simulator is {lag_min:.0f} sim-min behind the clock; lower --speed if this grows"
+                    )
                 self.watch_teacher()
             except urllib.error.URLError as exc:
                 print(f"  network hiccup: {exc}; retrying")

@@ -7,6 +7,7 @@ outdoor data and policy are injected.
 from __future__ import annotations
 
 import datetime as dt
+import time
 from collections.abc import Callable
 from dataclasses import asdict
 from typing import Any
@@ -52,6 +53,9 @@ from khidki_services.store import Item, Store
 
 REPLAN_EVERY_S = 300.0
 COOLDOWN_AFTER_MISS_S = 300.0
+DAY_CACHE_S = 20.0
+"""How long a warm Lambda trusts its copy of today's decisions (overrides from other containers show up
+within this time)."""
 EMPTY_ROOM_MIN_EXCESS_PPM = 150.0
 TEL_TTL_S = 14 * 24 * 3600
 ACTIVITIES = (
@@ -101,6 +105,7 @@ class Engine:
         self.task_notifier: Callable[[str, Item], None] | None = None
         """Returns the teacher's tap to a waiting Step Functions task (SendTaskSuccess)."""
         self._forecast_cache: dict[str, OutdoorDay] = {}
+        self._day_cache: dict[str, tuple[float, Item]] = {}
 
     # ── setup ────────────────────────────────────────────────────────────────────────────────────────
     def seed(self) -> None:
@@ -182,9 +187,13 @@ class Engine:
 
     def day(self) -> Item:
         date = self.clock.date()
+        cached = self._day_cache.get(date)
+        if cached and time.monotonic() - cached[0] < DAY_CACHE_S:
+            return cached[1]
         pk = f"SCHOOL#{self.school.school_id}"
         item = self.store.get(pk, f"DAY#{date}")
         if item is not None:
+            self._day_cache[date] = (time.monotonic(), item)
             return item
         fc = self.forecast(date)
         meta = self.store.get(pk, "META") or {}
@@ -232,6 +241,7 @@ class Engine:
             },
         }
         self.store.put(pk, f"DAY#{date}", item)
+        self._day_cache[date] = (time.monotonic(), item)
         return item
 
     def _decided(self, day: Item, key: str) -> bool:
@@ -282,7 +292,9 @@ class Engine:
             )
 
     # ── telemetry ────────────────────────────────────────────────────────────────────────────────────
-    def ingest(self, room_id: str, reading: dict[str, Any]) -> Item:
+    def ingest(self, room_id: str, reading: dict[str, Any], infer: bool = True) -> Item:
+        """Store a reading and update the state estimate. `infer=False` skips the CO₂-curve fit (a batch only
+        needs it on its newest reading per room)."""
         ts = float(reading.get("ts") or self.clock.now())
         item = {
             "ts": ts,
@@ -321,7 +333,7 @@ class Engine:
         st["estimate_at"] = ts
         st["last_ingest"] = ts
         # Window inference from the last 4.5 minutes at constant occupancy.
-        fit = self._fit_recent(room_id, ts - 270, ts, kids, adults)
+        fit = self._fit_recent(room_id, ts - 270, ts, kids, adults) if infer else None
         if fit is not None:
             guess = classify_window(fit.lam, params.lam)
             inf = st["inferred"]
@@ -895,6 +907,7 @@ class Engine:
             override_at=hhmm(int(ist_minute(now))),
         )
         self.store.put(f"SCHOOL#{self.school.school_id}", f"DAY#{day['date']}", day)
+        self._day_cache[day["date"]] = (time.monotonic(), day)
         entry = {
             "at": now,
             "time": hhmm(int(ist_minute(now))),
