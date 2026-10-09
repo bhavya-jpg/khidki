@@ -63,3 +63,24 @@ export interface RoomNow {
   series: { t: string; ts: number; co2: number; pm25: number | null }[];
   simulated: boolean;
 }
+
+export interface PlanStepView {
+  t_min: number;
+  t: string;
+  window: WindowState;
+  purifier: PurifierState;
+  predicted_co2: number;
+  predicted_pm: number;
+  occupied: boolean;
+  reason_code: string;
+}
+
+export interface PlanView {
+  room_id: string;
+  date: string;
+  version: number;
+  steps: PlanStepView[];
+  instructions: { t_start: string; t_start_min: number; t_end_min: number; duration_min: number; action: ActionJson; reason_code: string }[];
+  made_at: number;
+  day_steps: PlanStepView[];
+}

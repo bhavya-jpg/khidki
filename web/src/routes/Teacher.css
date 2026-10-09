@@ -2,17 +2,17 @@
 
 .teacher {
   min-height: 100dvh;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: var(--s-4) var(--s-5) var(--s-4);
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "bar bar"
-    "window decision"
-    "foot foot";
-  gap: var(--s-4) var(--s-6);
-  padding: var(--s-4) var(--s-5);
-  max-width: 1280px;
-  margin: 0 auto;
+    "stage panel"
+    "day day";
+  gap: var(--s-4) var(--s-5);
 }
 .teacher--loading {
   display: grid;
@@ -22,52 +22,165 @@
   filter: grayscale(1) opacity(0.6);
 }
 
+/* ── top bar ── */
 .teacher__bar {
   grid-area: bar;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: var(--s-3);
+  flex-wrap: wrap;
+}
+.teacher__id {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  margin-right: auto;
+}
+.teacher__brand {
+  font-weight: 800;
+  font-stretch: 118%;
+  font-size: var(--step-1);
+  color: var(--breath-ink);
 }
 .teacher__room {
-  margin: 0 auto 0 0;
+  margin: 0;
   font-size: var(--step-2);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 .teacher__clock {
-  font-size: var(--step-1);
-  font-weight: 560;
+  font-size: var(--step-2);
+  font-weight: 700;
+  font-stretch: 85%;
+  letter-spacing: -0.01em;
 }
 .lang-toggle {
   min-height: 44px;
   padding: 0 var(--s-4);
   border: 1px solid var(--rule);
   border-radius: var(--r-chip);
-  background: transparent;
+  background: var(--raised);
+  font-weight: 560;
   cursor: pointer;
 }
 
-.teacher__window {
-  grid-area: window;
-  align-self: center;
-}
-.teacher__decision {
-  grid-area: decision;
-  align-self: center;
+/* ── stage: the window on its wall, and the numbers ── */
+.teacher__stage {
+  grid-area: stage;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
   min-width: 0;
 }
-.teacher__foot {
-  grid-area: foot;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--s-5);
+.wall {
+  position: relative;
+  padding: clamp(14px, 3vw, 28px);
+  border-radius: var(--r-panel);
+  background:
+    radial-gradient(120% 90% at 30% 0%, rgba(255, 255, 255, 0.55), transparent 60%),
+    linear-gradient(180deg, var(--raised), color-mix(in srgb, var(--raised) 80%, var(--haze)));
+  box-shadow: var(--shadow-deep);
 }
-.teacher__note {
-  margin: var(--s-2) 0 0;
-  color: var(--ink-2);
+.wall .air-window__box {
+  filter: drop-shadow(0 18px 22px rgba(31, 58, 48, 0.35));
+}
+.wall .air-window__legend {
+  margin-top: var(--s-2);
+}
+
+.readouts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-2);
+}
+.readout {
+  padding: var(--s-3) var(--s-4);
+  border-radius: 16px;
+  background: var(--raised);
+  box-shadow: 0 1px 0 var(--rule);
+  min-width: 0;
+}
+.readout__label {
   font-size: var(--step--1);
+  color: var(--ink-2);
+  font-weight: 560;
+}
+.readout__value {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: var(--step-3);
+  font-weight: 700;
+  font-stretch: 82%;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.readout__unit {
+  font-size: var(--step--1);
+  font-weight: 560;
+  color: var(--ink-2);
+  letter-spacing: 0;
+}
+.readout__trend {
+  align-self: center;
+  color: var(--ink-2);
+}
+.readout__status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  font-size: var(--step--1);
+  font-weight: 560;
+  color: var(--ink-2);
+}
+.readout__status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink-3);
+}
+.readout--good .readout__status::before {
+  background: var(--breath);
+}
+.readout--warn .readout__status::before {
+  background: var(--haldi);
+}
+.readout--bad .readout__status {
+  color: var(--haldi-ink);
+}
+.readout--bad .readout__status::before {
+  background: var(--haldi-ink);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--haldi) 35%, transparent);
+}
+
+/* ── the decision panel ── */
+.panel {
+  grid-area: panel;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(20px, 3.4vw, 40px);
+  border-radius: var(--r-panel);
+  background: var(--raised);
+  box-shadow: var(--shadow-deep);
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+}
+.panel--action::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 6px;
+  background: var(--haldi);
+}
+.panel__eyebrow {
+  font-size: var(--step--1);
+  font-weight: 560;
+  color: var(--ink-3);
 }
 
 .bi-primary {
@@ -75,10 +188,11 @@
 }
 .bi-secondary {
   display: block;
-  font-size: max(0.55em, 0.85rem);
+  font-size: max(0.5em, 0.85rem);
   font-weight: 400;
   color: var(--ink-2);
   font-stretch: 100%;
+  letter-spacing: 0;
 }
 
 /* keep: small and quiet */
@@ -86,81 +200,152 @@
   display: flex;
   align-items: flex-start;
   gap: var(--s-3);
-  margin: 0;
-  font-size: var(--step-2);
-  font-weight: 560;
-  line-height: 1.3;
+  margin: var(--s-2) 0 0;
+  font-size: var(--step-3);
+  font-weight: 700;
+  line-height: 1.15;
 }
 .keep__line svg {
   flex: none;
-  margin-top: 4px;
-  color: var(--ink-2);
+  margin-top: 6px;
+  color: var(--breath-ink);
 }
 .keep__next {
-  margin: var(--s-4) 0 0;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: var(--s-5);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--rule);
   color: var(--ink-2);
+}
+.keep__next > span:last-child {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+.keep__time {
+  font-size: var(--step-2);
+  font-weight: 700;
+  font-stretch: 85%;
+  color: var(--ink);
 }
 
 /* action */
 .action__followup {
-  margin: 0 0 var(--s-3);
+  display: flex;
+  gap: var(--s-3);
+  align-items: flex-start;
+  margin: 0 0 var(--s-4);
   padding: var(--s-3) var(--s-4);
   background: var(--haldi);
   color: var(--blackboard);
-  border-radius: var(--r-button);
+  border-radius: 14px;
   font-weight: 560;
+  animation: rise 420ms var(--ease) both;
+}
+.action__followup svg {
+  flex: none;
+  margin-top: 3px;
 }
 .action__followup .bi-secondary {
   color: var(--blackboard);
 }
-.action__verb {
-  margin: 0;
-  font-size: var(--step-4);
-  font-weight: 700;
-  line-height: 1.1;
-  transition: font-stretch var(--dur-pane) var(--ease);
-}
-.action__duration {
+.action__head {
   display: flex;
-  align-items: baseline;
-  gap: var(--s-4);
-  margin: var(--s-3) 0 0;
-  font-size: var(--step-1);
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--s-2);
 }
-.action__countdown {
-  color: var(--haldi-ink);
+.action__icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--breath) 14%, transparent);
+  color: var(--breath-ink);
+}
+.ring {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.ring__text {
+  position: absolute;
   font-weight: 700;
+  font-stretch: 85%;
+  color: var(--haldi-ink);
+}
+.action__verb {
+  margin: var(--s-2) 0 0;
+  font-size: clamp(2rem, 3.6vw, 3.1rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  transition: font-stretch var(--dur-pane) var(--ease);
+  animation: rise 520ms var(--ease) both;
+}
+.action__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  margin: var(--s-3) 0 0;
+  font-size: var(--step-0);
+}
+.action__meta .num {
+  font-weight: 700;
+  font-size: var(--step-1);
 }
 .action__why {
-  margin: var(--s-3) 0 0;
-  max-width: 60ch;
   color: var(--ink-2);
+  max-width: 52ch;
 }
 .action__checking {
-  margin: var(--s-5) 0 0;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: var(--s-5);
   font-size: var(--step-1);
-  font-weight: 560;
+  font-weight: 700;
+}
+.action__checking small {
+  display: block;
+  font-size: var(--step--1);
+  font-weight: 400;
+  color: var(--ink-2);
+}
+.pulse {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--breath);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--breath) 60%, transparent);
+  animation: pulse 1.6s ease-out infinite;
 }
 .action__buttons {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
   gap: var(--s-3);
   margin-top: var(--s-5);
 }
 .btn {
-  min-height: 72px;
-  min-width: 200px;
-  padding: var(--s-3) var(--s-5);
+  min-height: 76px;
+  padding: var(--s-3) var(--s-4);
   border-radius: var(--r-button);
   font-size: var(--step-1);
-  font-weight: 560;
-  line-height: 1.25;
+  font-weight: 700;
+  line-height: 1.2;
   text-align: left;
   cursor: pointer;
-  transition: transform var(--dur-ui) var(--ease);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  transition: transform var(--dur-ui) var(--ease), box-shadow var(--dur-ui) var(--ease);
 }
 .btn:active {
-  transform: translateY(1px);
+  transform: translateY(1px) scale(0.99);
 }
 .btn:disabled {
   opacity: 0.6;
@@ -170,7 +355,10 @@
   background: var(--breath-ink);
   color: var(--on-fill);
   border: 0;
-  order: 2; /* where a right thumb rests */
+  box-shadow: 0 10px 22px -12px color-mix(in srgb, var(--breath-ink) 80%, transparent);
+}
+.btn--primary svg {
+  flex: none;
 }
 .btn--primary .bi-secondary {
   color: var(--on-fill);
@@ -178,48 +366,260 @@
 }
 .btn--secondary {
   background: transparent;
-  border: 2px solid var(--ink-3);
+  border: 2px solid var(--rule);
+  color: var(--ink);
 }
 .action__reasons {
   display: flex;
   flex-wrap: wrap;
   gap: var(--s-2);
   margin-top: var(--s-3);
+  animation: rise 300ms var(--ease) both;
 }
 .chip {
   min-height: 64px;
-  padding: var(--s-2) var(--s-4);
+  padding: var(--s-2) var(--s-5);
   border-radius: var(--r-chip);
-  border: 1px solid var(--ink-3);
-  background: var(--raised);
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  font-weight: 560;
   cursor: pointer;
 }
-.teacher__flash {
-  margin: 0;
-  font-size: var(--step-3);
-  font-weight: 700;
-  color: var(--breath-ink);
+.chip:hover {
+  border-color: var(--ink-3);
 }
 
-.sparkline {
+.flash {
+  animation: rise 420ms var(--ease) both;
+}
+.flash__title {
+  margin: 0;
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  font-weight: 800;
+  font-stretch: 115%;
+  color: var(--breath-ink);
+}
+.flash__sub {
+  margin: var(--s-2) 0 0;
+  color: var(--ink-2);
+}
+
+/* ── the day ── */
+.teacher__day {
+  grid-area: day;
+  padding: var(--s-3) var(--s-4) var(--s-2);
+  border-radius: 18px;
+  background: var(--raised);
+  box-shadow: 0 1px 0 var(--rule);
+}
+.teacher__dayhead {
   display: flex;
-  align-items: center;
-  gap: var(--s-2);
+  justify-content: space-between;
+  gap: var(--s-3);
+  font-size: var(--step--1);
+  font-weight: 560;
+  color: var(--ink-2);
+}
+.teacher__note {
+  margin: 0;
   color: var(--ink-2);
   font-size: var(--step--1);
+}
+
+.ribbon {
+  margin: var(--s-1) 0 0;
+}
+.ribbon__periods,
+.ribbon__track,
+.ribbon__axis {
+  position: relative;
+}
+.ribbon__periods {
+  height: 18px;
+  font-size: 11px;
+  color: var(--ink-3);
+}
+.ribbon__periods span {
+  position: absolute;
+  top: 0;
+  text-align: center;
+  border-left: 1px solid var(--rule);
+  line-height: 18px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ribbon__periods .is-break {
+  color: var(--ink-2);
+  font-weight: 560;
+}
+.ribbon__track {
+  height: 26px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.ribbon__cell {
+  position: absolute;
+  top: 0;
+  bottom: 6px;
+}
+.ribbon__cell.is-past {
+  opacity: 0.4;
+}
+.ribbon__purifier {
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  background: var(--ink-2);
+}
+.ribbon__now {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 3px;
+  margin-left: -1px;
+  background: var(--ink);
+  border-radius: 2px;
+  box-shadow: 0 0 0 2px var(--raised);
+}
+.ribbon__axis {
+  height: 16px;
+  font-size: 11px;
+  color: var(--ink-3);
+}
+.ribbon__axis span {
+  position: absolute;
+  transform: translateX(-50%);
+}
+.ribbon__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.ribbon__legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  display: inline-block;
+  width: 14px;
+  height: 10px;
+  border-radius: 3px;
+}
+.swatch--purifier {
+  height: 4px;
+  background: var(--ink-2);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pulse {
+  70% {
+    box-shadow: 0 0 0 14px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+/* Short tablet screens (1024×600): tighten so everything fits without scrolling. */
+@media (max-height: 640px) and (min-width: 761px) {
+  .teacher {
+    padding-block: var(--s-2);
+    gap: var(--s-2) var(--s-4);
+  }
+  .wall {
+    padding: 12px;
+  }
+  .wall .air-window__legend {
+    display: none;
+  }
+  .readout {
+    padding: var(--s-2) var(--s-3);
+  }
+  .readout__value {
+    font-size: var(--step-2);
+  }
+  .air-window--calm .air-window__box {
+    aspect-ratio: 16 / 9;
+  }
+  .ribbon__legend {
+    display: none;
+  }
 }
 
 @media (max-width: 760px) {
   .teacher {
     grid-template-columns: 1fr;
-    grid-template-areas: "bar" "decision" "window" "foot";
+    grid-template-areas: "bar" "panel" "stage" "day";
     padding: var(--s-3) var(--s-4);
   }
+  .action__buttons {
+    grid-template-columns: 1fr;
+  }
+  .btn--primary {
+    order: -1;
+  }
+  .readout__value {
+    font-size: var(--step-2);
+  }
+  .ribbon__periods {
+    display: none;
+  }
+}
+
+/* Display text in Devanagari needs room for matras, but not body-text spacing. */
+.action__verb [lang],
+.keep__line [lang],
+.flash__title [lang],
+.teacher__room [lang] {
+  line-height: 1.28;
+}
+.action__verb .bi-secondary {
+  margin-top: var(--s-2);
+  line-height: 1.4;
+}
+
+@media (max-height: 640px) and (min-width: 761px) {
+  .panel {
+    padding: 20px 26px;
+  }
   .action__verb {
-    font-size: var(--step-3);
+    font-size: 2.05rem;
+  }
+  .action__icon {
+    width: 52px;
+    height: 52px;
+  }
+  .action__buttons {
+    margin-top: var(--s-3);
   }
   .btn {
-    min-width: 0;
-    flex: 1 1 100%;
+    min-height: 66px;
+  }
+  .action__meta {
+    margin-top: var(--s-2);
+  }
+  .teacher__day {
+    padding: var(--s-2) var(--s-3) var(--s-1);
+  }
+  .ribbon__periods {
+    height: 15px;
+    line-height: 15px;
+  }
+  .ribbon__track {
+    height: 20px;
   }
 }

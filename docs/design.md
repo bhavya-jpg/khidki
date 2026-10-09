@@ -50,3 +50,35 @@ banner's English at ~9 px. It now has a floor of 0.85 rem.
 ### Screenshots use Playwright, not Chrome's `--screenshot`
 Headless Chrome's one-shot screenshot captured the canvas before it painted, which looked like a bug in
 the AirWindow. The design-QA loop uses Playwright, as the spec says.
+
+## Redesign, Fri 9 Oct (night)
+
+Feedback: the first UI was "too basic". Direction after looking at current Awwwards winners and trend surveys
+(bento layouts, tactile grain, editorial numerals, one strong metaphor per screen), without WebGL or GSAP:
+
+### The window became a scene, and every new element is data
+Behind the glass there is now a Delhi skyline (two layers of rooftops with water tanks) and a sun. Both fade
+as outdoor PM2.5 rises, under a smog veil whose density follows the same value. On a clean day you see the
+city; at PM2.5 250 it is gone. The frame is painted with a bevel and a sill; the glass has reflections. The dot
+encoding and the CO₂ haze are unchanged.
+
+### Teacher screen as a calm instrument panel
+The window sits on a lit "wall" card; three readouts (CO₂, PM2.5 inside, AQI outside) use big tabular
+numerals with a status word and dot (colour is never the only signal); the instruction has a countdown ring;
+and an **air ribbon** shows the whole day's plan (one stripe per 5 minutes, darker = more open, a "now"
+marker, period labels). The ribbon stitches together every plan version of the day (each version owns the
+steps from when it was made), so the past shows what was planned at the time.
+
+### Landing page
+A blackboard hero whose headline widens (Anek's width axis) as the window opens, cycling Shut, Open and
+Khidki with numbers from the physics model; a strip of four facts; a bento "four steps"; results read live
+from `benchmark.json` (including the honest "+4 points PM2.5" tile); a "built on AWS" list; footer with
+attribution and the not-a-medical-device line. Sections reveal on scroll, off under reduced motion.
+
+### New roles and rules
+- Panels use a 24 px radius (`--r-panel`), a new role between buttons (14 px) and the window frame (2 px).
+- Grain: a fixed SVG-noise overlay at 5–7% opacity, multiply in light mode, screen in dark.
+- Devanagari display text uses line-height 1.28; the 1.75 body rule was leaking into headings.
+- The landing page defaults to English (its readers are judges and principals); teacher and parent pages
+  default to Hindi. A saved choice wins.
+- The 2025 classroom study is quoted only for what we verified (CO₂ down ~19%, PM up as windows opened).

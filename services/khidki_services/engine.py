@@ -730,7 +730,17 @@ class Engine:
             "reason": item["reason"],
             "bias_ratio": item["bias_ratio"],
             "bias_corrected": item["bias_corrected"],
+            "day_steps": self.day_steps(room_id, item["plan"]["date"]),
         }
+
+    def day_steps(self, room_id: str, date: str) -> list[Item]:
+        """The whole day as planned: each plan version owns the steps from the moment it was made, so earlier
+        steps keep what was planned at the time (the latest version only covers the rest of the day)."""
+        by_t: dict[int, Item] = {}
+        for item in self.store.query(f"ROOM#{room_id}", f"PLAN#{date}#"):
+            for step in item["plan"]["steps"]:
+                by_t[step["t_min"]] = step
+        return [by_t[t] for t in sorted(by_t)]
 
     def school_today(self) -> Item:
         day = self.day()

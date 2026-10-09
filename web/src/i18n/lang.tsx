@@ -11,7 +11,8 @@ function initial(): Lang {
   } catch {
     /* storage blocked */
   }
-  return "hi";
+  // Teachers and parents are Hindi-first; the landing page's readers (judges, principals) start in English.
+  return location.pathname.startsWith("/teacher") || location.pathname.startsWith("/parent") ? "hi" : "en";
 }
 
 export function LangProvider({ children }: { children: ReactNode }) {

@@ -4,7 +4,7 @@ import { DEFAULT_PM_PER_PARTICLE, EncodingContext } from "./components/AirWindow
 import { LangProvider } from "./i18n/lang";
 
 // Route-level code splitting: the teacher route loads only what it needs.
-const Home = lazy(() => import("./routes/Home"));
+const Landing = lazy(() => import("./routes/Landing"));
 const Teacher = lazy(() => import("./routes/Teacher"));
 const DevWindow = lazy(() => import("./routes/DevWindow"));
 
@@ -16,7 +16,7 @@ export default function App() {
         <BrowserRouter>
           <Suspense fallback={null}>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Landing />} />
               <Route path="/teacher/:roomId" element={<Teacher />} />
               <Route path="/dev/window" element={<DevWindow />} />
             </Routes>

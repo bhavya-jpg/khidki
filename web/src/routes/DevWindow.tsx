@@ -6,10 +6,12 @@ const STATES: WindowState[] = ["closed", "cracked", "open_one", "open_both"];
 
 /** Development page for the AirWindow: every input on a slider. */
 export default function DevWindow() {
-  const [outdoor, setOutdoor] = useState(240);
-  const [indoor, setIndoor] = useState(150);
-  const [co2, setCo2] = useState(1600);
-  const [state, setState] = useState<WindowState>("closed");
+  const q = new URLSearchParams(location.search);
+  const num = (k: string, d: number) => (q.has(k) ? Number(q.get(k)) : d);
+  const [outdoor, setOutdoor] = useState(num("out", 240));
+  const [indoor, setIndoor] = useState(num("in", 150));
+  const [co2, setCo2] = useState(num("co2", 1600));
+  const [state, setState] = useState<WindowState>((q.get("w") as WindowState) || "closed");
   const [variant, setVariant] = useState<"hero" | "calm" | "mini" | "compare">("calm");
   const row = { display: "grid", gridTemplateColumns: "10rem 1fr 5rem", alignItems: "center", gap: 8 } as const;
   return (

@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { api, usePoll } from "../api";
 import { AirWindow } from "../components/AirWindow/AirWindow";
-import { AqiBadge, SimBadge } from "../components/ui/Badges";
-import { Sparkline } from "../components/ui/Sparkline";
+import { AirRibbon } from "../components/ui/AirRibbon";
+import { SimBadge } from "../components/ui/Badges";
+import { CountdownRing } from "../components/ui/CountdownRing";
+import { Readout } from "../components/ui/Readout";
 import { WindowIcon } from "../components/ui/WindowIcon";
 import { Bi, LangToggle, useLang } from "../i18n/lang";
-import type { ActionCard, Bilingual, RoomNow, WindowState } from "../types";
+import type { ActionCard, Bilingual, PlanView, RoomNow, WindowState } from "../types";
 import "./Teacher.css";
 
 const STRETCH: Record<WindowState, number> = { closed: 75, cracked: 90, open_one: 110, open_both: 125 };
@@ -20,24 +22,31 @@ const CANT: { key: string; t: Bilingual }[] = [
 
 const T = {
   checking: { en: "Done. Checking the air…", hi: "हो गया। हवा जाँच रहे हैं…" },
+  checkingSub: { en: "Khidki is reading the CO₂ curve to confirm.", hi: "Khidki CO₂ की रेखा पढ़कर पक्का कर रहा है।" },
   verified: { en: "Air is changing ✓", hi: "हवा बदल रही है ✓" },
+  verifiedSub: { en: "Confirmed from the CO₂ curve.", hi: "CO₂ की रेखा से पक्का हुआ।" },
   cant: { en: "Can't right now", hi: "अभी नहीं हो सकता" },
-  why: { en: "Why can't you?", hi: "क्यों नहीं हो सकता?" },
+  why: { en: "What's stopping you?", hi: "क्या दिक़्क़त है?" },
   noted: { en: "Noted. Khidki will plan around it.", hi: "ठीक है। Khidki इसके हिसाब से योजना बदलेगा।" },
+  notedSub: { en: "No need to do anything else.", hi: "आपको और कुछ नहीं करना है।" },
+  nowLabel: { en: "Now", hi: "अभी" },
+  todayPlan: { en: "Today's plan", hi: "आज की योजना" },
 };
 
-function mmss(s: number) {
-  const v = Math.max(0, Math.round(s));
-  return `${Math.floor(v / 60)}:${String(v % 60).padStart(2, "0")}`;
+function co2Status(co2: number): { tone: "good" | "warn" | "bad"; t: Bilingual } {
+  if (co2 < 1000) return { tone: "good", t: { en: "Fresh", hi: "ताज़ी" } };
+  if (co2 < 1500) return { tone: "warn", t: { en: "Getting stuffy", hi: "भारी हो रही है" } };
+  return { tone: "bad", t: { en: "Stuffy", hi: "घुटन वाली" } };
 }
 
 export default function Teacher() {
   const { roomId = "6B" } = useParams();
   const { data, error, lastOk, refresh } = usePoll<RoomNow>(`/v1/rooms/${roomId}/now`, 2000);
+  const plan = usePoll<PlanView>(`/v1/rooms/${roomId}/plan`, 15000);
   const { lang } = useLang();
   const [showCant, setShowCant] = useState(false);
   const [busy, setBusy] = useState(false);
-  const [flash, setFlash] = useState<Bilingual | null>(null);
+  const [flash, setFlash] = useState<{ t: Bilingual; sub: Bilingual } | null>(null);
   const seenOutcome = useRef<string | null>(null);
 
   // The one orchestrated moment: when verification lands, say so for a few seconds.
@@ -48,8 +57,8 @@ export default function Teacher() {
     seenOutcome.current = o.nudge_id;
     if (first) return;
     if (o.status === "verified" || o.status === "verified_silent") {
-      setFlash(T.verified);
-      const id = window.setTimeout(() => setFlash(null), 3000);
+      setFlash({ t: T.verified, sub: T.verifiedSub });
+      const id = window.setTimeout(() => setFlash(null), 3500);
       return () => window.clearTimeout(id);
     }
   }, [data?.last_outcome]);
@@ -58,7 +67,10 @@ export default function Teacher() {
     setBusy(true);
     try {
       await api.post(`/v1/nudges/${card.nudge_id}/ack`, { result, reason });
-      if (result === "cant") setFlash(T.noted);
+      if (result === "cant") {
+        setFlash({ t: T.noted, sub: T.notedSub });
+        window.setTimeout(() => setFlash(null), 3500);
+      }
       setShowCant(false);
       await refresh();
     } finally {
@@ -78,35 +90,50 @@ export default function Teacher() {
   const stale = (data.indoor.stale_s ?? 0) > 240;
   const card = data.card;
   const target: WindowState = card.kind === "action" ? card.action.window : data.window.believed.window;
-  const shown: WindowState = data.window.inferred;
   const co2Series = data.series.map((s) => s.co2);
-  const pmSeries = data.series.map((s) => s.pm25 ?? NaN);
   const rising = co2Series.length > 3 && co2Series[co2Series.length - 1] > co2Series[co2Series.length - 4] + 20;
+  const falling = co2Series.length > 3 && co2Series[co2Series.length - 1] < co2Series[co2Series.length - 4] - 20;
+  const co2 = co2Status(data.indoor.co2);
+  const [hh, mm] = data.clock.time.split(":").map(Number);
+  const nowMin = hh * 60 + mm;
+  const outTone = data.outdoor.aqi > 300 ? "bad" : data.outdoor.aqi > 200 ? "warn" : "good";
 
   return (
     <main className={`teacher ${offlineFor > 0.5 ? "teacher--offline" : ""}`}>
       <header className="teacher__bar">
-        <h1 className="teacher__room">
-          <span lang="hi">कक्षा {data.room_id}</span>
-          <span className="visually-hidden"> (Class {data.room_id})</span>
-        </h1>
-        <AqiBadge aqi={data.outdoor.aqi} category={data.outdoor.category} en={data.outdoor.category_en} hi={data.outdoor.category_hi} />
+        <div className="teacher__id">
+          <span className="teacher__brand" lang="hi">खिड़की</span>
+          <h1 className="teacher__room">
+            <span lang="hi">कक्षा {data.room_id}</span>
+            <span className="visually-hidden"> (Class {data.room_id})</span>
+          </h1>
+        </div>
         <span className="teacher__clock num">{data.clock.time}</span>
         <SimBadge speed={data.clock.speed} simulated={data.simulated} />
         <LangToggle />
       </header>
 
-      <section className="teacher__window">
-        <AirWindow
-          outdoorPm={data.outdoor.pm25}
-          indoorPm={data.indoor.pm25}
-          co2={data.indoor.co2}
-          window={shown}
-          purifier={data.window.believed.purifier === "on"}
-          framePaint={data.frame_paint}
-          variant="calm"
-          rising={rising}
-        />
+      <section className="teacher__stage">
+        <div className="wall">
+          <AirWindow
+            outdoorPm={data.outdoor.pm25}
+            indoorPm={data.indoor.pm25}
+            co2={data.indoor.co2}
+            window={data.window.inferred}
+            purifier={data.window.believed.purifier === "on"}
+            framePaint={data.frame_paint}
+            variant="calm"
+            rising={rising}
+          />
+        </div>
+        <div className="readouts">
+          <Readout label="CO₂" value={data.indoor.co2.toLocaleString("en-IN")} unit="ppm" tone={co2.tone}
+            trend={rising ? "up" : falling ? "down" : "flat"} status={<span lang={lang}>{co2.t[lang]}</span>} />
+          <Readout label={lang === "hi" ? "अंदर PM2.5" : "PM2.5 inside"}
+            value={data.indoor.pm25 == null ? "–" : String(Math.round(data.indoor.pm25))} unit="µg/m³" />
+          <Readout label={lang === "hi" ? "बाहर AQI" : "AQI outside"} value={String(data.outdoor.aqi)} unit=""
+            tone={outTone} status={<span lang={lang}>{lang === "hi" ? data.outdoor.category_hi : data.outdoor.category_en}</span>} />
+        </div>
         {stale && (
           <p className="teacher__note" role="status">
             {lang === "hi"
@@ -116,20 +143,27 @@ export default function Teacher() {
         )}
       </section>
 
-      <section className="teacher__decision" aria-live="polite">
+      <section className={`panel ${card.kind === "action" ? "panel--action" : ""}`} aria-live="polite">
         {flash ? (
-          <p className="teacher__flash"><Bi t={flash} /></p>
+          <div className="flash">
+            <p className="flash__title"><Bi t={flash.t} secondary={false} /></p>
+            <p className="flash__sub"><span lang={lang}>{flash.sub[lang]}</span></p>
+          </div>
         ) : card.kind === "keep" ? (
           <div className="keep">
+            <span className="panel__eyebrow"><span lang={lang}>{T.nowLabel[lang]}</span></span>
             <p className="keep__line">
-              <WindowIcon state={data.window.believed.window} size={28} />
+              <WindowIcon state={data.window.believed.window} size={36} />
               <Bi t={card.text} />
             </p>
             {card.next && (
-              <p className="keep__next num">
-                {lang === "hi" ? `अगला बदलाव ${card.next.t} पर: ` : `Next change at ${card.next.t}: `}
-                <span lang={lang}>{card.next.text[lang]}</span>
-              </p>
+              <div className="keep__next">
+                <span className="keep__time num">{card.next.t}</span>
+                <span>
+                  <WindowIcon state={card.next.action.window} size={22} />
+                  <span lang={lang}>{card.next.text[lang]}</span>
+                </span>
+              </div>
             )}
           </div>
         ) : (
@@ -146,16 +180,18 @@ export default function Teacher() {
         )}
       </section>
 
-      <footer className="teacher__foot">
-        <Sparkline values={co2Series} label="CO₂" unit="ppm" color="var(--haldi-ink)" />
-        <Sparkline values={pmSeries} label="PM2.5" unit="µg/m³" color="var(--ink-2)" />
-        {offlineFor > 0.5 && (
-          <p className="teacher__note" role="status">
-            {lang === "hi"
-              ? `${Math.round(offlineFor)} मिनट से कनेक्शन नहीं। आख़िरी निर्देश दिखा रहे हैं।`
-              : `No connection for ${Math.round(offlineFor)} min. Last instruction shown.`}
-          </p>
-        )}
+      <footer className="teacher__day">
+        <div className="teacher__dayhead">
+          <span lang={lang}>{T.todayPlan[lang]}</span>
+          {offlineFor > 0.5 && (
+            <span className="teacher__note" role="status">
+              {lang === "hi"
+                ? `${Math.round(offlineFor)} मिनट से कनेक्शन नहीं। आख़िरी निर्देश दिखा रहे हैं।`
+                : `No connection for ${Math.round(offlineFor)} min. Last instruction shown.`}
+            </span>
+          )}
+        </div>
+        {plan.data && <AirRibbon steps={plan.data.day_steps ?? plan.data.steps} nowMin={nowMin} />}
       </footer>
     </main>
   );
@@ -177,26 +213,36 @@ function ActionPanel(props: {
   const waiting = card.status === "issued" || card.status === "follow_up";
   return (
     <div className="action">
-      {card.follow_up_text && card.status === "follow_up" ? (
-        <p className="action__followup"><Bi t={card.follow_up_text} /></p>
-      ) : null}
+      {card.follow_up_text && card.status === "follow_up" && (
+        <p className="action__followup">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" /><path d="M12 10v5M12 18v.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
+          <Bi t={card.follow_up_text} />
+        </p>
+      )}
+      <div className="action__head">
+        <span className="action__icon"><WindowIcon state={card.action.window} size={44} /></span>
+        <CountdownRing remaining={remaining} total={card.duration_min * 60} label={lang === "hi" ? "बचा समय" : "Time left"} />
+      </div>
       <h2 className="action__verb" style={{ fontStretch: `${stretch}%` }}>
         <Bi t={card.text} />
       </h2>
-      <p className="action__duration num">
-        <span lang={lang}>{lang === "hi" ? `${card.duration_min} मिनट के लिए` : `For ${card.duration_min} minutes`}</span>
-        <span className="action__countdown" aria-label={lang === "hi" ? "बचा समय" : "Time left"}>{mmss(remaining)}</span>
+      <p className="action__meta">
+        <span className="num" lang={lang}>{lang === "hi" ? `${card.duration_min} मिनट के लिए` : `For ${card.duration_min} minutes`}</span>
+        <span className="action__why" lang={lang}>{card.reason[lang]}</span>
       </p>
-      <p className="action__why"><span lang={lang}>{card.reason[lang]}</span></p>
       {card.status === "verifying" ? (
-        <p className="action__checking"><Bi t={T.checking} /></p>
+        <div className="action__checking">
+          <span className="pulse" aria-hidden="true" />
+          <span><Bi t={T.checking} secondary={false} /><small lang={lang}>{T.checkingSub[lang]}</small></span>
+        </div>
       ) : waiting ? (
         <div className="action__buttons">
-          <button type="button" className="btn btn--primary" onClick={props.onDone} disabled={busy}>
-            <Bi t={card.button} />
-          </button>
           <button type="button" className="btn btn--secondary" onClick={props.onCant} disabled={busy} aria-expanded={showCant}>
             <Bi t={T.cant} />
+          </button>
+          <button type="button" className="btn btn--primary" onClick={props.onDone} disabled={busy}>
+            <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            <Bi t={card.button} />
           </button>
         </div>
       ) : null}

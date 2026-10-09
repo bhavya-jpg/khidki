@@ -19,6 +19,14 @@ interface Dot {
   r: number;
 }
 
+interface Building {
+  x: number;
+  w: number;
+  h: number;
+  tank: boolean;
+  tankX: number;
+}
+
 interface Palette {
   haze: string;
   breath: string;
@@ -250,53 +258,126 @@ export class AirWindowRenderer {
     }
   }
 
+  /** Two layers of Delhi rooftops (with water tanks), generated once per window so they don't jump. */
+  private skyline: { far: Building[]; near: Building[] } | null = null;
+
+  private buildSkyline() {
+    const r = rng(42);
+    const make = (n: number, hMin: number, hMax: number): Building[] => {
+      const out: Building[] = [];
+      let x = -0.02;
+      for (let i = 0; i < n && x < 1.02; i++) {
+        const w = 0.05 + r() * 0.09;
+        out.push({ x, w, h: hMin + r() * (hMax - hMin), tank: r() < 0.45, tankX: 0.2 + r() * 0.5 });
+        x += w + r() * 0.015;
+      }
+      return out;
+    };
+    this.skyline = { far: make(24, 0.16, 0.34), near: make(18, 0.08, 0.22) };
+  }
+
   private draw() {
     const { ctx, w, h } = this;
     if (!w || !h) return;
     const p = this.palette;
+    if (!this.skyline) this.buildSkyline();
     ctx.clearRect(0, 0, w, h);
-    const fw = Math.max(6, Math.min(w, h) * 0.04); // frame width
-    const gx = fw, gy = fw, gw = w - 2 * fw, gh = h - 2 * fw; // glass area
-
-    // Outside: sky that turns to smog with outdoor PM.
+    const fw = Math.max(8, Math.min(w, h) * 0.05); // frame width
+    const sill = fw * 0.9;
+    const gx = fw, gy = fw, gw = w - 2 * fw, gh = h - 2 * fw - sill; // glass area
     const smog = Math.min(1, this.target.outdoorPm / 250);
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(gx, gy, gw, gh);
+    ctx.clip();
+
+    // Sky: clear blue turning to smog-beige as outdoor PM rises.
     const sky = ctx.createLinearGradient(0, gy, 0, gy + gh);
-    sky.addColorStop(0, mix(mix(p.breath, p.chalk, 0.55), p.haze, smog));
-    sky.addColorStop(1, mix(mix(p.breath, p.chalk, 0.75), p.haze, Math.min(1, smog + 0.15)));
+    sky.addColorStop(0, mix(mix(p.breath, p.chalk, 0.45), p.haze, smog * 0.95));
+    sky.addColorStop(0.65, mix(mix(p.breath, p.chalk, 0.75), p.haze, Math.min(1, smog * 0.9 + 0.1)));
+    sky.addColorStop(1, mix(p.chalk, p.haze, Math.min(1, smog + 0.2)));
     ctx.fillStyle = sky;
     ctx.fillRect(gx, gy, gw, gh);
 
-    ctx.fillStyle = rgba(mix(p.haze, p.ink, 0.25), 0.8);
+    // A sun that the smog swallows.
+    const sx = gx + gw * 0.74, sy = gy + gh * 0.26, sr = Math.min(gw, gh) * 0.07;
+    const sun = ctx.createRadialGradient(sx, sy, 0, sx, sy, sr * (3 + smog * 3));
+    sun.addColorStop(0, rgba("#FFF4D6", 0.95 - smog * 0.55));
+    sun.addColorStop(0.25, rgba("#FFE7A8", 0.55 - smog * 0.35));
+    sun.addColorStop(1, rgba("#FFE7A8", 0));
+    ctx.fillStyle = sun;
+    ctx.fillRect(gx, gy, gw, gh);
+
+    // Skyline: the far layer disappears first as the air thickens.
+    const base = gy + gh;
+    const drawLayer = (layer: Building[], color: string, alpha: number) => {
+      if (alpha <= 0.01) return;
+      ctx.fillStyle = rgba(color, alpha);
+      for (const b of layer) {
+        const bx = gx + b.x * gw, bw = b.w * gw, bh = b.h * gh;
+        ctx.fillRect(bx, base - bh, bw, bh);
+        if (b.tank) {
+          const tw = bw * 0.28, th = bh * 0.16 + 4;
+          ctx.fillRect(bx + b.tankX * bw, base - bh - th, tw, th);
+        }
+      }
+    };
+    drawLayer(this.skyline!.far, mix(p.ink, p.chalk, 0.55), Math.max(0, 0.55 * Math.pow(1 - smog, 1.6)));
+    // Smog veil between the layers.
+    const veil = ctx.createLinearGradient(0, gy + gh * 0.35, 0, base);
+    veil.addColorStop(0, rgba(p.haze, 0));
+    veil.addColorStop(1, rgba(p.haze, 0.25 + smog * 0.45));
+    ctx.fillStyle = veil;
+    ctx.fillRect(gx, gy, gw, gh);
+    drawLayer(this.skyline!.near, mix(p.ink, p.chalk, 0.3), Math.max(0.08, 0.8 * (1 - smog * 0.8)));
+
+    // Outside air: dots behind the glass.
+    ctx.fillStyle = rgba(mix(p.haze, p.ink, 0.35), 0.75);
     for (const d of this.outside) {
       ctx.beginPath();
       ctx.arc(gx + d.x * gw, gy + d.y * gh, d.r, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    // Glass sashes: two halves, hinged at the outer edges, swinging outward.
+    // Glass sashes, hinged at the outer edges, swinging outward.
     const half = gw / 2;
     this.drawSash(gx, gy, half, gh, this.angles[0], "left", fw);
     this.drawSash(gx + half, gy, half, gh, this.angles[1], "right", fw);
 
     // Inside air: dots in front of the glass, plus the warm breath haze for CO₂.
-    ctx.fillStyle = mix(p.haze, p.ink, 0.45);
+    ctx.fillStyle = rgba(mix(p.haze, p.ink, 0.55), 0.9);
     for (const d of this.inside) {
       ctx.beginPath();
       ctx.arc(gx + d.x * gw, gy + d.y * gh, d.r, 0, Math.PI * 2);
       ctx.fill();
     }
     if (this.haze > 0.01) {
-      const g = ctx.createRadialGradient(gx + gw / 2, gy + gh * 1.05, gh * 0.1, gx + gw / 2, gy + gh * 0.9, gh * 1.1);
-      g.addColorStop(0, rgba(p.haldi, 0.55 * this.haze));
+      const g = ctx.createRadialGradient(gx + gw / 2, base + gh * 0.1, gh * 0.1, gx + gw / 2, base, gh * 1.15);
+      g.addColorStop(0, rgba(p.haldi, 0.6 * this.haze));
+      g.addColorStop(0.6, rgba(p.haldi, 0.25 * this.haze));
       g.addColorStop(1, rgba(p.haldi, 0));
       ctx.fillStyle = g;
       ctx.fillRect(gx, gy, gw, gh);
     }
+    ctx.restore();
 
-    // Frame on top.
-    ctx.strokeStyle = p.frame;
-    ctx.lineWidth = fw;
-    ctx.strokeRect(fw / 2, fw / 2, w - fw, h - fw);
+    // Painted frame with a bevel, and a sill.
+    ctx.fillStyle = p.frame;
+    ctx.fillRect(0, 0, w, fw);
+    ctx.fillRect(0, 0, fw, h);
+    ctx.fillRect(w - fw, 0, fw, h);
+    ctx.fillRect(0, h - fw - sill, w, fw + sill);
+    ctx.strokeStyle = rgba("#FFFFFF", 0.22);
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(1, 1, w - 2, h - 2);
+    ctx.strokeStyle = rgba("#000000", 0.28);
+    ctx.strokeRect(gx - 0.75, gy - 0.75, gw + 1.5, gh + 1.5);
+    // sill: a ledge catching the light
+    ctx.fillStyle = rgba("#FFFFFF", 0.18);
+    ctx.fillRect(0, h - sill - fw * 0.55, w, Math.max(2, fw * 0.18));
+    ctx.fillStyle = rgba("#000000", 0.18);
+    ctx.fillRect(0, h - Math.max(2, fw * 0.25), w, Math.max(2, fw * 0.25));
   }
 
   private drawSash(x: number, y: number, w: number, h: number, angleDeg: number, hinge: "left" | "right", fw: number) {
@@ -313,7 +394,11 @@ export class AirWindowRenderer {
     ctx.lineTo(fx, y + h - shrink / 2);
     ctx.lineTo(hx, y + h);
     ctx.closePath();
-    ctx.fillStyle = rgba(p.chalk, 0.16 + 0.1 * Math.sin(a));
+    const glass = ctx.createLinearGradient(Math.min(hx, fx), y, Math.max(hx, fx), y + h);
+    glass.addColorStop(0, rgba("#FFFFFF", 0.2 + 0.1 * Math.sin(a)));
+    glass.addColorStop(0.5, rgba(p.breath, 0.06));
+    glass.addColorStop(1, rgba("#FFFFFF", 0.12));
+    ctx.fillStyle = glass;
     ctx.fill();
     ctx.strokeStyle = p.frame;
     ctx.lineWidth = Math.max(2, fw * 0.45);
@@ -326,11 +411,16 @@ export class AirWindowRenderer {
     ctx.stroke();
     // a faint reflection on closed glass
     if (angleDeg < 5) {
+      ctx.strokeStyle = rgba("#FFFFFF", 0.45);
+      ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.moveTo(x + w * 0.2, y + h * 0.15);
-      ctx.lineTo(x + w * 0.35, y + h * 0.05);
-      ctx.strokeStyle = rgba(p.chalk, 0.5);
-      ctx.lineWidth = 1.5;
+      ctx.moveTo(x + w * 0.16, y + h * 0.34);
+      ctx.lineTo(x + w * 0.42, y + h * 0.06);
+      ctx.stroke();
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(x + w * 0.24, y + h * 0.4);
+      ctx.lineTo(x + w * 0.52, y + h * 0.1);
       ctx.stroke();
     }
   }
