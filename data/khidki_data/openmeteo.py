@@ -19,13 +19,15 @@ WEATHER_VARS = ("temperature_2m", "relative_humidity_2m", "wind_speed_10m", "pre
 
 ATTRIBUTION = (
     "Air quality: Copernicus Atmosphere Monitoring Service (CAMS) via Open-Meteo.com, CC BY 4.0. "
-    "Weather: Open-Meteo.com, CC BY 4.0. Contains modified Copernicus Atmosphere Monitoring Service information."
+    "Weather: Open-Meteo.com, CC BY 4.0. "
+    "Contains modified Copernicus Atmosphere Monitoring Service information."
 )
 
 
 @dataclass
 class Hourly:
-    """Hourly series keyed by variable name. `time` is local ISO time (Asia/Kolkata), e.g. 2025-11-12T07:00."""
+    """Hourly series keyed by variable name. `time` is local ISO time (Asia/Kolkata), e.g.
+    2025-11-12T07:00."""
 
     time: list[str]
     values: dict[str, list[float | None]] = field(default_factory=dict)

@@ -48,3 +48,29 @@ above 1,500 ppm. The test now checks the physics-backed claim, and the benchmark
   07:30 to 13:00 day on a 5-minute grid.
 - One extra reason code, `AIR_REFRESHED` ("CO₂ is down, close to keep the smog out"), for closing after a
   purge, which none of the spec's codes described.
+
+## Fri 9 Oct 2026
+
+### A new AWS account is locked for a while, even after "your account is now active"
+`aws configure` worked and `sts get-caller-identity` returned the user, but every service call (DynamoDB,
+Lambda, IoT, S3, CloudFormation) failed with "explicit deny in a service control policy" from an
+AWS-owned organisation, and Bedrock said "Your account is currently being verified". The denies outlasted
+the activation email. The IAM user was fine (AdministratorAccess); the block sits above IAM. The spec's
+advice, confirmed: create the AWS account days early.
+
+### The Free plan quietly changes the AI plan
+On the AWS Free plan, Bedrock global and geographic cross-Region inference are not allowed, and in
+ap-south-1 Nova models are reachable *only* through `apac.` or `global.` inference profiles. Polly was
+explicitly denied by the account's service control policy. us-east-1 serves `amazon.nova-lite-v1:0`
+in-region (ON_DEMAND), which is the fallback to test once the account unlocks.
+
+### CAMS reads Delhi low
+The 48 cached school days (15 Oct to 19 Dec 2025, East Delhi) have a median 24-hour CAMS PM2.5 of
+91 µg/m³ and a maximum of 178. CPCB stations were reporting "Very poor" and "Severe" through November.
+CAMS global is ~45 km and smooths out the city. Replay days are labelled "CAMS model values, uncorrected";
+live mode bias-corrects against the nearest CPCB station. Relative results (Khidki vs baselines) are less
+sensitive to the scale than absolute doses.
+
+### `&&` only guards the line it's on
+A commit went in with three lint errors because `git commit` sat on its own line after a failing
+`ruff check && ...` chain. Fixed in the next commit; checks and commit now run under `set -e`.

@@ -38,7 +38,8 @@ def main(argv: list[str]) -> int:
                 n += 1
         day += dt.timedelta(days=1)
     (FIXTURES / "ATTRIBUTION.txt").write_text(
-        f"{ATTRIBUTION}\nLocation: {DEMO_LAT}, {DEMO_LON} (East Delhi). Fetched {dt.date.today().isoformat()}.\n"
+        f"{ATTRIBUTION}\nLocation: {DEMO_LAT}, {DEMO_LON} (East Delhi). "
+        f"Fetched {dt.date.today().isoformat()}.\n"
         "These are model values (CAMS global, ~45 km), not station measurements.\n"
     )
     print(f"Wrote {n} replay days to {FIXTURES}")
