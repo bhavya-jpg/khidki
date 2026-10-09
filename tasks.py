@@ -77,12 +77,9 @@ def not_yet(phase: str) -> Callable[[list[str]], int]:
 
 
 for _name, _phase, _help in [
-    ("sim", "Phase 2", "Run the classroom simulator against local or cloud"),
     ("provision-device", "Phase 4", "Create an IoT thing and certificates for a room"),
     ("seed-demo", "Phase 4", "Seed the demo school and rooms"),
     ("synth-phrases", "Phase 5", "Pre-synthesize instruction phrases with Polly"),
-    ("web-build", "Phase 5", "Build the web app"),
-    ("web-deploy", "Phase 5", "Deploy the web app to Amplify"),
     ("demo-reset", "Phase 5", "Reset demo state between video takes"),
     ("arch-diagram", "Phase 8", "Render the architecture diagram"),
 ]:
@@ -196,6 +193,41 @@ def deploy(args: list[str]) -> int:
         cwd=ROOT / "infra",
         env=env,
     )
+
+
+@command("Run the classroom simulator: --scenario NAME --speed N --target local|cloud [--minutes M]")
+def sim(args: list[str]) -> int:
+    import argparse
+
+    ap = argparse.ArgumentParser(prog="tasks.py sim")
+    ap.add_argument("--scenario", default="severe_morning")
+    ap.add_argument("--speed", type=float, default=10)
+    ap.add_argument("--target", choices=["local", "cloud"], default="cloud")
+    ap.add_argument("--minutes", type=float, default=None)
+    a = ap.parse_args(args)
+    if a.target == "local":
+        print("Local mode runs the simulator inside the API: python tasks.py local " + a.scenario)
+        return run([uv(), "run", "python", "tasks.py", "local", a.scenario])
+    import json
+
+    env = _env_keys()
+    api = json.loads((ROOT / "infra" / "outputs.json").read_text())["Khidki"]["ApiUrl"]
+    code = (
+        "from khidki_sim import scenario as s; from khidki_sim.cloud import CloudSim; "
+        f"CloudSim({api!r}, {env['KHIDKI_DEVICE_KEY']!r}, {env['KHIDKI_ADMIN_KEY']!r}, "
+        f"s.load({a.scenario!r}), {a.speed}).run({a.minutes})"
+    )
+    return run([uv(), "run", "--offline", "python", "-c", code])
+
+
+@command("Build the web app (web/dist)")
+def web_build(args: list[str]) -> int:
+    return run(["npx", "vite", "build"], cwd=ROOT / "web")
+
+
+@command("Build and publish the web app to Amplify Hosting")
+def web_deploy(args: list[str]) -> int:
+    return run([uv(), "run", "--offline", "python", "scripts/web_deploy.py"])
 
 
 @command("Cache real Delhi outdoor-air replay days from Open-Meteo")
