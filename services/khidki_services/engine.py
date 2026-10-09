@@ -38,6 +38,7 @@ from khidki_core.schemas import (
     Plan,
     Profile,
     Purifier,
+    ReasonCode,
     RoomParams,
     Window,
 )
@@ -819,7 +820,35 @@ class Engine:
             "bias_ratio": item["bias_ratio"],
             "bias_corrected": item["bias_corrected"],
             "day_steps": self.day_steps(room_id, item["plan"]["date"]),
+            "timetable": self.timetable(room_id, item["plan"]["date"]),
         }
+
+    def timetable(self, room_id: str, date: str) -> list[Item]:
+        """The day's instructions as a printable list (the no-hardware tier), in both languages."""
+        steps = self.day_steps(room_id, date)
+        out: list[Item] = []
+        prev: tuple[str, str] | None = None
+        for st in steps:
+            key = (st["window"], st["purifier"])
+            if key != prev and prev is not None:
+                action = Action(window=Window(st["window"]), purifier=Purifier(st["purifier"]))
+                en, hi = texts.action_text(action)
+                r_en, r_hi = texts.REASON_TEXT[ReasonCode(st["reason_code"])]
+                out.append(
+                    {
+                        "t": st["t"],
+                        "t_min": st["t_min"],
+                        "window": st["window"],
+                        "purifier": st["purifier"],
+                        "text": {"en": en, "hi": hi},
+                        "reason": {"en": r_en, "hi": r_hi},
+                    }
+                )
+            prev = key
+        for i, row in enumerate(out):
+            end = out[i + 1]["t_min"] if i + 1 < len(out) else DAY_END_MIN
+            row["until"] = hhmm(end)
+        return out
 
     def day_steps(self, room_id: str, date: str) -> list[Item]:
         """The whole day as planned: each plan version owns the steps from the moment it was made, so earlier

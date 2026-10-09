@@ -1,0 +1,131 @@
+.print {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  color: #1f3a30;
+  background: #fff;
+}
+.print__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+.print__actions button {
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: var(--r-button);
+  border: 0;
+  background: var(--breath-ink);
+  color: #eef0e6;
+  font-weight: 700;
+  cursor: pointer;
+}
+.print__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  padding-bottom: 16px;
+  border-bottom: 3px solid #1f3a30;
+}
+.print__brand {
+  margin: 0;
+  font-weight: 800;
+  font-stretch: 118%;
+  color: #15669e;
+}
+.print h1 {
+  margin: 4px 0 0;
+  font-size: 1.9rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+.print h1 span {
+  display: block;
+}
+.print h1 span + span {
+  font-size: 1.1rem;
+  font-weight: 560;
+  color: #3f564c;
+}
+.print dl {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  font-size: 0.85rem;
+}
+.print dl div {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+}
+.print dt {
+  color: #3f564c;
+}
+.print dd {
+  margin: 0;
+  font-weight: 800;
+}
+.print table {
+  width: 100%;
+  margin-top: 16px;
+  border-collapse: collapse;
+}
+.print th {
+  text-align: left;
+  font-size: 0.8rem;
+  color: #3f564c;
+  padding: 6px 8px;
+  border-bottom: 1px solid #c9cfc2;
+}
+.print td {
+  vertical-align: top;
+  padding: 12px 8px;
+  border-bottom: 1px solid #c9cfc2;
+}
+.print td:first-child {
+  font-size: 1.3rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.print td small {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 560;
+  color: #3f564c;
+}
+.print td b,
+.print td span {
+  display: block;
+}
+.print td b {
+  font-size: 1.1rem;
+}
+.print td span {
+  font-size: 0.85rem;
+  color: #3f564c;
+}
+.print td svg {
+  color: #15669e;
+}
+.print__foot {
+  margin-top: 20px;
+  font-size: 0.78rem;
+  color: #3f564c;
+}
+.print__foot p {
+  margin: 0 0 6px;
+}
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+  body::before,
+  .print__actions {
+    display: none !important;
+  }
+  .print {
+    padding: 0;
+    max-width: none;
+  }
+}

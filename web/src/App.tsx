@@ -7,6 +7,7 @@ import { LangProvider } from "./i18n/lang";
 const Landing = lazy(() => import("./routes/Landing"));
 const Teacher = lazy(() => import("./routes/Teacher"));
 const School = lazy(() => import("./routes/School"));
+const Print = lazy(() => import("./routes/Print"));
 const DevWindow = lazy(() => import("./routes/DevWindow"));
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
               <Route path="/" element={<Landing />} />
               <Route path="/teacher/:roomId" element={<Teacher />} />
               <Route path="/school/:schoolId" element={<School />} />
+              <Route path="/print/:roomId" element={<Print />} />
               <Route path="/dev/window" element={<DevWindow />} />
             </Routes>
           </Suspense>

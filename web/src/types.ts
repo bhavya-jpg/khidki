@@ -83,6 +83,7 @@ export interface PlanView {
   instructions: { t_start: string; t_start_min: number; t_end_min: number; duration_min: number; action: ActionJson; reason_code: string }[];
   made_at: number;
   day_steps: PlanStepView[];
+  timetable: { t: string; until: string; t_min: number; window: WindowState; purifier: PurifierState; text: Bilingual; reason: Bilingual }[];
 }
 
 export interface Decision {
