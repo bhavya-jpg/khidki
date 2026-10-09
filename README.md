@@ -10,6 +10,31 @@ that the air really changed.
 Built for **Environmental Hacks (Bharat Builds Tour), Air track**, 8 to 11 Oct 2026. Work in progress:
 see [`docs/SPEC.md`](docs/SPEC.md) for the plan and the git history for progress.
 
+## What it does, in one breath
+Every morning Khidki plans each classroom's ventilation in 5-minute steps from the outdoor forecast, the
+timetable and a physics model of the room. School safety rules are [Cedar](core/khidki_core/policy/khidki.cedar)
+policies (for example S2: outdoor PE moves indoors if forecast PM2.5 is above 90). During the day the teacher
+sees one calm Hindi/English instruction. Khidki then reads the CO₂ curve to check the window really opened
+(the children's breath is the tracer gas), and asks for the corridor side if only one side did. It re-plans
+every 5 minutes, never asks more than 6 times a day, and answers questions in Hindi with numbers it can't
+make up.
+
+## Results (simulation with real outdoor air, not a field trial)
+Over 48 real East Delhi school days (Oct to Dec 2025), against a CO₂ alarm with the same teacher behaviour,
+in a class of 44 without a purifier ([full report](docs/benchmark.md)):
+
+| | CO₂ alarm | Khidki |
+|---|---|---|
+| Minutes a day above 1,500 ppm | 65 | **17** (fewer on 44 of 48 days) |
+| Requests to the teacher a day | 15 | **4** |
+| PM2.5 dose (% of an always-open room) | 89% | 93% |
+
+Khidki trades a few points of PM2.5 for far less stuffiness and far fewer interruptions. Weighted towards
+PM, it matches the alarm on both PM2.5 and CO₂ with a third of the requests and less than half the cold air.
+Without a purifier, physics leaves little room to cut PM by timing alone; we say so in the report.
+
+![Benchmark](docs/benchmark-pareto.png)
+
 ## Run locally (no AWS account needed)
 
 ```bash
