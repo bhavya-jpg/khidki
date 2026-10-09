@@ -212,6 +212,32 @@ def school_today(school_id: str) -> dict[str, Any]:
         return r.engine.school_today()
 
 
+class OverrideBody(BaseModel):
+    key: str
+    outdoor: bool
+    reason: str = Field(min_length=3, max_length=200)
+
+
+@app.post("/v1/schools/{school_id}/override")
+def override(school_id: str, body: OverrideBody) -> dict[str, Any]:
+    """Local mode has no login; it acts as the demo principal. The cloud requires the admin passcode."""
+    r = rt()
+    with r.lock:
+        try:
+            return r.engine.override(body.key, body.outdoor, body.reason, user_id="principal")
+        except PermissionError as exc:
+            raise HTTPException(403, str(exc)) from exc
+        except KeyError as exc:
+            raise HTTPException(404, f"No decision {body.key}") from exc
+
+
+@app.get("/v1/schools/{school_id}/audit")
+def audit(school_id: str) -> list[dict[str, Any]]:
+    r = rt()
+    with r.lock:
+        return r.engine.audit()
+
+
 @app.get("/v1/sim/scenarios")
 def list_scenarios() -> list[dict[str, Any]]:
     out = []

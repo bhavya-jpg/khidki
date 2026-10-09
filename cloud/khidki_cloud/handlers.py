@@ -114,6 +114,27 @@ def school_today(school_id: str) -> dict[str, Any]:
     return e.school_today()
 
 
+@app.post("/v1/schools/<school_id>/override")
+def override(school_id: str) -> dict[str, Any]:
+    """The demo principal signs in with the admin passcode; Cedar still decides (A2/A3) and it is logged."""
+    if not _secret_ok("x-khidki-admin", "/khidki/admin_key"):
+        raise UnauthorizedError("Principal passcode required")
+    body = _body()
+    try:
+        return runtime.engine(metrics).override(
+            str(body.get("key")), bool(body.get("outdoor")), str(body.get("reason", "")), user_id="principal"
+        )
+    except KeyError as exc:
+        raise NotFoundError("No such decision today") from exc
+    except ValueError as exc:
+        raise BadRequestError(str(exc)) from exc
+
+
+@app.get("/v1/schools/<school_id>/audit")
+def audit(school_id: str) -> list[dict[str, Any]]:
+    return runtime.engine(metrics).audit()
+
+
 @app.post("/v1/agent/ask")
 def agent() -> dict[str, Any]:
     body = _body()

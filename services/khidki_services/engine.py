@@ -871,6 +871,51 @@ class Engine:
             "simulated": day["simulated"],
         }
 
+    # ── principal actions (Cedar-checked, always logged) ─────────────────────────────────────────────
+    def override(self, key: str, outdoor: bool, reason: str, user_id: str) -> Item:
+        """Override one of today's activity decisions. Only a principal may (Cedar A2/A3); every override
+        is written to the audit log with who, when and why, and the affected rooms are re-planned."""
+        authorize = getattr(self.policy, "authorize", None)
+        if authorize is not None:
+            d = authorize(user_id, "plan.override", "School", self.school.school_id)
+            if not d.allowed:
+                raise PermissionError(f"Only a principal can override decisions ({', '.join(d.policy_ids)})")
+        reason = reason.strip()
+        if not reason:
+            raise ValueError("Give a reason; overrides are logged")
+        day = self.day()
+        decision = next((x for x in day["decisions"] if x["key"] == key), None)
+        if decision is None:
+            raise KeyError(key)
+        now = self.clock.now()
+        decision.update(
+            override=bool(outdoor),
+            override_by=user_id,
+            override_reason=reason[:200],
+            override_at=hhmm(int(ist_minute(now))),
+        )
+        self.store.put(f"SCHOOL#{self.school.school_id}", f"DAY#{day['date']}", day)
+        entry = {
+            "at": now,
+            "time": hhmm(int(ist_minute(now))),
+            "date": day["date"],
+            "by": user_id,
+            "key": key,
+            "label": decision["label"],
+            "outdoor": bool(outdoor),
+            "was_outdoor": decision["outdoor"],
+            "policy_ids": decision["policy_ids"],
+            "reason": reason[:200],
+        }
+        self.store.put(f"AUDIT#{self.school.school_id}", f"{iso(now)}#{key}", entry)
+        rooms = [key.split(":")[1]] if key.startswith("pe:") else [r.room_id for r in self.school.rooms]
+        for rid in rooms:
+            self.replan(rid, reason=f"override {key}")
+        return entry
+
+    def audit(self, limit: int = 20) -> list[Item]:
+        return self.store.query(f"AUDIT#{self.school.school_id}", "", limit=limit, newest_first=True)
+
     # ── demo support ─────────────────────────────────────────────────────────────────────────────────
     def reset(self) -> None:
         if hasattr(self.store, "clear"):

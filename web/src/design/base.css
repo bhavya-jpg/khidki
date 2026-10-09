@@ -129,3 +129,13 @@ body::before {
 .o3 {
   background: var(--breath);
 }
+
+.lang-toggle {
+  min-height: 44px;
+  padding: 0 var(--s-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-chip);
+  background: var(--raised);
+  font-weight: 560;
+  cursor: pointer;
+}

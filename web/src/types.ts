@@ -84,3 +84,61 @@ export interface PlanView {
   made_at: number;
   day_steps: PlanStepView[];
 }
+
+export interface Decision {
+  key: string;
+  label: string;
+  start: string;
+  end: string;
+  outdoor: boolean;
+  policy_ids: string[];
+  max_pm25: number;
+  override: boolean | null;
+  override_by?: string;
+  override_reason?: string;
+  override_at?: string;
+}
+
+export interface SchoolRoom {
+  room_id: string;
+  name: string;
+  grade: number;
+  has_purifier: boolean;
+  frame_paint: string;
+  indoor: RoomNow["indoor"];
+  window: RoomNow["window"];
+  card: RoomNow["card"];
+  last_outcome: RoomNow["last_outcome"];
+  occupied: boolean;
+}
+
+export interface SchoolToday {
+  school_id: string;
+  name: string;
+  clock: ClockView;
+  date: string;
+  city_aqi: number;
+  indicative_grap: number;
+  official_grap: number | null;
+  grap_stage: number;
+  grap: { name_en: string; name_hi: string; reminder_en: string; reminder_hi: string; circulars_url: string };
+  decisions: Decision[];
+  policies: Record<string, { en: string; hi: string; source: string }>;
+  hourly: { hour_min: number[]; pm25: (number | null)[] };
+  forecast_source: string;
+  rooms: SchoolRoom[];
+  simulated: boolean;
+}
+
+export interface AuditEntry {
+  at: number;
+  time: string;
+  date: string;
+  by: string;
+  key: string;
+  label: string;
+  outdoor: boolean;
+  was_outdoor: boolean;
+  policy_ids: string[];
+  reason: string;
+}

@@ -104,3 +104,27 @@ def test_engine_moves_pe_indoors_with_policy_id() -> None:
     pe = next(d for d in view["decisions"] if d["key"] == "pe:6B")
     assert pe["outdoor"] is False and "S2" in pe["policy_ids"]
     assert "S2" in view["policies"] and view["policies"]["S2"]["hi"]
+
+
+def test_override_is_principal_only_logged_and_replans() -> None:
+    from khidki_core.clock import SimClock
+    from khidki_core.optimizer import Grid
+    from khidki_services.engine import Engine
+    from khidki_services.outdoor import ReplayOutdoor
+    from khidki_services.store import MemoryStore
+
+    t = [1_000_000.0]
+    clock = SimClock(real_time=lambda: t[0])
+    clock.start_demo("2025-11-18", "07:00", 1.0)
+    engine = Engine(MemoryStore(), clock, ReplayOutdoor("2025-11-18"), grid=Grid(co2_step=50, pm_step=5))
+    engine.seed()
+    with pytest.raises(PermissionError):
+        engine.override("pe:6B", True, "sports day", user_id="teacher-6B")
+    with pytest.raises(ValueError):
+        engine.override("pe:6B", True, "  ", user_id="principal")
+    entry = engine.override("pe:6B", True, "Inter-school match, masks given", user_id="principal")
+    assert entry["by"] == "principal" and entry["was_outdoor"] is False and "S2" in entry["policy_ids"]
+    pe = next(d for d in engine.school_today()["decisions"] if d["key"] == "pe:6B")
+    assert pe["override"] is True and pe["override_reason"].startswith("Inter-school")
+    assert engine.audit()[0]["key"] == "pe:6B"
+    assert engine.occupancy_flags("6B")["pe_outdoor"] is True

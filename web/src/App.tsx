@@ -6,6 +6,7 @@ import { LangProvider } from "./i18n/lang";
 // Route-level code splitting: the teacher route loads only what it needs.
 const Landing = lazy(() => import("./routes/Landing"));
 const Teacher = lazy(() => import("./routes/Teacher"));
+const School = lazy(() => import("./routes/School"));
 const DevWindow = lazy(() => import("./routes/DevWindow"));
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Landing />} />
               <Route path="/teacher/:roomId" element={<Teacher />} />
+              <Route path="/school/:schoolId" element={<School />} />
               <Route path="/dev/window" element={<DevWindow />} />
             </Routes>
           </Suspense>
