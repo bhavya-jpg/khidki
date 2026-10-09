@@ -78,7 +78,6 @@ def not_yet(phase: str) -> Callable[[list[str]], int]:
 
 for _name, _phase, _help in [
     ("local", "Phase 2", "Run the whole app locally (no AWS account needed)"),
-    ("fetch-replay", "Phase 2", "Cache real Delhi outdoor-air replay days from Open-Meteo"),
     ("sim", "Phase 2", "Run the classroom simulator against local or cloud"),
     ("bench", "Phase 7", "Run the policy benchmark over replay days"),
     ("cdk-synth", "Phase 4", "Synthesize the CDK app"),
@@ -92,6 +91,12 @@ for _name, _phase, _help in [
     ("arch-diagram", "Phase 8", "Render the architecture diagram"),
 ]:
     COMMANDS.setdefault(_name, (not_yet(_phase), _help))
+
+
+@command("Cache real Delhi outdoor-air replay days from Open-Meteo")
+def fetch_replay(args: list[str]) -> int:
+    print("Fetching replay days (needs internet)...")
+    return run([uv(), "run", "python", "scripts/fetch_replay.py", *args])
 
 
 @command("List commands")
