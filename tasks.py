@@ -212,12 +212,14 @@ def sim(args: list[str]) -> int:
 
     env = _env_keys()
     api = json.loads((ROOT / "infra" / "outputs.json").read_text())["Khidki"]["ApiUrl"]
+    # Keys travel in the environment, never on the command line (it gets echoed and logged).
     code = (
-        "from khidki_sim import scenario as s; from khidki_sim.cloud import CloudSim; "
-        f"CloudSim({api!r}, {env['KHIDKI_DEVICE_KEY']!r}, {env['KHIDKI_ADMIN_KEY']!r}, "
+        "import os; from khidki_sim import scenario as s; from khidki_sim.cloud import CloudSim; "
+        f"CloudSim({api!r}, os.environ['KHIDKI_DEVICE_KEY'], os.environ['KHIDKI_ADMIN_KEY'], "
         f"s.load({a.scenario!r}), {a.speed}).run({a.minutes})"
     )
-    return run([uv(), "run", "--offline", "python", "-c", code])
+    print(f"$ cloud simulator: scenario={a.scenario} speed={a.speed:g}x api={api}")
+    return subprocess.call([uv(), "run", "--offline", "python", "-c", code], cwd=ROOT, env=env)
 
 
 @command("Build the web app (web/dist)")

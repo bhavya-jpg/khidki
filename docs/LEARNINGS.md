@@ -125,3 +125,29 @@ interruptions, verified. We report it that way.
 ### `hash()` made the benchmark non-reproducible
 Seeds were `hash((date, room))`, and Python randomises string hashing per process, so two runs disagreed
 (Khidki's minutes above 1,500 ppm went from 12.6 to 16.0). Seeds now come from `zlib.crc32`.
+
+## Sat 10 Oct 2026 (just after midnight)
+
+### The "verification hold" was a region lock all along
+For a day every AWS call failed with "explicit deny in a service control policy". It wasn't verification:
+the account was created through AWS's new sign-up experience, whose managed policy ("RegionFloor") denies
+almost everything outside the account's selected home region. Probing DynamoDB in every region found the
+one that answered: `ap-southeast-2` (Sydney). Everything we need works there, so Khidki is deployed in
+Sydney. The data is still Delhi's; only the hosting moved. The AWS docs page "Managed policies for your
+organization" lists the exact policy.
+
+### Bedrock: a different lock
+Bedrock returns "Operation not allowed" for every model in every allowed region, with the model showing
+"available" but "NOT_AUTHORIZED". AWS's troubleshooting page says that specific error is an account
+security restriction only Support can lift. Ask Khidki answers from verified templates until then, which is
+exactly the fallback it was designed with.
+
+### First deploy
+`python tasks.py deploy`: CDK bootstrap, then one stack (46 resources) to CREATE_COMPLETE on the first try.
+The Lambda layer was built entirely offline from the uv cache (Linux wheels for numpy, pydantic-core and
+cedarpy). The Step Functions definition was checked with `ValidateStateMachineDefinition` before deploying.
+
+### Two small lessons from the cloud simulator
+- The venue network drops TLS handshakes; every simulator request now retries with backoff.
+- The first version passed the demo keys on the command line, so they were echoed into the log. Keys now
+  travel only in the environment.

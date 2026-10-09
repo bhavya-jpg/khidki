@@ -31,14 +31,29 @@ from khidki_sim.scenario import Scenario
 
 
 def _req(
-    method: str, url: str, body: Any = None, headers: dict[str, str] | None = None, timeout: float = 20
+    method: str,
+    url: str,
+    body: Any = None,
+    headers: dict[str, str] | None = None,
+    timeout: float = 40,
+    retries: int = 3,
 ) -> Any:
+    """JSON over HTTPS with retries: the venue network drops TLS handshakes."""
     data = json.dumps(body).encode() if body is not None else None
-    req = urllib.request.Request(
-        url, data=data, method=method, headers={"content-type": "application/json", **(headers or {})}
-    )
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return json.loads(r.read().decode() or "null")
+    for attempt in range(retries + 1):
+        req = urllib.request.Request(
+            url, data=data, method=method, headers={"content-type": "application/json", **(headers or {})}
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return json.loads(r.read().decode() or "null")
+        except urllib.error.HTTPError:
+            raise
+        except (urllib.error.URLError, TimeoutError, ConnectionError):
+            if attempt == retries:
+                raise
+            time.sleep(2 * (attempt + 1))
+    return None
 
 
 @dataclass
