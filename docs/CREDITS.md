@@ -20,6 +20,13 @@ Filled in as each library is added.
 | pytest | MIT |
 | Ruff | MIT |
 | mypy | MIT |
+| FastAPI, Starlette, Uvicorn | MIT, BSD-3-Clause, BSD-3-Clause |
+| PyYAML | MIT |
+| React, React Router | MIT |
+| Vite, @vitejs/plugin-react | MIT |
+| TypeScript | Apache-2.0 |
+| Playwright (screenshots) | Apache-2.0 |
+| Anek Latin, Anek Devanagari (Ek Type, Google Fonts) | SIL Open Font License 1.1 |
 
 ## Research
 See `docs/physics.md` for the papers behind every parameter.

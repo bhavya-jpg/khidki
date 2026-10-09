@@ -1,0 +1,114 @@
+/* Khidki design tokens (docs/SPEC.md §14.3). The only brand colours allowed. Lifted from the classroom:
+   whitewashed wall, blackboard, Delhi smog, clear sky through an open window, turmeric, sindoor. */
+
+:root {
+  /* core palette */
+  --chalk: #eef0e6;
+  --blackboard: #1f3a30;
+  --haze: #b7a27e;
+  --breath: #1c7dc0;
+  --haldi: #d99a1e;
+  --sindoor: #b3261e;
+
+  /* text-safe companions */
+  --breath-ink: #15669e; /* chalk text on it: 5.3:1 */
+  --haldi-ink: #8f5c00; /* on chalk: 4.9:1 */
+
+  /* neutrals (light) */
+  --surface: var(--chalk);
+  --raised: #f7f8f2;
+  --ink: var(--blackboard);
+  --ink-2: #3f564c;
+  --ink-3: #5a6c63;
+  --rule: #c9cfc2;
+  --frame: #dce1d3;
+  --on-fill: var(--chalk);
+  --window-paint-green: var(--blackboard);
+  --window-paint-blue: var(--breath-ink);
+
+  /* chart palette (validated; do not edit without re-running the validator) */
+  --series-1: #1c7dc0; /* Khidki */
+  --series-2: #c2661a; /* CO2 alarm */
+  --series-3: #2a8f63; /* temperature-led teacher */
+  --series-4: #9a4fb0; /* always closed */
+  --series-5: #a0522d; /* always open */
+
+  /* type */
+  --font-ui: "Anek Latin", "Anek Devanagari", "Mukta", system-ui, sans-serif;
+  --font-hi: "Anek Devanagari", "Anek Latin", "Mukta", system-ui, sans-serif;
+  --step--1: 0.8rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.563rem;
+  --step-3: 1.953rem;
+  --step-4: 2.441rem;
+  --step-5: 3.815rem;
+  --step-6: 5.96rem;
+
+  /* space (4-px grid) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 40px;
+  --s-7: 64px;
+  --s-8: 96px;
+
+  /* shape: radius by role */
+  --r-frame: 2px;
+  --r-button: 14px;
+  --r-chip: 999px;
+  --shadow-raised: 0 1px 0 var(--rule), 0 8px 24px -16px rgba(31, 58, 48, 0.35);
+
+  /* motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-ui: 240ms;
+  --dur-pane: 750ms;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface: var(--blackboard);
+    --raised: #27463a;
+    --ink: #e7ece2;
+    --ink-2: #b7c4bb;
+    --ink-3: #9fb0a5;
+    --rule: #3a5a4d;
+    --frame: #3a5a4d;
+    --on-fill: var(--blackboard);
+    --breath-ink: #7fb8e3;
+    --window-paint-green: #dce1d3;
+    --window-paint-blue: #7fb8e3;
+    --haldi-ink: #e8b65a;
+    --series-1: #4896ce;
+    --series-2: #cf7a33;
+    --series-3: #36a675;
+    --series-4: #a673c6;
+    --series-5: #c46f4a;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --surface: var(--blackboard);
+  --raised: #27463a;
+  --ink: #e7ece2;
+  --ink-2: #b7c4bb;
+  --ink-3: #9fb0a5;
+  --rule: #3a5a4d;
+  --frame: #3a5a4d;
+  --on-fill: var(--blackboard);
+  --breath-ink: #7fb8e3;
+  --window-paint-green: #dce1d3;
+  --window-paint-blue: #7fb8e3;
+  --haldi-ink: #e8b65a;
+  --series-1: #4896ce;
+  --series-2: #cf7a33;
+  --series-3: #36a675;
+  --series-4: #a673c6;
+  --series-5: #c46f4a;
+  color-scheme: dark;
+}

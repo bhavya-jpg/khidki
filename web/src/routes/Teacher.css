@@ -1,0 +1,225 @@
+/* Teacher tablet: ₹8–10k Android tablet at 1024×600 landscape, readable from 2 m, touch targets ≥ 64 px. */
+
+.teacher {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "bar bar"
+    "window decision"
+    "foot foot";
+  gap: var(--s-4) var(--s-6);
+  padding: var(--s-4) var(--s-5);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.teacher--loading {
+  display: grid;
+  place-items: center;
+}
+.teacher--offline .air-window__box {
+  filter: grayscale(1) opacity(0.6);
+}
+
+.teacher__bar {
+  grid-area: bar;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+}
+.teacher__room {
+  margin: 0 auto 0 0;
+  font-size: var(--step-2);
+  font-weight: 700;
+  line-height: 1.2;
+}
+.teacher__clock {
+  font-size: var(--step-1);
+  font-weight: 560;
+}
+.lang-toggle {
+  min-height: 44px;
+  padding: 0 var(--s-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-chip);
+  background: transparent;
+  cursor: pointer;
+}
+
+.teacher__window {
+  grid-area: window;
+  align-self: center;
+}
+.teacher__decision {
+  grid-area: decision;
+  align-self: center;
+  min-width: 0;
+}
+.teacher__foot {
+  grid-area: foot;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-5);
+}
+.teacher__note {
+  margin: var(--s-2) 0 0;
+  color: var(--ink-2);
+  font-size: var(--step--1);
+}
+
+.bi-primary {
+  display: block;
+}
+.bi-secondary {
+  display: block;
+  font-size: max(0.55em, 0.85rem);
+  font-weight: 400;
+  color: var(--ink-2);
+  font-stretch: 100%;
+}
+
+/* keep: small and quiet */
+.keep__line {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  margin: 0;
+  font-size: var(--step-2);
+  font-weight: 560;
+  line-height: 1.3;
+}
+.keep__line svg {
+  flex: none;
+  margin-top: 4px;
+  color: var(--ink-2);
+}
+.keep__next {
+  margin: var(--s-4) 0 0;
+  color: var(--ink-2);
+}
+
+/* action */
+.action__followup {
+  margin: 0 0 var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  background: var(--haldi);
+  color: var(--blackboard);
+  border-radius: var(--r-button);
+  font-weight: 560;
+}
+.action__followup .bi-secondary {
+  color: var(--blackboard);
+}
+.action__verb {
+  margin: 0;
+  font-size: var(--step-4);
+  font-weight: 700;
+  line-height: 1.1;
+  transition: font-stretch var(--dur-pane) var(--ease);
+}
+.action__duration {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-4);
+  margin: var(--s-3) 0 0;
+  font-size: var(--step-1);
+}
+.action__countdown {
+  color: var(--haldi-ink);
+  font-weight: 700;
+}
+.action__why {
+  margin: var(--s-3) 0 0;
+  max-width: 60ch;
+  color: var(--ink-2);
+}
+.action__checking {
+  margin: var(--s-5) 0 0;
+  font-size: var(--step-1);
+  font-weight: 560;
+}
+.action__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  margin-top: var(--s-5);
+}
+.btn {
+  min-height: 72px;
+  min-width: 200px;
+  padding: var(--s-3) var(--s-5);
+  border-radius: var(--r-button);
+  font-size: var(--step-1);
+  font-weight: 560;
+  line-height: 1.25;
+  text-align: left;
+  cursor: pointer;
+  transition: transform var(--dur-ui) var(--ease);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+.btn--primary {
+  background: var(--breath-ink);
+  color: var(--on-fill);
+  border: 0;
+  order: 2; /* where a right thumb rests */
+}
+.btn--primary .bi-secondary {
+  color: var(--on-fill);
+  opacity: 0.85;
+}
+.btn--secondary {
+  background: transparent;
+  border: 2px solid var(--ink-3);
+}
+.action__reasons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-3);
+}
+.chip {
+  min-height: 64px;
+  padding: var(--s-2) var(--s-4);
+  border-radius: var(--r-chip);
+  border: 1px solid var(--ink-3);
+  background: var(--raised);
+  cursor: pointer;
+}
+.teacher__flash {
+  margin: 0;
+  font-size: var(--step-3);
+  font-weight: 700;
+  color: var(--breath-ink);
+}
+
+.sparkline {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--ink-2);
+  font-size: var(--step--1);
+}
+
+@media (max-width: 760px) {
+  .teacher {
+    grid-template-columns: 1fr;
+    grid-template-areas: "bar" "decision" "window" "foot";
+    padding: var(--s-3) var(--s-4);
+  }
+  .action__verb {
+    font-size: var(--step-3);
+  }
+  .btn {
+    min-width: 0;
+    flex: 1 1 100%;
+  }
+}
