@@ -33,3 +33,8 @@ See `docs/physics.md` for the papers behind every parameter.
 
 ## AI coding tools
 Built with **Claude Code** (Anthropic) in VS Code.
+| Cedar (cedarpy bindings) | Apache-2.0 |
+| Strands Agents SDK | Apache-2.0 |
+| boto3 / botocore | Apache-2.0 |
+| moto (tests) | Apache-2.0 |
+| Matplotlib (benchmark chart) | Matplotlib licence (PSF-based) |

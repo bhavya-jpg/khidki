@@ -1,0 +1,24 @@
+namespace Khidki {
+  entity School = { name: String };
+  entity Room in [School] = { grade: Long, sensitiveCount: Long, hasPurifier: Bool };
+  entity User in [School, Room] = { role: String, school: School };
+  entity Activity in [School] = { kind: String };
+
+  type VentCtx = {
+    outdoorPm25: Long,
+    co2Band: Long,
+    grapStage: Long,
+    minuteOfDay: Long,
+    tempOutC: Long,
+  };
+  type ActCtx = { maxPm25During: Long, grapStage: Long, minGrade: Long };
+
+  action "ventilate.open", "ventilate.crack", "ventilate.close"
+    appliesTo { principal: [Room], resource: [Room], context: VentCtx };
+  action "activity.outdoor"
+    appliesTo { principal: [School], resource: [Activity], context: ActCtx };
+  action "view.room", "plan.override", "grap.setOfficial"
+    appliesTo { principal: [User], resource: [Room, School] };
+  action "view.school"
+    appliesTo { principal: [User], resource: [School] };
+}

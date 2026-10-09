@@ -28,6 +28,7 @@ from khidki_core.inference import (
 from khidki_core.optimizer import Grid
 from khidki_core.physics import co2_source_ppm_per_h, relax
 from khidki_core.planning import build_plan
+from khidki_core.policy import POLICIES
 from khidki_core.schemas import (
     WINDOW_ORDER,
     Action,
@@ -45,7 +46,7 @@ from khidki_data.replay import build_drive
 from khidki_services import nudge as nsm
 from khidki_services import texts
 from khidki_services.outdoor import OutdoorDay, OutdoorProvider
-from khidki_services.policy import ActivityContext, PermitAll, PolicyEngine
+from khidki_services.policy import ActivityContext, CedarPolicyEngine, PolicyEngine
 from khidki_services.seed import DEMO_SCHOOL, RoomConfig, SchoolConfig
 from khidki_services.store import Item, Store
 
@@ -88,7 +89,7 @@ class Engine:
         self.store = store
         self.clock = clock
         self.outdoor = outdoor
-        self.policy = policy or PermitAll()
+        self.policy = policy if policy is not None else CedarPolicyEngine(school)
         self.school = school
         self.grid = grid
         self.replan_every_s = replan_every_s
@@ -772,6 +773,12 @@ class Engine:
                 "circulars_url": grap.DOE_CIRCULARS_URL,
             },
             "decisions": day["decisions"],
+            "policies": {
+                pid: {"en": POLICIES[pid].en, "hi": POLICIES[pid].hi, "source": POLICIES[pid].source}
+                for d in day["decisions"]
+                for pid in d["policy_ids"]
+                if pid in POLICIES
+            },
             "hourly": day["hourly"],
             "forecast_source": day["forecast_source"],
             "rooms": rooms,

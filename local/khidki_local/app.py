@@ -17,7 +17,10 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
+from khidki_agent.answer import ask as agent_ask
+from khidki_agent.tools import Tools
 from khidki_core.clock import SimClock
+from khidki_core.policy import POLICIES
 from khidki_data.openmeteo import ATTRIBUTION
 from khidki_services.engine import Engine
 from khidki_services.store import MemoryStore
@@ -100,6 +103,25 @@ class SimControl(BaseModel):
     action: Literal["scenario", "speed", "pause", "resume", "reset"]
     scenario: str | None = None
     speed: float | None = Field(default=None, gt=0, le=120)
+
+
+class AskBody(BaseModel):
+    room_id: str
+    question: str = Field(min_length=1, max_length=400)
+    lang: Literal["hi", "en"] = "hi"
+
+
+_LLM: Any = None
+
+
+def _llm() -> Any:
+    """Bedrock only when asked for (KHIDKI_BEDROCK=1) and credentials exist; otherwise templates."""
+    global _LLM
+    if _LLM is None and os.environ.get("KHIDKI_BEDROCK") == "1":
+        from khidki_agent.bedrock import make_llm
+
+        _LLM = make_llm()
+    return _LLM
 
 
 class Reading(BaseModel):
@@ -202,6 +224,31 @@ def sim_control(body: SimControl) -> dict[str, Any]:
         elif body.action == "resume":
             r.clock.pause(False)
         return {"scenario": r.scenario.name, "clock": r.engine.clock_view()}
+
+
+@app.post("/v1/agent/ask")
+def agent(body: AskBody) -> dict[str, Any]:
+    r = rt()
+    with r.lock:
+        try:
+            r.engine.room_cfg(body.room_id)
+        except KeyError as exc:
+            raise HTTPException(404, f"No room {body.room_id}") from exc
+        a = agent_ask(Tools(r.engine), body.room_id, body.question, body.lang, llm=_llm())
+    return {
+        "answer": a.answer,
+        "lang": a.lang,
+        "source": a.source,
+        "numbers_verified": a.numbers_verified,
+        "tools_used": a.tools_used,
+        "tool_outputs": a.tool_outputs,
+        "note": a.note,
+    }
+
+
+@app.get("/v1/policies")
+def policies() -> dict[str, Any]:
+    return {pid: {"en": p.en, "hi": p.hi, "source": p.source} for pid, p in POLICIES.items()}
 
 
 @app.post("/ingest")

@@ -95,3 +95,18 @@ Running a whole simulated morning surfaced three verification bugs the unit test
 Each re-plan got "6 minus instructions already issued". With 0 left, the bisection can't find a 0-change
 plan when CO₂ is climbing, and fell back to a plan with changes, so a 7th instruction went out. Now the
 optimizer holds the current state when the budget can't be met, and the engine refuses to issue past it.
+
+### Cedar returns *which* policy decided, if you ask for annotations
+`cedarpy`'s `diagnostics.reasons` lists internal ids (`policy0`); the `@id("S2")` annotations come back through
+`diagnostics.id_annotations_by_reason`. With those, every decision carries the human policy id, and the
+policy's `@en`/`@hi` annotations become the bilingual explanation, so "PE moved indoors because of S2: forecast
+113 > 90" comes straight from the policy file, not from the LLM.
+
+### "Principal manages their school" needs an attribute, not the hierarchy
+`resource in principal` never matches (rooms belong to schools, not to users). Giving each user a
+`school` attribute and writing `resource in principal.school` does what was meant.
+
+### The guard's rounding rule
+A strict "within one unit of the last digit" rule rejected "about 1,620 ppm" for a measured 1,623. Trailing
+zeros now mark a rounded number, allowed within half its rounding unit *and* 3% of the tool value, so
+1,600 for 1,623 passes but 100 for 95 doesn't.
