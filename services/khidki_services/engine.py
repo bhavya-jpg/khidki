@@ -85,6 +85,7 @@ class Engine:
         school: SchoolConfig = DEMO_SCHOOL,
         grid: Grid | None = None,
         replan_every_s: float = REPLAN_EVERY_S,
+        external_nudges: bool = False,
     ) -> None:
         self.store = store
         self.clock = clock
@@ -95,6 +96,10 @@ class Engine:
         self.replan_every_s = replan_every_s
         self.on_nudge: list[NudgeHook] = []
         self.on_ack: list[NudgeHook] = []
+        self.external_nudges = external_nudges
+        """True in the cloud: Step Functions owns nudge timing (waits, timeouts, verification)."""
+        self.task_notifier: Callable[[str, Item], None] | None = None
+        """Returns the teacher's tap to a waiting Step Functions task (SendTaskSuccess)."""
         self._forecast_cache: dict[str, OutdoorDay] = {}
 
     # ── setup ────────────────────────────────────────────────────────────────────────────────────────
@@ -420,8 +425,10 @@ class Engine:
         return self.store.get(f"ROOM#{room_id}", st["plan_sk"]) if st["plan_sk"] else None
 
     # ── nudges ───────────────────────────────────────────────────────────────────────────────────────
-    def tick(self) -> None:
-        """Advance everything to clock.now(): outdoor observation, re-plans, nudge timeouts and checks."""
+    def tick(self, room_ids: list[str] | None = None) -> None:
+        """Advance everything to clock.now(): outdoor observation, re-plans, nudge timeouts and checks.
+
+        `room_ids` limits the work to some rooms (the cloud ticks one room per ingested reading)."""
         now = self.clock.now()
         minute = ist_minute(now)
         if minute < DAY_START_MIN or minute >= DAY_END_MIN:
@@ -430,12 +437,15 @@ class Engine:
         self.observe_outdoor()
         for r in self.school.rooms:
             rid = r.room_id
+            if room_ids is not None and rid not in room_ids:
+                continue
             st = self._state(rid)
             if st["last_replan_at"] is None or now - st["last_replan_at"] >= self.replan_every_s:
                 self.replan(rid)
             st = self._state(rid)
             if st["open_nudge"]:
-                self._advance_nudge(rid, st["open_nudge"], now)
+                if not self.external_nudges:
+                    self._advance_nudge(rid, st["open_nudge"], now)
             elif now >= st["cooldown_until"]:
                 self._maybe_issue(rid, now, minute)
 
@@ -532,12 +542,77 @@ class Engine:
         n, state = self._load_nudge(room_id, sk)
         now = self.clock.now()
         new, effects = nsm.on_ack(state, now, result, reason)
+        if new == state:  # a late or repeated tap changes nothing
+            return n
         n["acked_at"] = now
+        token = n.pop("task_token", None)
         self._save_nudge(room_id, sk, n, new)
         for hook in self.on_ack:
             hook(room_id, {**n, "ack": result, "cant_reason": reason})
         self._apply(room_id, sk, n, new, effects, now)
+        if token and self.task_notifier:
+            self.task_notifier(token, {"result": result, "reason": reason, "status": new.status.value})
         return self.store.get(f"ROOM#{room_id}", sk) or n
+
+    # ── Step Functions entry points (cloud): same pure transitions as local mode ─────────────────────
+    def nudge_seconds(self) -> dict[str, int]:
+        """Real seconds Step Functions should wait (simulated seconds divided by the demo speed)."""
+        return {
+            "ack_timeout_s": max(1, round(self.clock.real_seconds(nsm.ACK_TIMEOUT_S))),
+            "verify_wait_s": max(1, round(self.clock.real_seconds(nsm.VERIFY_WAIT_S))),
+        }
+
+    def _nudge_view(self, n: Item, state: nsm.NudgeState) -> Item:
+        return {
+            "nudge_id": n["nudge_id"],
+            "status": state.status.value,
+            "outcome": state.outcome.value if state.outcome else None,
+            "follow_up": state.follow_up.value if state.follow_up else None,
+            "ack": state.ack,
+            "evidence": n.get("evidence"),
+            **self.nudge_seconds(),
+        }
+
+    def sf_await_ack(self, nudge_id: str, token: str) -> Item:
+        """Park the task token on the nudge. If the teacher has already tapped, hand it straight back."""
+        room_id, sk = self.find_nudge(nudge_id)
+        n, state = self._load_nudge(room_id, sk)
+        if state.status in (nsm.Status.ISSUED, nsm.Status.FOLLOW_UP):
+            n["task_token"] = token
+            self._save_nudge(room_id, sk, n, state)
+        elif self.task_notifier:
+            self.task_notifier(
+                token,
+                {"result": state.ack or "done", "reason": state.cant_reason, "status": state.status.value},
+            )
+        return self._nudge_view(n, state)
+
+    def sf_timeout(self, nudge_id: str) -> Item:
+        """Nobody tapped in time: move to verification, exactly as the local tick would."""
+        room_id, sk = self.find_nudge(nudge_id)
+        n, state = self._load_nudge(room_id, sk)
+        n.pop("task_token", None)
+        new, effects = nsm.on_tick(state, max(self.clock.now(), state.deadline))
+        self._save_nudge(room_id, sk, n, new)
+        self._apply(room_id, sk, n, new, effects, self.clock.now())
+        return self._nudge_view(n, new)
+
+    def sf_verify(self, nudge_id: str) -> Item:
+        """Read the CO₂ curve and decide: verified, follow up once, or not followed."""
+        room_id, sk = self.find_nudge(nudge_id)
+        n, state = self._load_nudge(room_id, sk)
+        if state.status != nsm.Status.VERIFYING:
+            return self._nudge_view(n, state)
+        now = self.clock.now()
+        verdict, evidence = self._verify(room_id, n, state, now)
+        n["evidence"] = evidence
+        new, effects = nsm.on_verdict(state, now, verdict)
+        if new.status == nsm.Status.FOLLOW_UP and new.follow_up is not None:
+            f_en, f_hi = texts.FOLLOW_UP_TEXT[new.follow_up.value]
+            n["follow_up_text"] = {"en": f_en, "hi": f_hi}
+        self._save_nudge(room_id, sk, n, new)
+        self._apply(room_id, sk, n, new, effects, now)
+        return self._nudge_view(n, new)
 
     def _advance_nudge(self, room_id: str, sk: str, now: float) -> None:
         n, state = self._load_nudge(room_id, sk)
