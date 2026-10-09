@@ -53,3 +53,12 @@ def test_rolling_mean() -> None:
     assert r[0] == 0
     assert r[23] == pytest.approx(np.mean(x[:24]))
     assert r[47] == pytest.approx(np.mean(x[24:48]))
+
+
+def test_school_reminders_defer_to_doe_and_name_no_class_lists() -> None:
+    from khidki_core.grap import STAGES
+
+    for st in STAGES.values():
+        if st.school_reminder_en:
+            assert "Directorate of Education" in st.school_reminder_en
+            assert "classes VI" not in st.school_reminder_en and "up to V" not in st.school_reminder_en
