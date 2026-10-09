@@ -78,8 +78,6 @@ def not_yet(phase: str) -> Callable[[list[str]], int]:
 
 for _name, _phase, _help in [
     ("sim", "Phase 2", "Run the classroom simulator against local or cloud"),
-    ("cdk-synth", "Phase 4", "Synthesize the CDK app"),
-    ("deploy", "Phase 4", "Deploy all stacks to AWS (ap-south-1)"),
     ("provision-device", "Phase 4", "Create an IoT thing and certificates for a room"),
     ("seed-demo", "Phase 4", "Seed the demo school and rooms"),
     ("synth-phrases", "Phase 5", "Pre-synthesize instruction phrases with Polly"),
@@ -122,6 +120,82 @@ def bench(args: list[str]) -> int:
     print("Running the benchmark on every replay day (a few minutes)...")
     rc = run([uv(), "run", "python", "bench/run_benchmark.py", *args])
     return rc or run([uv(), "run", "python", "bench/report.py"])
+
+
+REGION = "ap-southeast-2"  # the account's home region (docs/SCOPE.md)
+
+
+def _env_keys() -> dict[str, str]:
+    """Demo device and admin keys, generated once into .env (gitignored)."""
+    import os
+    import secrets
+
+    env_file = ROOT / ".env"
+    lines = env_file.read_text().splitlines() if env_file.exists() else []
+    values = dict(line.split("=", 1) for line in lines if "=" in line and not line.startswith("#"))
+    changed = False
+    for key in ("KHIDKI_DEVICE_KEY", "KHIDKI_ADMIN_KEY"):
+        if not values.get(key):
+            values[key] = secrets.token_urlsafe(18)
+            lines.append(f"{key}={values[key]}")
+            changed = True
+    if changed:
+        env_file.write_text("\n".join(lines) + "\n")
+        print("Generated demo keys in .env")
+    return {
+        **os.environ,
+        "KHIDKI_DEVICE_KEY": values["KHIDKI_DEVICE_KEY"],
+        "KHIDKI_ADMIN_KEY": values["KHIDKI_ADMIN_KEY"],
+        "KHIDKI_REGION": REGION,
+        "AWS_REGION": REGION,
+        "CDK_DEFAULT_REGION": REGION,
+    }
+
+
+@command("Build Lambda assets and synthesize the CDK app")
+def cdk_synth(args: list[str]) -> int:
+    rc = run([uv(), "run", "--offline", "python", "scripts/build_lambda.py"])
+    if rc:
+        return rc
+    env = _env_keys()
+    print("$ cdk synth (infra/)")
+    return subprocess.call(["cdk", "synth", "--quiet"], cwd=ROOT / "infra", env=env)
+
+
+@command("Deploy everything to AWS (ap-southeast-2): build assets, bootstrap once, cdk deploy")
+def deploy(args: list[str]) -> int:
+    rc = run([uv(), "run", "--offline", "python", "scripts/build_lambda.py"])
+    if rc:
+        return rc
+    env = _env_keys()
+    account = subprocess.run(
+        ["aws", "sts", "get-caller-identity", "--query", "Account", "--output", "text"],
+        capture_output=True,
+        text=True,
+        env=env,
+    ).stdout.strip()
+    if not account:
+        print("AWS credentials not found. Run `aws configure` first.")
+        return 1
+    env["CDK_DEFAULT_ACCOUNT"] = account
+    print(f"Bootstrapping CDK in {account}/{REGION} (no-op if already done)...")
+    rc = subprocess.call(["cdk", "bootstrap", f"aws://{account}/{REGION}"], cwd=ROOT / "infra", env=env)
+    if rc:
+        return rc
+    print("Deploying the Khidki stack...")
+    return subprocess.call(
+        [
+            "cdk",
+            "deploy",
+            "--require-approval",
+            "never",
+            "--outputs-file",
+            str(ROOT / "infra" / "outputs.json"),
+            *args,
+        ],
+        cwd=ROOT / "infra",
+        env=env,
+    )
 
 
 @command("Cache real Delhi outdoor-air replay days from Open-Meteo")

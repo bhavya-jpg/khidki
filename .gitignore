@@ -26,3 +26,4 @@ cdk.context.json
 # OS / editor
 .DS_Store
 .idea/
+infra/outputs.json
