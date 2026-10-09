@@ -163,6 +163,7 @@ class Engine:
         return RoomParams.model_validate(item["params"])
 
     def _state(self, room_id: str) -> Item:
+        self.room_cfg(room_id)  # unknown room -> KeyError (a 404 at the API), never a re-seed
         st = self.store.get(f"ROOM#{room_id}", "STATE")
         if st is None:
             self.seed()

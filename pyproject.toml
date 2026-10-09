@@ -22,6 +22,9 @@ local = [
 agent = [
     "strands-agents==1.57.2",
 ]
+cloud = [
+    "aws-lambda-powertools==3.35.0",
+]
 
 [dependency-groups]
 dev = [
@@ -45,6 +48,7 @@ packages = [
     "sim/khidki_sim",
     "local/khidki_local",
     "agent/khidki_agent",
+    "cloud/khidki_cloud",
 ]
 
 [tool.pytest.ini_options]
