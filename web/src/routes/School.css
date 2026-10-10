@@ -75,7 +75,7 @@
 }
 .grap__aqi {
   font-weight: 560;
-  color: var(--haldi);
+  color: var(--chalk); /* information, not an action: no turmeric */
 }
 .grap__note {
   flex: 1 1 320px;
@@ -226,7 +226,7 @@
 .decision__override {
   margin: var(--s-1) 0 0;
   font-size: var(--step--1);
-  color: var(--haldi-ink);
+  color: var(--ink-2);
   font-weight: 560;
 }
 .link-btn {

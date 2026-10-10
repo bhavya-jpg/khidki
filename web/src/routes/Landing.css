@@ -83,7 +83,7 @@
 }
 .hero__kicker {
   margin: 0 0 var(--s-4);
-  color: var(--haldi);
+  color: rgba(238, 240, 230, 0.78); /* chalk, not haldi: turmeric only ever means "act now" */
   font-weight: 560;
   font-size: var(--step-1);
 }
@@ -335,7 +335,7 @@
   color: rgba(238, 240, 230, 0.75);
 }
 .tile--nudge .tile__n {
-  color: var(--haldi);
+  color: rgba(238, 240, 230, 0.78);
 }
 .tile--verify {
   grid-column: span 3;
@@ -369,7 +369,7 @@
 }
 .tile--replan {
   grid-column: span 3;
-  background: color-mix(in srgb, var(--haldi) 22%, var(--raised));
+  background: color-mix(in srgb, var(--haze) 30%, var(--raised)); /* smog tint; turmeric is kept for actions */
 }
 .mini-ribbon {
   display: flex;
