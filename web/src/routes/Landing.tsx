@@ -239,7 +239,7 @@ export default function Landing() {
               <path d="M0 70 C40 60 70 35 100 22" fill="none" stroke="var(--haldi)" strokeWidth="3" strokeLinecap="round" />
               <path d="M100 22 C130 18 150 46 175 58 C195 66 215 70 240 71" fill="none" stroke="var(--breath)" strokeWidth="3" strokeLinecap="round" />
               <circle cx="100" cy="22" r="5" fill="var(--ink)" />
-              <text x="106" y="14" fontSize="11" fill="var(--ink-2)">{lang === "hi" ? "खोल दीं" : "opened"}</text>
+              <text x="106" y="14" fontSize="13" fill="var(--ink-2)">{lang === "hi" ? "खोल दीं" : "opened"}</text>
             </svg>
           </article>
           <article className="tile tile--replan">

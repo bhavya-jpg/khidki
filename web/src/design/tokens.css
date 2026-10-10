@@ -36,7 +36,7 @@
   /* type */
   --font-ui: "Anek Latin", "Anek Devanagari", "Mukta", system-ui, sans-serif;
   --font-hi: "Anek Devanagari", "Anek Latin", "Mukta", system-ui, sans-serif;
-  --step--1: 0.8rem;
+  --step--1: 0.875rem; /* 14px: the smallest text anywhere (was 12.8px; design-refs principle 7) */
   --step-0: 1rem;
   --step-1: 1.25rem;
   --step-2: 1.563rem;

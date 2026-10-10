@@ -51,7 +51,7 @@
   display: grid;
   gap: 4px;
   margin: 0;
-  font-size: 0.85rem;
+  font-size: var(--step--1);
 }
 .print dl div {
   display: flex;
@@ -72,7 +72,7 @@
 }
 .print th {
   text-align: left;
-  font-size: 0.8rem;
+  font-size: var(--step--1);
   color: #3f564c;
   padding: 6px 8px;
   border-bottom: 1px solid #c9cfc2;
@@ -89,7 +89,7 @@
 }
 .print td small {
   display: block;
-  font-size: 0.8rem;
+  font-size: var(--step--1);
   font-weight: 560;
   color: #3f564c;
 }
@@ -101,7 +101,7 @@
   font-size: 1.1rem;
 }
 .print td span {
-  font-size: 0.85rem;
+  font-size: var(--step--1);
   color: #3f564c;
 }
 .print td svg {
@@ -109,7 +109,7 @@
 }
 .print__foot {
   margin-top: 20px;
-  font-size: 0.78rem;
+  font-size: var(--step--1);
   color: #3f564c;
 }
 .print__foot p {

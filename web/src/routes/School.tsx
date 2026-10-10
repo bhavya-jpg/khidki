@@ -249,23 +249,23 @@ function ForecastChart({ hourly }: { hourly: SchoolToday["hourly"] }) {
         onMouseLeave={() => setHover(null)}
         onMouseMove={(e) => { const r = (e.currentTarget as SVGSVGElement).getBoundingClientRect(); setHover((((e.clientX - r.left) / r.width) * W - L) / (W - L - R) * 24); }}>
         <rect x={x(7.5)} y={T} width={x(13) - x(7.5)} height={H - T - B} fill="var(--rule)" opacity="0.45" />
-        <text x={x(7.5) + 6} y={T + 14} fontSize="11" fill="var(--ink-2)">{lang === "hi" ? "स्कूल का समय" : "School hours"}</text>
+        <text x={x(7.5) + 6} y={T + 14} fontSize="13" fill="var(--ink-2)">{lang === "hi" ? "स्कूल का समय" : "School hours"}</text>
         {ticks.map((t) => (
           <g key={t}>
             <line x1={L} x2={W - R} y1={y(t)} y2={y(t)} stroke="var(--rule)" strokeWidth="1" />
-            <text x={L - 6} y={y(t) + 4} fontSize="11" textAnchor="end" fill="var(--ink-2)">{t}</text>
+            <text x={L - 6} y={y(t) + 4} fontSize="13" textAnchor="end" fill="var(--ink-2)">{t}</text>
           </g>
         ))}
         <line x1={L} x2={W - R} y1={y(90)} y2={y(90)} stroke="var(--haldi-ink)" strokeDasharray="5 4" strokeWidth="1.5" />
-        <text x={W - R} y={y(90) - 6} fontSize="11" textAnchor="end" fill="var(--haldi-ink)">{lang === "hi" ? "S2 सीमा 90" : "S2 limit 90"}</text>
+        <text x={W - R} y={y(90) - 6} fontSize="13" textAnchor="end" fill="var(--haldi-ink)">{lang === "hi" ? "S2 सीमा 90" : "S2 limit 90"}</text>
         <path d={area} fill="var(--haze)" opacity="0.28" />
         <path d={line} fill="none" stroke="var(--ink)" strokeWidth="2" strokeLinejoin="round" />
-        {[0, 6, 12, 18, 24].map((h) => <text key={h} x={x(h)} y={H - 8} fontSize="11" textAnchor="middle" fill="var(--ink-2)">{String(h % 24).padStart(2, "0")}:00</text>)}
+        {[0, 6, 12, 18, 24].map((h) => <text key={h} x={x(h)} y={H - 8} fontSize="13" textAnchor="middle" fill="var(--ink-2)">{String(h % 24).padStart(2, "0")}:00</text>)}
         {hp && (
           <g>
             <line x1={x(hp.h)} x2={x(hp.h)} y1={T} y2={H - B} stroke="var(--ink-3)" />
             <circle cx={x(hp.h)} cy={y(hp.v)} r="5" fill="var(--ink)" stroke="var(--raised)" strokeWidth="2" />
-            <text x={Math.min(x(hp.h) + 8, W - 90)} y={Math.max(y(hp.v) - 10, T + 12)} fontSize="12" fill="var(--ink)" fontWeight="700">
+            <text x={Math.min(x(hp.h) + 8, W - 90)} y={Math.max(y(hp.v) - 10, T + 12)} fontSize="13" fill="var(--ink)" fontWeight="700">
               {String(hp.h).padStart(2, "0")}:00, {Math.round(hp.v)} µg/m³
             </text>
           </g>

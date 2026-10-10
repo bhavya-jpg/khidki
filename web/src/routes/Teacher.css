@@ -442,7 +442,7 @@
 }
 .ribbon__periods {
   height: 18px;
-  font-size: 11px;
+  font-size: 12px; /* axis ticks only; everything else is 14px or more */
   color: var(--ink-3);
 }
 .ribbon__periods span {
@@ -490,7 +490,7 @@
 }
 .ribbon__axis {
   height: 16px;
-  font-size: 11px;
+  font-size: 12px; /* axis ticks only; everything else is 14px or more */
   color: var(--ink-3);
 }
 .ribbon__axis span {
@@ -502,7 +502,7 @@
   flex-wrap: wrap;
   gap: var(--s-4);
   margin-top: 2px;
-  font-size: 12px;
+  font-size: var(--step--1);
   color: var(--ink-2);
 }
 .ribbon__legend span {
