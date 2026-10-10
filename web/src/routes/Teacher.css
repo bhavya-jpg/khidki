@@ -75,6 +75,14 @@
 .wall .air-window__box {
   filter: drop-shadow(0 18px 22px rgba(31, 58, 48, 0.35));
 }
+/* Something to do: a turmeric frame around the window. Nothing to do: no frame. */
+.wall {
+  outline: 0 solid transparent;
+  transition: outline-color var(--dur-ui) var(--ease);
+}
+.teacher__stage[data-due="true"] .wall {
+  outline: 5px solid var(--haldi);
+}
 .wall .air-window__legend {
   margin-top: var(--s-2);
 }

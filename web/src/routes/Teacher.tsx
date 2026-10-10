@@ -97,6 +97,9 @@ export default function Teacher() {
   const [hh, mm] = data.clock.time.split(":").map(Number);
   const nowMin = hh * 60 + mm;
   const outTone = data.outdoor.aqi > 300 ? "bad" : data.outdoor.aqi > 200 ? "warn" : "good";
+  // An instruction is waiting for the teacher: the window itself carries the signal, readable from across
+  // the room without reading (docs/design-refs/NOTES.md, principle 2).
+  const due = data.card.kind === "action" && (data.card.status === "issued" || data.card.status === "follow_up");
 
   return (
     <main className={`teacher ${offlineFor > 0.5 ? "teacher--offline" : ""}`}>
@@ -113,7 +116,7 @@ export default function Teacher() {
         <LangToggle />
       </header>
 
-      <section className="teacher__stage">
+      <section className="teacher__stage" data-due={due ? "true" : undefined}>
         <div className="wall">
           <AirWindow
             outdoorPm={data.outdoor.pm25}
