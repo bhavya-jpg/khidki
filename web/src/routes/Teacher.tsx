@@ -185,6 +185,13 @@ export default function Teacher() {
             {T.todayPlan[lang]}
             <span className="teacher__unit">{T.stripe[lang]}</span>
           </span>
+          {offlineFor <= 0.5 && data.requests && (
+            <span className="teacher__budget num" lang={lang}>
+              {lang === "hi"
+                ? `आज के अनुरोध: ${data.requests.max} में से ${data.requests.used}`
+                : `${data.requests.used} of ${data.requests.max} requests used today`}
+            </span>
+          )}
           {offlineFor > 0.5 && (
             <span className="teacher__note" role="status">
               {lang === "hi"

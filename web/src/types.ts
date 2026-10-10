@@ -59,6 +59,7 @@ export interface RoomNow {
   indoor: { co2: number; pm25: number | null; last_ingest: number | null; stale_s: number | null };
   window: { believed: ActionJson; inferred: WindowState; confidence: number; implied_lam: number | null };
   card: ActionCard | KeepCard;
+  requests: { used: number; max: number };
   last_outcome: { status: string | null; at: number; nudge_id: string } | null;
   series: { t: string; ts: number; co2: number; pm25: number | null }[];
   simulated: boolean;

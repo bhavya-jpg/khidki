@@ -821,6 +821,11 @@ class Engine:
                 "implied_lam": st["inferred"].get("lam"),
             },
             "card": card,
+            # the attention budget, shown to the teacher as a plain count ("2 of 6 requests used today")
+            "requests": {
+                "used": int(st["counts"].get(f"issued:{self.clock.date()}", 0)),
+                "max": self.school.max_changes,
+            },
             "last_outcome": st["last_outcome"],
             "series": [
                 {"t": hhmm(int(ist_minute(r["ts"]))), "ts": r["ts"], "co2": r["co2"], "pm25": r["pm25"]}

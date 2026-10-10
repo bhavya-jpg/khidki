@@ -42,6 +42,7 @@ def test_severe_morning_verifies_and_respects_budget() -> None:
     for r in ("6B", "3A"):
         assert len(nudges(engine, r)) <= engine.school.max_changes
     view = engine.room_now("6B")
+    assert view["requests"] == {"used": len(nudges(engine, "6B")), "max": engine.school.max_changes}
     assert view["simulated"] and view["clock"]["simulated"]
     assert view["card"]["kind"] in ("keep", "action")
 
