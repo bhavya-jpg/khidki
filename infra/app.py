@@ -1,6 +1,6 @@
 """CDK app. Region: ap-southeast-2, this account's home region (see docs/SCOPE.md).
 
-Keys come from the environment (python tasks.py deploy generates them into .env)."""
+Keys and the owner's alert email come from the environment (python tasks.py deploy reads .env)."""
 
 import os
 
@@ -17,6 +17,7 @@ KhidkiStack(
     ),
     device_key=os.environ.get("KHIDKI_DEVICE_KEY", "change-me-device"),
     admin_key=os.environ.get("KHIDKI_ADMIN_KEY", "change-me-admin"),
+    alert_email=os.environ.get("KHIDKI_ALERT_EMAIL", ""),
     description="Khidki: plan, nudge and verify classroom ventilation (Environmental Hacks 2026)",
 )
 app.synth()

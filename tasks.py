@@ -143,6 +143,7 @@ def _env_keys() -> dict[str, str]:
         **os.environ,
         "KHIDKI_DEVICE_KEY": values["KHIDKI_DEVICE_KEY"],
         "KHIDKI_ADMIN_KEY": values["KHIDKI_ADMIN_KEY"],
+        "KHIDKI_ALERT_EMAIL": values.get("KHIDKI_ALERT_EMAIL", os.environ.get("KHIDKI_ALERT_EMAIL", "")),
         "KHIDKI_REGION": REGION,
         "AWS_REGION": REGION,
         "CDK_DEFAULT_REGION": REGION,

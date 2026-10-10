@@ -3,7 +3,10 @@
 DynamoDB (single table) · Lambda (api, ingest, planner, nudge_task) · API Gateway HTTP API · Step Functions
 NudgeSM (task-token callback, wait, verify from CO₂) · EventBridge Scheduler (06:00 Asia/Kolkata) · S3 (Polly
 audio cache) · SSM (device and admin keys) · Amplify Hosting (web, /v1 proxied to the API) · CloudWatch
-(dashboard + alarms).
+(dashboard + alarms) · SNS (alarm emails) · AWS Budgets (an email at the first cent).
+
+Cost rule: stay inside the always-free allowances. No always-on compute, no point-in-time recovery, the
+public API is throttled, and a 1 USD budget emails the owner as soon as any spend shows up.
 """
 
 from __future__ import annotations
@@ -14,13 +17,17 @@ from aws_cdk import CfnOutput, Duration, RemovalPolicy, Stack
 from aws_cdk import aws_amplify as amplify
 from aws_cdk import aws_apigatewayv2 as apigw
 from aws_cdk import aws_apigatewayv2_integrations as integ
+from aws_cdk import aws_budgets as budgets
 from aws_cdk import aws_cloudwatch as cw
+from aws_cdk import aws_cloudwatch_actions as cw_actions
 from aws_cdk import aws_dynamodb as ddb
 from aws_cdk import aws_iam as iam
 from aws_cdk import aws_lambda as lambda_
 from aws_cdk import aws_logs as logs
 from aws_cdk import aws_s3 as s3
 from aws_cdk import aws_scheduler as scheduler
+from aws_cdk import aws_sns as sns
+from aws_cdk import aws_sns_subscriptions as subs
 from aws_cdk import aws_ssm as ssm
 from aws_cdk import aws_stepfunctions as sfn
 from aws_cdk import aws_stepfunctions_tasks as tasks
@@ -32,7 +39,14 @@ SM_NAME = "Khidki-NudgeSM"
 
 class KhidkiStack(Stack):
     def __init__(
-        self, scope: Construct, cid: str, *, device_key: str, admin_key: str, **kwargs: object
+        self,
+        scope: Construct,
+        cid: str,
+        *,
+        device_key: str,
+        admin_key: str,
+        alert_email: str = "",
+        **kwargs: object,
     ) -> None:
         super().__init__(scope, cid, **kwargs)  # type: ignore[arg-type]
 
@@ -44,9 +58,7 @@ class KhidkiStack(Stack):
             sort_key=ddb.Attribute(name="sk", type=ddb.AttributeType.STRING),
             billing_mode=ddb.BillingMode.PAY_PER_REQUEST,
             time_to_live_attribute="ttl",
-            point_in_time_recovery_specification=ddb.PointInTimeRecoverySpecification(
-                point_in_time_recovery_enabled=True
-            ),
+            # No point-in-time recovery: it is billed per GB and this is replayable demo data.
             removal_policy=RemovalPolicy.DESTROY,
         )
         bucket = s3.Bucket(
@@ -256,6 +268,13 @@ class KhidkiStack(Stack):
             methods=[apigw.HttpMethod.POST],
             integration=integ.HttpLambdaIntegration("IngestInt", ingest_fn),
         )
+        # Three POST routes are open for the demo (tap, re-plan, ask). Throttle the whole stage so nobody can
+        # run up calls: two tablets, the principal page and the simulator together stay under 5 requests/s.
+        stage = http.default_stage.node.default_child if http.default_stage else None
+        if isinstance(stage, apigw.CfnStage):
+            stage.default_route_settings = apigw.CfnStage.RouteSettingsProperty(
+                throttling_rate_limit=10, throttling_burst_limit=20
+            )
 
         # ── 06:00 plan ──────────────────────────────────────────────────────────────────────────────
         sched_role = iam.Role(
@@ -343,7 +362,7 @@ class KhidkiStack(Stack):
                 ],
             ),
         )
-        for f in (api_fn, ingest_fn, nudge_fn):
+        alarms = [
             cw.Alarm(
                 self,
                 f"{f.node.id}Errors",
@@ -352,14 +371,55 @@ class KhidkiStack(Stack):
                 evaluation_periods=1,
                 alarm_description=f"{f.node.id} Lambda errors",
             )
-        cw.Alarm(
-            self,
-            "NudgeSMFailed",
-            metric=sm.metric_failed(period=Duration.minutes(5)),
-            threshold=1,
-            evaluation_periods=1,
-            alarm_description="NudgeSM executions failed",
+            for f in (api_fn, ingest_fn, nudge_fn)
+        ]
+        alarms.append(
+            cw.Alarm(
+                self,
+                "NudgeSMFailed",
+                metric=sm.metric_failed(period=Duration.minutes(5)),
+                threshold=1,
+                evaluation_periods=1,
+                alarm_description="NudgeSM executions failed",
+            )
         )
+
+        # ── Alerts and the spend guard (only when an owner email is configured) ─────────────────────────
+        if alert_email:
+            topic = sns.Topic(self, "Alerts", display_name="Khidki alerts")
+            topic.add_subscription(subs.EmailSubscription(alert_email))
+            for alarm in alarms:
+                alarm.add_alarm_action(cw_actions.SnsAction(topic))
+
+            def notify(kind: str, percent: float) -> budgets.CfnBudget.NotificationWithSubscribersProperty:
+                return budgets.CfnBudget.NotificationWithSubscribersProperty(
+                    notification=budgets.CfnBudget.NotificationProperty(
+                        comparison_operator="GREATER_THAN",
+                        notification_type=kind,
+                        threshold=percent,
+                        threshold_type="PERCENTAGE",
+                    ),
+                    subscribers=[
+                        budgets.CfnBudget.SubscriberProperty(address=alert_email, subscription_type="EMAIL")
+                    ],
+                )
+
+            budgets.CfnBudget(
+                self,
+                "SpendGuard",
+                budget=budgets.CfnBudget.BudgetDataProperty(
+                    budget_name="khidki-spend-guard",
+                    budget_type="COST",
+                    time_unit="MONTHLY",
+                    budget_limit=budgets.CfnBudget.SpendProperty(amount=1, unit="USD"),
+                ),
+                # 1% of 1 USD is the first cent of real spend (after credits).
+                notifications_with_subscribers=[
+                    notify("ACTUAL", 1),
+                    notify("ACTUAL", 100),
+                    notify("FORECASTED", 100),
+                ],
+            )
 
         CfnOutput(self, "ApiUrl", value=api_base)
         CfnOutput(self, "StateMachineArn", value=sm.state_machine_arn)
