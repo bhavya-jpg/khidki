@@ -280,6 +280,11 @@ export default function Landing() {
             <div className="stat">
               <span className="stat__num num">{Math.round(k.requests)} <small>vs</small> {Math.round(alarm.requests)}</span>
               <span className="stat__label">{lang === "hi" ? "शिक्षक को रोज़ के अनुरोध" : "requests to the teacher a day"}</span>
+              <p>
+                {lang === "hi"
+                  ? `Khidki ${Math.round(k.requests)}, CO₂ अलार्म ${Math.round(alarm.requests)}। ${pairedNb.days} असली दिनों पर सिम्युलेशन का औसत।`
+                  : `Khidki ${Math.round(k.requests)}, the CO₂ alarm ${Math.round(alarm.requests)}. The simulated average over ${pairedNb.days} real days.`}
+              </p>
             </div>
             <div className="stat stat--honest">
               <span className="stat__num num">+{pairedNb.median_pm_diff_pts}</span>

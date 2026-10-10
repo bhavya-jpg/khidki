@@ -5,6 +5,7 @@ import { AirWindow } from "../components/AirWindow/AirWindow";
 import { AirRibbon } from "../components/ui/AirRibbon";
 import { SimBadge } from "../components/ui/Badges";
 import { CountdownRing } from "../components/ui/CountdownRing";
+import { co2Status } from "../components/ui/co2";
 import { Readout } from "../components/ui/Readout";
 import { WindowIcon } from "../components/ui/WindowIcon";
 import { Bi, LangToggle, useLang } from "../i18n/lang";
@@ -32,12 +33,6 @@ const T = {
   nowLabel: { en: "Now", hi: "अभी" },
   todayPlan: { en: "Today's plan", hi: "आज की योजना" },
 };
-
-function co2Status(co2: number): { tone: "good" | "warn" | "bad"; t: Bilingual } {
-  if (co2 < 1000) return { tone: "good", t: { en: "Fresh", hi: "ताज़ी" } };
-  if (co2 < 1500) return { tone: "warn", t: { en: "Getting stuffy", hi: "भारी हो रही है" } };
-  return { tone: "bad", t: { en: "Stuffy", hi: "घुटन वाली" } };
-}
 
 export default function Teacher() {
   const { roomId = "6B" } = useParams();

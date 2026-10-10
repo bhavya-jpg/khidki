@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { api, usePoll } from "../api";
 import { AirWindow } from "../components/AirWindow/AirWindow";
 import { SimBadge } from "../components/ui/Badges";
+import { co2Status } from "../components/ui/co2";
 import { WindowIcon } from "../components/ui/WindowIcon";
 import { LangToggle, useLang } from "../i18n/lang";
 import type { AuditEntry, Decision, SchoolRoom, SchoolToday } from "../types";
@@ -120,6 +121,7 @@ function RoomRow({ room, outdoorPm }: { room: SchoolRoom; outdoorPm: number }) {
   const { lang } = useLang();
   const action = room.card.kind === "action";
   const verified = room.last_outcome?.status === "verified" || room.last_outcome?.status === "verified_silent";
+  const air = co2Status(room.indoor.co2);
   return (
     <li className={`room ${action ? "room--action" : ""}`}>
       <div className="room__win">
@@ -132,7 +134,10 @@ function RoomRow({ room, outdoorPm }: { room: SchoolRoom; outdoorPm: number }) {
           {room.has_purifier && <span className="tag">{lang === "hi" ? "प्यूरीफ़ायर" : "Purifier"}</span>}
         </div>
         <div className="room__nums num">
-          <span><b>{room.indoor.co2.toLocaleString("en-IN")}</b> ppm CO₂</span>
+          <span>
+            <b>{room.indoor.co2.toLocaleString("en-IN")}</b> ppm CO₂,{" "}
+            <span className={`room__word room__word--${air.tone}`} lang={lang}>{lang === "hi" ? air.t.hi : air.t.en.toLowerCase()}</span>
+          </span>
           <span><b>{room.indoor.pm25 == null ? "–" : Math.round(room.indoor.pm25)}</b> µg/m³ PM2.5</span>
         </div>
         <div className="room__state">
@@ -143,7 +148,7 @@ function RoomRow({ room, outdoorPm }: { room: SchoolRoom; outdoorPm: number }) {
           ) : verified ? (
             <span className="status status--ok" lang={lang}>✓ {lang === "hi" ? "हवा से पक्का" : "Verified from the air"}</span>
           ) : (
-            <span className="status" lang={lang}>{lang === "hi" ? "सब ठीक" : "All fine"}</span>
+            <span className="status" lang={lang}>{lang === "hi" ? "अभी कुछ नहीं करना" : "Nothing to do now"}</span>
           )}
         </div>
         {action && room.card.kind === "action" && <p className="room__instr" lang={lang}>{room.card.text[lang]}</p>}

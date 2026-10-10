@@ -323,3 +323,13 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* The word for the CO₂ number: weight, not colour (values and labels stay in ink, SPEC §14.8). */
+.room__word {
+  font-weight: 560;
+  color: var(--ink-2);
+}
+.room__word--bad {
+  font-weight: 700;
+  color: var(--ink);
+}
