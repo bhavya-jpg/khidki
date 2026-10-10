@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { api, usePoll } from "../api";
+import { api, ApiError, usePoll } from "../api";
 import { AirWindow } from "../components/AirWindow/AirWindow";
 import { SimBadge } from "../components/ui/Badges";
 import { co2Status } from "../components/ui/co2";
@@ -8,6 +8,8 @@ import { WindowIcon } from "../components/ui/WindowIcon";
 import { LangToggle, useLang } from "../i18n/lang";
 import type { AuditEntry, Decision, SchoolRoom, SchoolToday } from "../types";
 import "./School.css";
+
+const PASS_KEY = "khidki.principal"; // this browser tab only
 
 const WINDOW_WORD = {
   en: { closed: "Shut", cracked: "A little open", open_one: "One side open", open_both: "Both sides open" },
@@ -86,8 +88,12 @@ export default function School() {
               {audit.data.map((a) => (
                 <li key={`${a.at}${a.key}`}>
                   <span className="num">{a.time}</span>
-                  <span><b>{a.label}</b>: {a.was_outdoor ? (lang === "hi" ? "बाहर" : "outdoors") : (lang === "hi" ? "अंदर" : "indoors")} → {a.outdoor ? (lang === "hi" ? "बाहर" : "outdoors") : (lang === "hi" ? "अंदर" : "indoors")}</span>
-                  <span className="muted">“{a.reason}” ({a.by}, {a.policy_ids.join(", ")})</span>
+                  <span lang={lang}>
+                    {lang === "hi"
+                      ? <><b>{a.label}</b> को {a.outdoor ? "बाहर" : "अंदर"} किया गया, क्योंकि {a.reason}</>
+                      : <><b>{a.label}</b> {a.outdoor ? "held outdoors" : "moved indoors"} because {a.reason}</>}
+                  </span>
+                  <span className="muted">{a.by}{a.policy_ids.length > 0 ? `, ${lang === "hi" ? "नीति" : "over policy"} ${a.policy_ids.join(", ")}` : ""}</span>
                 </li>
               ))}
             </ul>
@@ -148,7 +154,7 @@ function RoomRow({ room, outdoorPm }: { room: SchoolRoom; outdoorPm: number }) {
           ) : verified ? (
             <span className="status status--ok" lang={lang}>✓ {lang === "hi" ? "हवा से पक्का" : "Verified from the air"}</span>
           ) : (
-            <span className="status" lang={lang}>{lang === "hi" ? "अभी कुछ नहीं करना" : "Nothing to do now"}</span>
+            <span className="status" lang={lang}>{lang === "hi" ? "कोई निर्देश बाक़ी नहीं" : "No instruction out"}</span>
           )}
         </div>
         {action && room.card.kind === "action" && <p className="room__instr" lang={lang}>{room.card.text[lang]}</p>}
@@ -162,17 +168,38 @@ function DecisionRow({ d, policies, schoolId, onDone }: { d: Decision; policies:
   const [open, setOpen] = useState(false);
   const [reason, setReason] = useState("");
   const [err, setErr] = useState<string | null>(null);
+  const [needPass, setNeedPass] = useState(false);
+  const [pass, setPass] = useState(() => {
+    try {
+      return sessionStorage.getItem(PASS_KEY) ?? "";
+    } catch {
+      return "";
+    }
+  });
   const outdoor = d.override ?? d.outdoor;
   const fired = d.policy_ids.filter((p) => p.startsWith("S"));
   async function submit() {
     setErr(null);
     try {
-      await api.post(`/v1/schools/${schoolId}/override`, { key: d.key, outdoor: !outdoor, reason });
+      // The deployed API asks for the principal passcode; local mode has no login and ignores the header.
+      const headers = pass ? { "x-khidki-admin": pass } : undefined;
+      await api.post(`/v1/schools/${schoolId}/override`, { key: d.key, outdoor: !outdoor, reason }, headers);
+      try {
+        if (pass) sessionStorage.setItem(PASS_KEY, pass);
+      } catch {
+        /* storage blocked: ask again next time */
+      }
       setOpen(false);
       setReason("");
+      setNeedPass(false);
       onDone();
     } catch (e) {
-      setErr(e instanceof Error ? e.message : String(e));
+      if (e instanceof ApiError && e.status === 401) {
+        setNeedPass(true);
+        setErr(lang === "hi" ? "प्रिंसिपल का पासकोड चाहिए।" : "This needs the principal's passcode.");
+      } else {
+        setErr(e instanceof Error ? e.message : String(e));
+      }
     }
   }
   return (
@@ -200,18 +227,33 @@ function DecisionRow({ d, policies, schoolId, onDone }: { d: Decision; policies:
       )}
       {open ? (
         <div className="decision__form">
-          <label>
-            <span>{lang === "hi" ? "कारण (दर्ज होगा)" : "Reason (logged)"}</span>
+          {/* The form reads as the sentence that will be logged. */}
+          <label className="decision__sentence" lang={lang}>
+            <span>
+              {lang === "hi"
+                ? <><b>{d.label}</b> को <b>{outdoor ? "अंदर" : "बाहर"}</b> करें, क्योंकि</>
+                : <>{outdoor ? "Move" : "Hold"} <b>{d.label}</b> <b>{outdoor ? "indoors" : "outdoors"}</b> because</>}
+            </span>
             <input value={reason} onChange={(e) => setReason(e.target.value)} maxLength={200}
-              placeholder={lang === "hi" ? "जैसे: अंतर-स्कूल मैच, मास्क दिए गए" : "e.g. inter-school match, masks given"} />
+              aria-label={lang === "hi" ? "कारण (दर्ज होगा)" : "Reason (logged)"}
+              placeholder={lang === "hi" ? "अंतर-स्कूल मैच है, मास्क दिए गए" : "there is an inter-school match, masks given"} />
           </label>
+          {needPass && (
+            <label className="decision__pass" lang={lang}>
+              <span>{lang === "hi" ? "प्रिंसिपल का पासकोड" : "Principal's passcode"}</span>
+              <input type="password" autoComplete="off" value={pass} onChange={(e) => setPass(e.target.value)} />
+            </label>
+          )}
+          <p className="decision__note" lang={lang}>
+            {lang === "hi" ? "यह वाक्य समय और नीति के साथ रिकॉर्ड में दर्ज होगा।" : "This sentence is logged with the time and the policy it overrides."}
+          </p>
           <div className="decision__btns">
-            <button type="button" className="btn-s btn-s--primary" disabled={reason.trim().length < 3} onClick={() => void submit()}>
-              {outdoor ? (lang === "hi" ? "अंदर करें" : "Move indoors") : (lang === "hi" ? "बाहर करें" : "Allow outdoors")}
+            <button type="button" className="btn-s btn-s--primary" disabled={reason.trim().length < 3 || (needPass && !pass)} onClick={() => void submit()}>
+              {lang === "hi" ? "दर्ज करें" : "Log it"}
             </button>
             <button type="button" className="btn-s" onClick={() => setOpen(false)}>{lang === "hi" ? "रद्द" : "Cancel"}</button>
           </div>
-          {err && <p className="err">{err}</p>}
+          {err && <p className="err" role="alert">{err}</p>}
         </div>
       ) : (
         <button type="button" className="link-btn" onClick={() => setOpen(true)}>{lang === "hi" ? "बदलें" : "Override"}</button>
@@ -260,7 +302,7 @@ function ForecastChart({ hourly }: { hourly: SchoolToday["hourly"] }) {
         <text x={W - R} y={y(90) - 6} fontSize="13" textAnchor="end" fill="var(--haldi-ink)">{lang === "hi" ? "S2 सीमा 90" : "S2 limit 90"}</text>
         <path d={area} fill="var(--haze)" opacity="0.28" />
         <path d={line} fill="none" stroke="var(--ink)" strokeWidth="2" strokeLinejoin="round" />
-        {[0, 6, 12, 18, 24].map((h) => <text key={h} x={x(h)} y={H - 8} fontSize="13" textAnchor="middle" fill="var(--ink-2)">{String(h % 24).padStart(2, "0")}:00</text>)}
+        {[0, 6, 12, 18, 24].map((h) => <text key={h} x={x(h)} y={H - 8} fontSize="13" textAnchor={h === 0 ? "start" : h === 24 ? "end" : "middle"} fill="var(--ink-2)">{String(h % 24).padStart(2, "0")}:00</text>)}
         {hp && (
           <g>
             <line x1={x(hp.h)} x2={x(hp.h)} y1={T} y2={H - B} stroke="var(--ink-3)" />

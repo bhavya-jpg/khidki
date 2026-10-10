@@ -14,7 +14,8 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   if (!res.ok) {
     let detail = res.statusText;
     try {
-      detail = (await res.json()).detail ?? detail;
+      const body = await res.json();
+      detail = body.detail ?? body.message ?? detail; // local mode says `detail`, the cloud says `message`
     } catch {
       /* not JSON */
     }
@@ -25,7 +26,8 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
 export const api = {
   get: <T,>(path: string) => request<T>(path),
-  post: <T,>(path: string, body: unknown) => request<T>(path, { method: "POST", body: JSON.stringify(body) }),
+  post: <T,>(path: string, body: unknown, headers?: Record<string, string>) =>
+    request<T>(path, { method: "POST", body: JSON.stringify(body), headers }),
 };
 
 /** Poll a GET endpoint. Keeps the last good value when a request fails, and reports how long since it worked. */
