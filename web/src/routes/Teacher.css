@@ -420,6 +420,12 @@
   font-weight: 560;
   color: var(--ink-2);
 }
+/* The ribbon's unit, said once where the ribbon starts (it stays visible on the 1024×600 tablet). */
+.teacher__unit {
+  margin-inline-start: var(--s-3);
+  font-weight: 400;
+  color: var(--ink-3);
+}
 .teacher__note {
   margin: 0;
   color: var(--ink-2);

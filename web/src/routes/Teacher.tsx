@@ -32,6 +32,7 @@ const T = {
   notedSub: { en: "No need to do anything else.", hi: "आपको और कुछ नहीं करना है।" },
   nowLabel: { en: "Now", hi: "अभी" },
   todayPlan: { en: "Today's plan", hi: "आज की योजना" },
+  stripe: { en: "One stripe = 5 minutes", hi: "एक पट्टी = 5 मिनट" },
 };
 
 export default function Teacher() {
@@ -180,7 +181,10 @@ export default function Teacher() {
 
       <footer className="teacher__day">
         <div className="teacher__dayhead">
-          <span lang={lang}>{T.todayPlan[lang]}</span>
+          <span lang={lang}>
+            {T.todayPlan[lang]}
+            <span className="teacher__unit">{T.stripe[lang]}</span>
+          </span>
           {offlineFor > 0.5 && (
             <span className="teacher__note" role="status">
               {lang === "hi"
