@@ -76,3 +76,17 @@ def test_teacher_cant_cold_records_constraint_and_replans() -> None:
     assert any(c["constraint"]["kind"] == "cold" for c in cons)
     outcomes = [n["state"]["outcome"] for r in ("6B", "3A") for n in nudges(engine, r)]
     assert "not_possible" in outcomes
+
+
+def test_an_instruction_never_gives_keep_steady_as_its_reason() -> None:
+    """ "All fine, keep things as they are" must not appear under "Open the windows", on the teacher card
+    or the printable timetable. Found in the audit: a re-plan relabelled the step asking for the change."""
+    engine, _ = run("partial_open", "09:00")
+    asked = [n for r in ("6B", "3A") for n in nudges(engine, r)]
+    assert asked
+    assert all(n["reason_code"] != "KEEP_STEADY" for n in asked), [n["reason_code"] for n in asked]
+    for room in ("6B", "3A"):
+        view = engine.plan_view(room)
+        assert view is not None
+        keep_en = "All fine. Keep things as they are."
+        assert all(row["reason"]["en"] != keep_en for row in view["timetable"]), view["timetable"]

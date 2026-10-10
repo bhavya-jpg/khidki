@@ -80,6 +80,24 @@ def _action(d: dict[str, str]) -> Action:
 NudgeHook = Callable[[str, dict[str, Any]], None]
 
 
+def change_reason(before: Action, after: Action, kids_present: bool) -> ReasonCode:
+    """Why the windows or purifier are being changed, judged from the change itself.
+
+    A plan step that continues the previous step is labelled KEEP_STEADY. After a re-plan, or when plans
+    from different times of day are stitched together, the step where the teacher is actually asked to act
+    can carry that label, and "All fine, keep things as they are" under "Open the windows" is wrong. This
+    gives the honest reason for the direction of the change instead.
+    """
+    order = list(Window)
+    if after.window == before.window:
+        return ReasonCode.PURIFIER_DURING_CLOSED
+    if order.index(after.window) > order.index(before.window):
+        return ReasonCode.CO2_RISING_FAST if kids_present else ReasonCode.RECESS_PURGE
+    if after.window == Window.CLOSED and after.purifier == Purifier.ON:
+        return ReasonCode.PURIFIER_DURING_CLOSED
+    return ReasonCode.AIR_REFRESHED
+
+
 class Engine:
     def __init__(
         self,
@@ -485,6 +503,8 @@ class Engine:
         instr = next((i for i in plan.instructions if i.t_start_min <= minute < i.t_end_min), None)
         duration = (instr.t_end_min - int(minute)) if instr else PLAN_DT_MIN
         reason = instr.reason_code if instr else step.reason_code
+        if reason == ReasonCode.KEEP_STEADY:  # the plan step continues an earlier one, but we are asking
+            reason = change_reason(believed, target, kids_now > 0)
         verifiable = target.window != believed.window
         state = nsm.issue(now, verifiable=verifiable)
         nid = f"{room_id}-{int(now)}"
@@ -833,7 +853,12 @@ class Engine:
             if key != prev and prev is not None:
                 action = Action(window=Window(st["window"]), purifier=Purifier(st["purifier"]))
                 en, hi = texts.action_text(action)
-                r_en, r_hi = texts.REASON_TEXT[ReasonCode(st["reason_code"])]
+                code = ReasonCode(st["reason_code"])
+                if code == ReasonCode.KEEP_STEADY:  # a boundary between stitched plans: see change_reason
+                    before = Action(window=Window(prev[0]), purifier=Purifier(prev[1]))
+                    kids, _ = self.occupants_at(room_id, st["t_min"])
+                    code = change_reason(before, action, kids > 0)
+                r_en, r_hi = texts.REASON_TEXT[code]
                 out.append(
                     {
                         "t": st["t"],
