@@ -14,7 +14,7 @@
   padding: 0 20px;
   border-radius: var(--r-button);
   border: 0;
-  background: var(--breath-ink);
+  background: #15669e; /* fixed, like the rest of this paper-white page: the token lightens in dark mode */
   color: #eef0e6;
   font-weight: 700;
   cursor: pointer;

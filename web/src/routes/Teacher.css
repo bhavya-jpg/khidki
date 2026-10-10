@@ -247,8 +247,11 @@
   flex: none;
   margin-top: 3px;
 }
+/* Always dark ink on turmeric, in dark mode too (light ink on it measured 1.53:1). */
+.action__followup,
+.action__followup .bi-primary,
 .action__followup .bi-secondary {
-  color: var(--blackboard);
+  color: #1f3a30;
 }
 .action__head {
   display: flex;
@@ -361,8 +364,7 @@
   flex: none;
 }
 .btn--primary .bi-secondary {
-  color: var(--on-fill);
-  opacity: 0.85;
+  color: var(--on-fill); /* full strength: 0.85 opacity measured 4.32:1, under AA */
 }
 .btn--secondary {
   background: transparent;
