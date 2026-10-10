@@ -1,0 +1,167 @@
+{
+ "s1_question": {
+  "seconds": 8.031,
+  "lines": [
+   {
+    "text": "On a bad-air morning in Delhi, a teacher with 44 children has one question.",
+    "start": 0.25,
+    "end": 4.732
+   },
+   {
+    "text": "Open the window, or keep it shut?",
+    "start": 5.052,
+    "end": 7.581
+   }
+  ]
+ },
+ "s2_dilemma": {
+  "seconds": 13.911,
+  "lines": [
+   {
+    "text": "Keep it shut, and the children's own breath pushes CO₂ past 2,000 ppm in a single period.",
+    "start": 0.25,
+    "end": 6.465
+   },
+   {
+    "text": "The room turns stuffy, and attention drops.",
+    "start": 6.785,
+    "end": 9.506
+   },
+   {
+    "text": "Open it, and almost all of the smog outside comes in.",
+    "start": 9.826,
+    "end": 13.461
+   }
+  ]
+ },
+ "s3_khidki": {
+  "seconds": 11.26,
+  "lines": [
+   {
+    "text": "Khidki, the Hindi word for window, answers that question minute by minute.",
+    "start": 0.25,
+    "end": 4.783
+   },
+   {
+    "text": "It tells the teacher exactly when to open or close, and then checks that the air really changed.",
+    "start": 5.103,
+    "end": 10.81
+   }
+  ]
+ },
+ "s4_plan": {
+  "seconds": 15.136,
+  "lines": [
+   {
+    "text": "Every morning at six, it plans the day in five-minute steps, from the outdoor air forecast, the school timetable and a physics model of the room.",
+    "start": 0.25,
+    "end": 8.314
+   },
+   {
+    "text": "School safety rules are written as Cedar policies, so every decision shows the rule and the number behind it.",
+    "start": 8.634,
+    "end": 14.686
+   }
+  ]
+ },
+ "s5_instruction": {
+  "seconds": 10.324,
+  "lines": [
+   {
+    "text": "During the day, the teacher sees one calm instruction, in Hindi and English.",
+    "start": 0.25,
+    "end": 5.08
+   },
+   {
+    "text": "One tap says it's done.",
+    "start": 5.4,
+    "end": 7.086
+   },
+   {
+    "text": "Khidki never asks more than six times a day.",
+    "start": 7.406,
+    "end": 9.874
+   }
+  ]
+ },
+ "s6_verify": {
+  "seconds": 18.951,
+  "lines": [
+   {
+    "text": "Then comes the part we like most. The children's breath is a tracer gas.",
+    "start": 0.25,
+    "end": 4.669
+   },
+   {
+    "text": "How fast CO₂ falls tells Khidki whether the window really opened.",
+    "start": 4.989,
+    "end": 9.564
+   },
+   {
+    "text": "If only one side did, it asks for the other.",
+    "start": 9.884,
+    "end": 12.627
+   },
+   {
+    "text": "An AWS Step Functions workflow waits for the tap, waits for the air, and then verifies.",
+    "start": 12.947,
+    "end": 18.501
+   }
+  ]
+ },
+ "s7_aws": {
+  "seconds": 14.583,
+  "lines": [
+   {
+    "text": "It runs on AWS. Lambda, API Gateway and DynamoDB hold the plan and the readings.",
+    "start": 0.25,
+    "end": 6.137
+   },
+   {
+    "text": "EventBridge starts the 6 AM plan, Polly speaks Hindi, and Cedar decides the policies.",
+    "start": 6.457,
+    "end": 11.654
+   },
+   {
+    "text": "All of it is infrastructure as code.",
+    "start": 11.974,
+    "end": 14.133
+   }
+  ]
+ },
+ "s8_results": {
+  "seconds": 19.07,
+  "lines": [
+   {
+    "text": "We tested it on 48 real Delhi school days from last winter, in a simulated classroom.",
+    "start": 0.25,
+    "end": 5.893
+   },
+   {
+    "text": "Against a CO₂ alarm, Khidki cut stuffy minutes from 65 a day to 17, with 4 requests to the teacher instead of 15.",
+    "start": 6.213,
+    "end": 14.698
+   },
+   {
+    "text": "It lets in a little more smog to do that, and we say so plainly.",
+    "start": 15.018,
+    "end": 18.62
+   }
+  ]
+ },
+ "s9_close": {
+  "seconds": 7.797,
+  "lines": [
+   {
+    "text": "And for a school with no sensor at all, there is a window timetable to print.",
+    "start": 0.25,
+    "end": 4.476
+   },
+   {
+    "text": "Khidki. Open the window at the right minute.",
+    "start": 4.796,
+    "end": 7.347
+   }
+  ]
+ }
+}

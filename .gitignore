@@ -33,3 +33,13 @@ docs/design-refs/screens/
 
 # TypeScript incremental build cache (rewritten on every type-check)
 web/tsconfig.tsbuildinfo
+
+# Explainer video: local TTS environment, generated audio, captures and renders
+video/.tts-venv/
+video/out/
+video/node_modules/
+video/public/vo/
+video/public/footage/
+
+# Third-party agent skills (installed with `npx skills add`; see skills-lock.json)
+.claude/skills/

@@ -38,3 +38,12 @@ Built with **Claude Code** (Anthropic) in VS Code.
 | boto3 / botocore | Apache-2.0 |
 | moto (tests) | Apache-2.0 |
 | Matplotlib (benchmark chart) | Matplotlib licence (PSF-based) |
+
+## Explainer video (`video/`)
+| Tool | Use | Licence / terms |
+|---|---|---|
+| Remotion | motion graphics and rendering | Remotion licence: free for individuals and teams of up to three |
+| Chatterbox (Resemble AI) | the narration: a synthetic voice, generated locally and said to be so on screen | MIT |
+| OpenAI Whisper | transcribing the narration back to check it | MIT |
+| Playwright, FFmpeg | capturing the real teacher screen from local mode | Apache-2.0; LGPL/GPL (used as a tool, not distributed) |
+| Agent skills from `remotion-dev/skills` and `heygen-com/hyperframes` | guidance for the coding agent; installed locally, not committed (`skills-lock.json`) | see each repository |

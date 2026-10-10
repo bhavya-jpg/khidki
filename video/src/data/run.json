@@ -1,0 +1,1205 @@
+{
+ "date": "2025-11-18",
+ "series": [
+  {
+   "t": "07:49",
+   "ts": 1763432370.012207,
+   "co2": 1323,
+   "pm25": 117
+  },
+  {
+   "t": "07:50",
+   "ts": 1763432430.012207,
+   "co2": 1316,
+   "pm25": 120.4
+  },
+  {
+   "t": "07:51",
+   "ts": 1763432490.012207,
+   "co2": 1313,
+   "pm25": 122.9
+  },
+  {
+   "t": "07:52",
+   "ts": 1763432550.012207,
+   "co2": 1288,
+   "pm25": 127.2
+  },
+  {
+   "t": "07:53",
+   "ts": 1763432610.012207,
+   "co2": 1285,
+   "pm25": 129.8
+  },
+  {
+   "t": "07:54",
+   "ts": 1763432670.012207,
+   "co2": 1257,
+   "pm25": 134.5
+  },
+  {
+   "t": "07:55",
+   "ts": 1763432730.012207,
+   "co2": 1263,
+   "pm25": 133.1
+  },
+  {
+   "t": "07:56",
+   "ts": 1763432790.012207,
+   "co2": 1246,
+   "pm25": 137.4
+  },
+  {
+   "t": "07:57",
+   "ts": 1763432850.012207,
+   "co2": 1239,
+   "pm25": 140.1
+  },
+  {
+   "t": "07:58",
+   "ts": 1763432910.012207,
+   "co2": 1235,
+   "pm25": 141.8
+  },
+  {
+   "t": "07:59",
+   "ts": 1763432970.012207,
+   "co2": 1221,
+   "pm25": 144.2
+  },
+  {
+   "t": "08:00",
+   "ts": 1763433030.012207,
+   "co2": 1213,
+   "pm25": 140.2
+  },
+  {
+   "t": "08:01",
+   "ts": 1763433090.012207,
+   "co2": 1222,
+   "pm25": 145.7
+  },
+  {
+   "t": "08:02",
+   "ts": 1763433150.012207,
+   "co2": 1199,
+   "pm25": 147.6
+  },
+  {
+   "t": "08:03",
+   "ts": 1763433210.012207,
+   "co2": 1216,
+   "pm25": 150.5
+  },
+  {
+   "t": "08:04",
+   "ts": 1763433270.012207,
+   "co2": 1199,
+   "pm25": 146.3
+  },
+  {
+   "t": "08:05",
+   "ts": 1763433330.012207,
+   "co2": 1189,
+   "pm25": 148.5
+  },
+  {
+   "t": "08:06",
+   "ts": 1763433390.012207,
+   "co2": 1192,
+   "pm25": 149.4
+  },
+  {
+   "t": "08:07",
+   "ts": 1763433450.012207,
+   "co2": 1181,
+   "pm25": 153.7
+  },
+  {
+   "t": "08:08",
+   "ts": 1763433510.012207,
+   "co2": 1180,
+   "pm25": 150.6
+  },
+  {
+   "t": "08:09",
+   "ts": 1763433570.012207,
+   "co2": 1174,
+   "pm25": 152.6
+  },
+  {
+   "t": "08:10",
+   "ts": 1763433630.012207,
+   "co2": 1181,
+   "pm25": 155.9
+  },
+  {
+   "t": "08:11",
+   "ts": 1763433690.012207,
+   "co2": 1185,
+   "pm25": 150.3
+  },
+  {
+   "t": "08:12",
+   "ts": 1763433750.012207,
+   "co2": 1168,
+   "pm25": 149.7
+  },
+  {
+   "t": "08:13",
+   "ts": 1763433810.012207,
+   "co2": 1173,
+   "pm25": 152.2
+  },
+  {
+   "t": "08:14",
+   "ts": 1763433870.012207,
+   "co2": 1173,
+   "pm25": 156.5
+  },
+  {
+   "t": "08:15",
+   "ts": 1763433930.012207,
+   "co2": 1174,
+   "pm25": 154.3
+  },
+  {
+   "t": "08:16",
+   "ts": 1763433990.012207,
+   "co2": 1167,
+   "pm25": 151.3
+  },
+  {
+   "t": "08:17",
+   "ts": 1763434050.012207,
+   "co2": 1173,
+   "pm25": 155.1
+  },
+  {
+   "t": "08:18",
+   "ts": 1763434110.012207,
+   "co2": 1152,
+   "pm25": 150
+  },
+  {
+   "t": "08:19",
+   "ts": 1763434170.012207,
+   "co2": 1163,
+   "pm25": 153.7
+  },
+  {
+   "t": "08:20",
+   "ts": 1763434230.012207,
+   "co2": 1164,
+   "pm25": 149
+  },
+  {
+   "t": "08:21",
+   "ts": 1763434290.012207,
+   "co2": 1180,
+   "pm25": 152.4
+  },
+  {
+   "t": "08:22",
+   "ts": 1763434350.012207,
+   "co2": 1148,
+   "pm25": 154.8
+  },
+  {
+   "t": "08:23",
+   "ts": 1763434410.012207,
+   "co2": 1151,
+   "pm25": 151.9
+  },
+  {
+   "t": "08:24",
+   "ts": 1763434470.012207,
+   "co2": 1152,
+   "pm25": 150.4
+  },
+  {
+   "t": "08:25",
+   "ts": 1763434530.012207,
+   "co2": 1150,
+   "pm25": 153.3
+  },
+  {
+   "t": "08:26",
+   "ts": 1763434590.012207,
+   "co2": 1163,
+   "pm25": 150.2
+  },
+  {
+   "t": "08:27",
+   "ts": 1763434650.012207,
+   "co2": 1164,
+   "pm25": 148.7
+  },
+  {
+   "t": "08:28",
+   "ts": 1763434710.012207,
+   "co2": 1159,
+   "pm25": 150
+  },
+  {
+   "t": "08:29",
+   "ts": 1763434770.012207,
+   "co2": 1156,
+   "pm25": 151.3
+  },
+  {
+   "t": "08:30",
+   "ts": 1763434830.012207,
+   "co2": 1143,
+   "pm25": 152.6
+  },
+  {
+   "t": "08:31",
+   "ts": 1763434890.012207,
+   "co2": 1157,
+   "pm25": 148.7
+  },
+  {
+   "t": "08:32",
+   "ts": 1763434950.012207,
+   "co2": 1159,
+   "pm25": 149.8
+  },
+  {
+   "t": "08:33",
+   "ts": 1763435010.012207,
+   "co2": 1143,
+   "pm25": 150.2
+  },
+  {
+   "t": "08:34",
+   "ts": 1763435070.012207,
+   "co2": 1147,
+   "pm25": 148.5
+  },
+  {
+   "t": "08:35",
+   "ts": 1763435130.012207,
+   "co2": 1146,
+   "pm25": 147.8
+  },
+  {
+   "t": "08:36",
+   "ts": 1763435190.012207,
+   "co2": 1140,
+   "pm25": 148.2
+  },
+  {
+   "t": "08:37",
+   "ts": 1763435250.012207,
+   "co2": 1148,
+   "pm25": 147.2
+  },
+  {
+   "t": "08:38",
+   "ts": 1763435310.012207,
+   "co2": 1149,
+   "pm25": 148
+  },
+  {
+   "t": "08:39",
+   "ts": 1763435370.012207,
+   "co2": 1145,
+   "pm25": 148
+  },
+  {
+   "t": "08:40",
+   "ts": 1763435430.012207,
+   "co2": 1120,
+   "pm25": 148.9
+  },
+  {
+   "t": "08:41",
+   "ts": 1763435490.012207,
+   "co2": 1069,
+   "pm25": 147
+  },
+  {
+   "t": "08:42",
+   "ts": 1763435550.012207,
+   "co2": 1049,
+   "pm25": 145.6
+  },
+  {
+   "t": "08:43",
+   "ts": 1763435610.012207,
+   "co2": 1025,
+   "pm25": 149.4
+  },
+  {
+   "t": "08:44",
+   "ts": 1763435670.012207,
+   "co2": 992,
+   "pm25": 148.8
+  },
+  {
+   "t": "08:45",
+   "ts": 1763435730.012207,
+   "co2": 968,
+   "pm25": 146.7
+  },
+  {
+   "t": "08:46",
+   "ts": 1763435790.012207,
+   "co2": 969,
+   "pm25": 148.2
+  },
+  {
+   "t": "08:47",
+   "ts": 1763435850.012207,
+   "co2": 952,
+   "pm25": 146.8
+  },
+  {
+   "t": "08:48",
+   "ts": 1763435910.012207,
+   "co2": 945,
+   "pm25": 149.5
+  }
+ ],
+ "day_steps": [
+  {
+   "t_min": 450,
+   "t": "07:30",
+   "window": "closed",
+   "purifier": "off",
+   "predicted_co2": 705,
+   "predicted_pm": 101.1,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 455,
+   "t": "07:35",
+   "window": "closed",
+   "purifier": "off",
+   "predicted_co2": 977,
+   "predicted_pm": 103.3,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 460,
+   "t": "07:40",
+   "window": "closed",
+   "purifier": "off",
+   "predicted_co2": 1251,
+   "predicted_pm": 103.1,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 465,
+   "t": "07:45",
+   "window": "open_one",
+   "purifier": "off",
+   "predicted_co2": 1306,
+   "predicted_pm": 116.7,
+   "occupied": true,
+   "reason_code": "CO2_RISING_FAST"
+  },
+  {
+   "t_min": 470,
+   "t": "07:50",
+   "window": "open_one",
+   "purifier": "off",
+   "predicted_co2": 1262,
+   "predicted_pm": 134.1,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 475,
+   "t": "07:55",
+   "window": "open_one",
+   "purifier": "off",
+   "predicted_co2": 1210,
+   "predicted_pm": 144.8,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 480,
+   "t": "08:00",
+   "window": "open_one",
+   "purifier": "off",
+   "predicted_co2": 1180,
+   "predicted_pm": 152.4,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 485,
+   "t": "08:05",
+   "window": "open_one",
+   "purifier": "off",
+   "predicted_co2": 1164,
+   "predicted_pm": 154.6,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 490,
+   "t": "08:10",
+   "window": "open_one",
+   "purifier": "off",
+   "predicted_co2": 1156,
+   "predicted_pm": 155,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 495,
+   "t": "08:15",
+   "window": "open_one",
+   "purifier": "off",
+   "predicted_co2": 1146,
+   "predicted_pm": 155.5,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 500,
+   "t": "08:20",
+   "window": "open_one",
+   "purifier": "off",
+   "predicted_co2": 1130,
+   "predicted_pm": 157.8,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 505,
+   "t": "08:25",
+   "window": "open_one",
+   "purifier": "off",
+   "predicted_co2": 1146,
+   "predicted_pm": 153.3,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 510,
+   "t": "08:30",
+   "window": "open_one",
+   "purifier": "off",
+   "predicted_co2": 1137,
+   "predicted_pm": 152.5,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 515,
+   "t": "08:35",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 1056,
+   "predicted_pm": 151.6,
+   "occupied": true,
+   "reason_code": "CO2_RISING_FAST"
+  },
+  {
+   "t_min": 520,
+   "t": "08:40",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 1041,
+   "predicted_pm": 150.3,
+   "occupied": true,
+   "reason_code": "CO2_RISING_FAST"
+  },
+  {
+   "t_min": 525,
+   "t": "08:45",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 934,
+   "predicted_pm": 149.4,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 530,
+   "t": "08:50",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 895,
+   "predicted_pm": 150.7,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 535,
+   "t": "08:55",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 877,
+   "predicted_pm": 150.2,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 540,
+   "t": "09:00",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 869,
+   "predicted_pm": 148.8,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 545,
+   "t": "09:05",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 864,
+   "predicted_pm": 147,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 550,
+   "t": "09:10",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 860,
+   "predicted_pm": 145,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 555,
+   "t": "09:15",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 858,
+   "predicted_pm": 142.8,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 560,
+   "t": "09:20",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 855,
+   "predicted_pm": 140.6,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 565,
+   "t": "09:25",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 853,
+   "predicted_pm": 138.4,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 570,
+   "t": "09:30",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 851,
+   "predicted_pm": 136.2,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 575,
+   "t": "09:35",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 849,
+   "predicted_pm": 133.9,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 580,
+   "t": "09:40",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 847,
+   "predicted_pm": 131.7,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 585,
+   "t": "09:45",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 844,
+   "predicted_pm": 129.4,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 590,
+   "t": "09:50",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 842,
+   "predicted_pm": 127.2,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 595,
+   "t": "09:55",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 840,
+   "predicted_pm": 125,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 600,
+   "t": "10:00",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 838,
+   "predicted_pm": 122.7,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 605,
+   "t": "10:05",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 836,
+   "predicted_pm": 120.5,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 610,
+   "t": "10:10",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 834,
+   "predicted_pm": 118.4,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 615,
+   "t": "10:15",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 832,
+   "predicted_pm": 116.3,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 620,
+   "t": "10:20",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 831,
+   "predicted_pm": 114.1,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 625,
+   "t": "10:25",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 829,
+   "predicted_pm": 112,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 630,
+   "t": "10:30",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 827,
+   "predicted_pm": 109.9,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 635,
+   "t": "10:35",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 826,
+   "predicted_pm": 107.8,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 640,
+   "t": "10:40",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 824,
+   "predicted_pm": 105.7,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 645,
+   "t": "10:45",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 822,
+   "predicted_pm": 103.5,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 650,
+   "t": "10:50",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 821,
+   "predicted_pm": 101.4,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 655,
+   "t": "10:55",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 819,
+   "predicted_pm": 99.3,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 660,
+   "t": "11:00",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 817,
+   "predicted_pm": 97.2,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 665,
+   "t": "11:05",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 816,
+   "predicted_pm": 95.4,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 670,
+   "t": "11:10",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 815,
+   "predicted_pm": 93.9,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 675,
+   "t": "11:15",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 814,
+   "predicted_pm": 92.6,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 680,
+   "t": "11:20",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 813,
+   "predicted_pm": 91.4,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 685,
+   "t": "11:25",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 812,
+   "predicted_pm": 90.2,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 690,
+   "t": "11:30",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 812,
+   "predicted_pm": 89,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 695,
+   "t": "11:35",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 811,
+   "predicted_pm": 87.9,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 700,
+   "t": "11:40",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 810,
+   "predicted_pm": 86.7,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 705,
+   "t": "11:45",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 809,
+   "predicted_pm": 85.5,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 710,
+   "t": "11:50",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 809,
+   "predicted_pm": 84.3,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 715,
+   "t": "11:55",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 808,
+   "predicted_pm": 83.1,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 720,
+   "t": "12:00",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 807,
+   "predicted_pm": 82,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 725,
+   "t": "12:05",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 807,
+   "predicted_pm": 81,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 730,
+   "t": "12:10",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 806,
+   "predicted_pm": 80.3,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 735,
+   "t": "12:15",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 806,
+   "predicted_pm": 79.7,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 740,
+   "t": "12:20",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 806,
+   "predicted_pm": 79.2,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 745,
+   "t": "12:25",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 806,
+   "predicted_pm": 78.7,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 750,
+   "t": "12:30",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 805,
+   "predicted_pm": 78.2,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 755,
+   "t": "12:35",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 805,
+   "predicted_pm": 77.7,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 760,
+   "t": "12:40",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 805,
+   "predicted_pm": 77.2,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 765,
+   "t": "12:45",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 805,
+   "predicted_pm": 76.7,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 770,
+   "t": "12:50",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 805,
+   "predicted_pm": 76.2,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 775,
+   "t": "12:55",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 805,
+   "predicted_pm": 75.7,
+   "occupied": true,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 780,
+   "t": "13:00",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 693,
+   "predicted_pm": 75.2,
+   "occupied": false,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 785,
+   "t": "13:05",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 561,
+   "predicted_pm": 74.7,
+   "occupied": false,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 790,
+   "t": "13:10",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 503,
+   "predicted_pm": 74.4,
+   "occupied": false,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 795,
+   "t": "13:15",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 478,
+   "predicted_pm": 74,
+   "occupied": false,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 800,
+   "t": "13:20",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 467,
+   "predicted_pm": 73.6,
+   "occupied": false,
+   "reason_code": "KEEP_STEADY"
+  },
+  {
+   "t_min": 805,
+   "t": "13:25",
+   "window": "open_both",
+   "purifier": "off",
+   "predicted_co2": 462,
+   "predicted_pm": 73.3,
+   "occupied": false,
+   "reason_code": "KEEP_STEADY"
+  }
+ ],
+ "timetable": [
+  {
+   "t": "07:45",
+   "t_min": 465,
+   "window": "open_one",
+   "purifier": "off",
+   "text": {
+    "en": "Open the road-side windows",
+    "hi": "सड़क की तरफ़ की खिड़कियाँ खोलिए"
+   },
+   "reason": {
+    "en": "CO₂ is rising fast. Fresh air now keeps the class alert.",
+    "hi": "CO₂ तेज़ी से बढ़ रहा है। अभी ताज़ी हवा से बच्चे चुस्त रहेंगे।"
+   },
+   "until": "08:35"
+  },
+  {
+   "t": "08:35",
+   "t_min": 515,
+   "window": "open_both",
+   "purifier": "off",
+   "text": {
+    "en": "Open both sides",
+    "hi": "दोनों तरफ़ की खिड़कियाँ खोलिए"
+   },
+   "reason": {
+    "en": "CO₂ is rising fast. Fresh air now keeps the class alert.",
+    "hi": "CO₂ तेज़ी से बढ़ रहा है। अभी ताज़ी हवा से बच्चे चुस्त रहेंगे।"
+   },
+   "until": "13:30"
+  }
+ ],
+ "decisions": [
+  {
+   "key": "assembly",
+   "label": "Assembly",
+   "start": "07:30",
+   "end": "07:50",
+   "outdoor": false,
+   "policy_ids": [
+    "S2",
+    "S3"
+   ],
+   "max_pm25": 190,
+   "override": null
+  },
+  {
+   "key": "recess_outdoor",
+   "label": "Recess outdoors",
+   "start": "10:10",
+   "end": "10:40",
+   "outdoor": false,
+   "policy_ids": [
+    "S2",
+    "S3"
+   ],
+   "max_pm25": 122,
+   "override": null
+  },
+  {
+   "key": "pe:6B",
+   "label": "PE (6B)",
+   "start": "11:15",
+   "end": "11:50",
+   "outdoor": false,
+   "policy_ids": [
+    "S2"
+   ],
+   "max_pm25": 97,
+   "override": null
+  },
+  {
+   "key": "pe:3A",
+   "label": "PE (3A)",
+   "start": "09:00",
+   "end": "09:35",
+   "outdoor": false,
+   "policy_ids": [
+    "S2",
+    "S3"
+   ],
+   "max_pm25": 150,
+   "override": null
+  }
+ ],
+ "policies": {
+  "S2": {
+   "en": "Outdoor activity moves indoors when forecast PM2.5 during it is above 90 (CPCB 'Poor').",
+   "hi": "गतिविधि के दौरान PM2.5 का पूर्वानुमान 90 से ज़्यादा (CPCB 'ख़राब') हो तो गतिविधि अंदर होगी।",
+   "source": "forbid (principal, action == Khidki::Action::\"activity.outdoor\", resource)\nwhen { context.maxPm25During > 90 };"
+  },
+  "S3": {
+   "en": "For classes up to V, outdoor activity moves indoors above PM2.5 60.",
+   "hi": "कक्षा V तक के लिए PM2.5 60 से ज़्यादा हो तो बाहर की गतिविधि अंदर होगी।",
+   "source": "forbid (principal, action == Khidki::Action::\"activity.outdoor\", resource)\nwhen { context.minGrade <= 5 && context.maxPm25During > 60 };"
+  }
+ },
+ "city_aqi": 321,
+ "grap": {
+  "name_en": "Stage II (Very poor)",
+  "name_hi": "चरण II (बहुत ख़राब)",
+  "reminder_en": "Schools follow the latest Directorate of Education circular for this stage. Check it before changing classes.",
+  "reminder_hi": "इस चरण के लिए शिक्षा निदेशालय का ताज़ा परिपत्र देखें। कक्षाओं में बदलाव उसी के अनुसार करें।",
+  "circulars_url": "https://www.edudel.nic.in/"
+ },
+ "outdoor": {
+  "pm25": 154.2,
+  "aqi": 326,
+  "category": "very_poor",
+  "category_en": "Very poor",
+  "category_hi": "बहुत ख़राब",
+  "temp": 17.9,
+  "source": "CAMS replay of 2025-11-18 (real outdoor air, uncorrected model values)"
+ },
+ "requests": {
+  "used": 2,
+  "max": 6
+ }
+}

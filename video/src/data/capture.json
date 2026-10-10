@@ -1,0 +1,49 @@
+{
+ "captured": "2026-10-10T19:04:44.615Z",
+ "note": "Local mode: simulated classroom, real outdoor air (CAMS replay of 2025-11-18).",
+ "clips": {
+  "instruction": {
+   "seconds": 23.148,
+   "marks": {
+    "instruction": 0.003,
+    "tap": 4.268,
+    "verified": 20.026
+   }
+  },
+  "followup": {
+   "seconds": 41.148,
+   "marks": {
+    "instruction": 0,
+    "tap": 3.19,
+    "follow_up": 18.461,
+    "tap2": 23.118,
+    "verified": 38.178
+   }
+  }
+ },
+ "firstOutcome": "verified",
+ "first": {
+  "text": {
+   "en": "Open the road-side windows",
+   "hi": "सड़क की तरफ़ की खिड़कियाँ खोलिए"
+  },
+  "reason": {
+   "en": "CO₂ is rising fast. Fresh air now keeps the class alert.",
+   "hi": "CO₂ तेज़ी से बढ़ रहा है। अभी ताज़ी हवा से बच्चे चुस्त रहेंगे।"
+  },
+  "time": "07:45",
+  "co2": 1330
+ },
+ "afterFirst": {
+  "time": "07:53",
+  "co2": 1280,
+  "inferred": "open_one",
+  "implied_lam": 4.87,
+  "outcome": {
+   "status": "verified",
+   "at": 1763432394.4378557,
+   "nudge_id": "6B-1763432135"
+  }
+ },
+ "followupOutcome": "follow_up:other_side then verified"
+}
