@@ -181,24 +181,85 @@
   background: var(--chalk);
   color: #1f3a30;
 }
-.hero__numbers {
-  display: flex;
-  gap: clamp(24px, 4vw, 56px);
+/* Readings attached to the window: outside on the sky, inside at the sill (design-refs principle 10). */
+.hero__wall {
+  position: relative;
 }
-.hero__numbers > div {
+.onglass {
+  position: absolute;
   display: flex;
   flex-direction: column;
+  gap: 2px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(31, 58, 48, 0.9);
+  color: var(--chalk);
+  box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.6);
 }
-.hero__num {
-  font-size: clamp(2.2rem, 4vw, 3.4rem);
+.onglass > span {
+  font-size: var(--step--1);
+  font-weight: 560;
+  color: rgba(238, 240, 230, 0.8);
+}
+.onglass b {
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
   font-weight: 800;
-  font-stretch: 80%;
   line-height: 1;
 }
-.hero__unit {
-  margin-top: 4px;
+.onglass small {
+  margin-left: 6px;
   font-size: var(--step--1);
-  color: rgba(238, 240, 230, 0.7);
+  color: rgba(238, 240, 230, 0.8);
+}
+.onglass > div {
+  display: flex;
+  align-items: baseline;
+}
+.onglass--out {
+  top: 14%;
+  right: 9%;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 8px;
+}
+.onglass--out small {
+  margin-left: 0;
+}
+.onglass--in {
+  left: 9%;
+  bottom: 15%;
+}
+/* the hairline that ties each label to its side of the glass */
+.onglass::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 26px;
+  background: rgba(31, 58, 48, 0.9);
+}
+.onglass--out::after {
+  top: 100%;
+  right: 22px;
+}
+.onglass--in::after {
+  bottom: 100%;
+  left: 22px;
+}
+@media (max-width: 760px) {
+  .onglass {
+    padding: 6px 10px;
+  }
+  .onglass--out {
+    top: 12%;
+    right: 8%;
+  }
+  .onglass--in {
+    left: 8%;
+    bottom: 13%;
+  }
+  .onglass::after {
+    height: 14px;
+  }
 }
 .hero__caption {
   font-size: var(--step-0);

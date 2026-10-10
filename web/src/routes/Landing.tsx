@@ -133,6 +133,23 @@ export default function Landing() {
         <figure className="hero__stage">
           <div className="hero__wall">
             <AirWindow outdoorPm={250} indoorPm={s.pmIn} co2={s.co2} window={s.window} variant="hero" showLegend={false} />
+            {/* The readings sit on the window itself, each on its own side of the glass. */}
+            <div className="onglass onglass--out">
+              <span lang={lang}>{lang === "hi" ? "बाहर" : "Outside"}</span>
+              <b className="num">250</b>
+              <small>µg/m³ PM2.5</small>
+            </div>
+            <div className="onglass onglass--in" aria-live="polite">
+              <span lang={lang}>{lang === "hi" ? "कमरे में" : "In the room"}</span>
+              <div>
+                <b className="num">{s.pmIn}</b>
+                <small>µg/m³ PM2.5</small>
+              </div>
+              <div>
+                <b className="num">{s.co2.toLocaleString("en-IN")}</b>
+                <small>ppm CO₂</small>
+              </div>
+            </div>
           </div>
           <div className="scenes" role="tablist" aria-label={lang === "hi" ? "तीन हालात" : "Three situations"}>
             {SCENES.map((x, i) => (
@@ -150,16 +167,6 @@ export default function Landing() {
                 <span lang={lang}>{t(x.title)}</span>
               </button>
             ))}
-          </div>
-          <div className="hero__numbers">
-            <div>
-              <span className="hero__num num">{s.co2.toLocaleString("en-IN")}</span>
-              <span className="hero__unit">ppm CO₂</span>
-            </div>
-            <div>
-              <span className="hero__num num">{s.pmIn}</span>
-              <span className="hero__unit">µg/m³ PM2.5 {lang === "hi" ? "अंदर" : "inside"}</span>
-            </div>
           </div>
           <figcaption className="hero__caption">
             <span lang={lang}>{t(s.line)}</span>
