@@ -9,6 +9,7 @@ const Teacher = lazy(() => import("./routes/Teacher"));
 const School = lazy(() => import("./routes/School"));
 const Print = lazy(() => import("./routes/Print"));
 const DevWindow = lazy(() => import("./routes/DevWindow"));
+const NotFound = lazy(() => import("./routes/NotFound"));
 
 export default function App() {
   const [pmPerParticle, setPmPerParticle] = useState(DEFAULT_PM_PER_PARTICLE);
@@ -23,6 +24,7 @@ export default function App() {
               <Route path="/school/:schoolId" element={<School />} />
               <Route path="/print/:roomId" element={<Print />} />
               <Route path="/dev/window" element={<DevWindow />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
         </BrowserRouter>

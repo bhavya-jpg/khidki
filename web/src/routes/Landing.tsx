@@ -100,6 +100,7 @@ export default function Landing() {
           <a href="#how">{lang === "hi" ? "कैसे काम करता है" : "How it works"}</a>
           <a href="#results">{lang === "hi" ? "नतीजे" : "Results"}</a>
           <Link to="/teacher/6B">{lang === "hi" ? "शिक्षक स्क्रीन" : "Teacher screen"}</Link>
+          <Link to="/school/dsv">{lang === "hi" ? "प्रिंसिपल" : "Principal"}</Link>
         </nav>
         <LangToggle />
       </header>
@@ -256,6 +257,16 @@ export default function Landing() {
             </div>
           </article>
         </div>
+        <div className="doors">
+          <Link to="/teacher/6B" className="door">
+            <span lang={lang}>{lang === "hi" ? "शिक्षक की स्क्रीन खोलें" : "Open the teacher's screen"}</span>
+            <small lang={lang}>{lang === "hi" ? "कक्षा 6B, सिम्युलेटेड सुबह" : "Class 6B, a simulated morning"}</small>
+          </Link>
+          <Link to="/print/6B" className="door door--quiet">
+            <span lang={lang}>{lang === "hi" ? "आज की समय-सारणी प्रिंट करें" : "Print today's timetable"}</span>
+            <small lang={lang}>{lang === "hi" ? "बिना सेंसर या टैबलेट के, एक A4 पन्ना" : "No sensor or tablet needed: one A4 page"}</small>
+          </Link>
+        </div>
       </Reveal>
 
       {/* ── results ── */}
@@ -302,6 +313,12 @@ export default function Landing() {
         ) : (
           <p className="section__lead">{lang === "hi" ? "नतीजे लोड हो रहे हैं…" : "Loading results…"}</p>
         )}
+        <div className="doors">
+          <Link to="/school/dsv" className="door">
+            <span lang={lang}>{lang === "hi" ? "प्रिंसिपल का पेज खोलें" : "Open the principal's page"}</span>
+            <small lang={lang}>{lang === "hi" ? "आज के फ़ैसले, हर कक्षा की हवा, और बदलावों का रिकॉर्ड" : "Today's decisions, every classroom's air, and the override log"}</small>
+          </Link>
+        </div>
       </Reveal>
 
       {/* ── aws ── */}
