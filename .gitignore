@@ -27,3 +27,6 @@ cdk.context.json
 .DS_Store
 .idea/
 infra/outputs.json
+
+# Reference-site screenshots: other people's copyrighted work, never committed
+docs/design-refs/screens/
