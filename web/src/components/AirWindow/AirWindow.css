@@ -24,3 +24,41 @@
   color: var(--ink-2);
   line-height: 1.4;
 }
+
+/* Placeholder: a window shape in the frame's paint, until the canvas has drawn. */
+.air-window__ph {
+  position: absolute;
+  inset: 3% 3% 9% 3%;
+  border: 12px solid var(--window-paint-green);
+  border-radius: 2px;
+  background: linear-gradient(180deg, #a9b5ae 0%, #cfbf9b 100%);
+}
+.air-window__ph i {
+  position: absolute;
+  background: var(--window-paint-green);
+}
+.air-window__ph i:first-child {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  margin-left: -5px;
+}
+.air-window__ph i:last-child {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 8px;
+  margin-top: -4px;
+}
+.air-window--mini .air-window__ph {
+  border-width: 5px;
+}
+.air-window--mini .air-window__ph i:first-child {
+  width: 4px;
+  margin-left: -2px;
+}
+.air-window--mini .air-window__ph i:last-child {
+  height: 4px;
+  margin-top: -2px;
+}

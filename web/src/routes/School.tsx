@@ -17,14 +17,20 @@ const WINDOW_WORD = {
 } as const;
 
 export default function School() {
-  usePulse(); // keep the live demo's classroom moving while this page is open
+  const pulse = usePulse(); // keeps the live demo's classroom moving while this page is open
   const { schoolId = "dsv" } = useParams();
   const { data, error, refresh } = usePoll<SchoolToday>(`/v1/schools/${schoolId}/today`, 4000);
   const audit = usePoll<AuditEntry[]>(`/v1/schools/${schoolId}/audit`, 15000);
   const { lang } = useLang();
 
-  if (!data) {
-    return <main className="school school--loading"><p>{error ? `Can't reach Khidki: ${error}` : "…"}</p></main>;
+  if (!data || pulse === null) {
+    return (
+      <main className="school school--loading">
+        <p role="status" lang={lang}>
+          {error ? `Can't reach Khidki: ${error}` : lang === "hi" ? "स्कूल खुल रहा है…" : "Opening the school…"}
+        </p>
+      </main>
+    );
   }
   const severe = data.grap_stage >= 3;
   const [hh, mm] = data.clock.time.split(":").map(Number);

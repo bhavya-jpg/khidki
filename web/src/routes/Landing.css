@@ -101,6 +101,7 @@
 }
 /* In English the headline is English, a little smaller because the line is longer, with the Hindi beneath. */
 .hero__title--en {
+  min-height: 0; /* two fixed lines: no need to reserve room for a third */
   font-size: clamp(2.5rem, 5.4vw, 5.2rem);
 }
 .hero__other {

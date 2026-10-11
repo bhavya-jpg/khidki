@@ -38,6 +38,16 @@ function usePrefersReducedMotion() {
   return reduced;
 }
 
+/** A plain window shape, shown at once so the space never looks empty while the data and the drawing load. */
+export function WindowPlaceholder() {
+  return (
+    <div className="air-window__ph" aria-hidden="true">
+      <i />
+      <i />
+    </div>
+  );
+}
+
 /**
  * A classroom window whose contents are the air. Dots are PM2.5 (one dot = the page's shared µg/m³ value;
  * behind the glass is outside air, in front is the room), the warm haze is CO₂, and the panes really open.
@@ -60,6 +70,7 @@ export function AirWindow({
   const { pmPerParticle, setPmPerParticle } = useEncoding();
   const { lang } = useLang();
   const reduced = usePrefersReducedMotion();
+  const [painted, setPainted] = useState(false);
   const air = useMemo(
     () => ({ outdoorPm, indoorPm, co2, window: state, purifier, pmPerParticle, framePaint }),
     [outdoorPm, indoorPm, co2, state, purifier, pmPerParticle, framePaint],
@@ -80,7 +91,10 @@ export function AirWindow({
     const onScheme = () => r.refreshPalette();
     scheme.addEventListener("change", onScheme);
     r.start();
+    // The drawn window replaces the placeholder once it has had two frames to paint.
+    const first = requestAnimationFrame(() => requestAnimationFrame(() => setPainted(true)));
     return () => {
+      cancelAnimationFrame(first);
       ro.disconnect();
       scheme.removeEventListener("change", onScheme);
       r.stop();
@@ -101,6 +115,7 @@ export function AirWindow({
   return (
     <figure className={`air-window air-window--${variant} ${className ?? ""}`}>
       <div ref={boxRef} className="air-window__box">
+        {!painted && <WindowPlaceholder />}
         <canvas ref={canvasRef} role="img" aria-label={label} />
       </div>
       {showLegend && (

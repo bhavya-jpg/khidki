@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { api, usePoll, usePulse } from "../api";
-import { AirWindow } from "../components/AirWindow/AirWindow";
+import { AirWindow, WindowPlaceholder } from "../components/AirWindow/AirWindow";
 import { AirRibbon } from "../components/ui/AirRibbon";
 import { SimBadge } from "../components/ui/Badges";
 import { CountdownRing } from "../components/ui/CountdownRing";
@@ -47,18 +47,23 @@ export default function Teacher() {
   const seenOutcome = useRef<string | null>(null);
 
   // The one orchestrated moment: when verification lands, say so for a few seconds.
+  // Whatever outcome was already there when the page opened is not news; anything after that is.
+  const loaded = data !== null;
+  const outcomeId = data?.last_outcome?.nudge_id ?? "";
+  const outcomeStatus = data?.last_outcome?.status ?? null;
   useEffect(() => {
-    const o = data?.last_outcome;
-    if (!o?.nudge_id || seenOutcome.current === o.nudge_id) return;
-    const first = seenOutcome.current === null;
-    seenOutcome.current = o.nudge_id;
-    if (first) return;
-    if (o.status === "verified" || o.status === "verified_silent") {
-      setFlash({ t: T.verified, sub: T.verifiedSub });
-      const id = window.setTimeout(() => setFlash(null), 3500);
-      return () => window.clearTimeout(id);
+    if (!loaded) return;
+    if (seenOutcome.current === null) {
+      seenOutcome.current = outcomeId;
+      return;
     }
-  }, [data?.last_outcome]);
+    if (!outcomeId || seenOutcome.current === outcomeId) return;
+    seenOutcome.current = outcomeId;
+    if (outcomeStatus === "verified" || outcomeStatus === "verified_silent") {
+      setFlash({ t: T.verified, sub: T.verifiedSub });
+      window.setTimeout(() => setFlash(null), 3500);
+    }
+  }, [loaded, outcomeId, outcomeStatus]);
 
   async function ack(card: ActionCard, result: "done" | "cant", reason?: string) {
     setBusy(true);
@@ -75,10 +80,25 @@ export default function Teacher() {
     }
   }
 
-  if (!data) {
+  if (!data || pulse === null) {
     return (
       <main className="teacher teacher--loading">
-        <p>{error ? `Can't reach Khidki: ${error}` : lang === "hi" ? "लोड हो रहा है…" : "Loading…"}</p>
+        <div className="teacher__wait">
+          <figure className="air-window air-window--calm">
+            <div className="air-window__box">
+              <WindowPlaceholder />
+            </div>
+          </figure>
+          <p role="status" lang={lang}>
+            {error
+              ? lang === "hi"
+                ? `Khidki तक पहुँच नहीं हो रही: ${error}`
+                : `Can't reach Khidki: ${error}`
+              : lang === "hi"
+                ? "कक्षा खुल रही है… एक नई सुबह शुरू हो रही है।"
+                : "Opening the classroom… a fresh school morning is starting."}
+          </p>
+        </div>
       </main>
     );
   }

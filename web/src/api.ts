@@ -65,27 +65,37 @@ export function usePoll<T>(path: string, everyMs = 2000) {
 /**
  * Keep the live demo's classroom moving while this page is open and visible. The deployed API advances its
  * simulated rooms on each pulse; local mode has its own simulator and answers "local". Returns the demo's
- * state: "running", "resting" (the monthly free-tier cap was reached), "external", "local" or null.
+ * state: null until the first answer (a fresh morning takes a few seconds to prepare, and the pages wait
+ * for it instead of showing the previous visitor's leftovers), then "running", "resting" (the monthly
+ * free-tier cap was reached), "external", "local", or "off" when there is no autopilot to wait for.
  */
 export function usePulse(everyMs = 3000) {
   const [state, setState] = useState<string | null>(null);
   useEffect(() => {
     let alive = true;
     let off = false;
+    const settle = (s: string) => {
+      if (alive) setState((prev) => (s === "off" && prev !== null ? prev : s));
+    };
+    const giveUp = window.setTimeout(() => settle("off"), 25000); // never keep a page waiting on the demo
     const beat = async () => {
       if (off || document.hidden) return;
       try {
         const res = await fetch("/v1/sim/pulse", { method: "POST" });
         if (res.status === 404 || res.status === 405) {
           off = true;
+          settle("off");
           return;
         }
-        if (!res.ok) return;
+        if (!res.ok) {
+          settle("off");
+          return;
+        }
         const body = (await res.json()) as { state?: string };
-        if (alive) setState(body.state ?? null);
+        if (alive) setState(body.state ?? "off");
         if (body.state === "local") off = true;
       } catch {
-        /* offline: the page's own offline banner covers it */
+        settle("off"); // offline: the page's own offline banner covers it
       }
     };
     void beat();
@@ -93,6 +103,7 @@ export function usePulse(everyMs = 3000) {
     return () => {
       alive = false;
       window.clearInterval(id);
+      window.clearTimeout(giveUp);
     };
   }, [everyMs]);
   return state;
