@@ -1,0 +1,35 @@
+"""Reproduce the partial_open scenario in-process with the local app's default engine settings."""
+import sys
+from khidki_core.clock import SimClock
+from khidki_services.engine import Engine
+from khidki_services.store import MemoryStore
+from khidki_sim import scenario as scenarios
+from khidki_sim.driver import SimDriver, outdoor_for
+
+step = float(sys.argv[1]) if len(sys.argv) > 1 else 10
+sc = scenarios.load(sys.argv[2] if len(sys.argv) > 2 else "partial_open")
+t = [1_000_000.0]
+clock = SimClock(real_time=lambda: t[0])
+clock.start_demo(sc.date, sc.start, 1.0)
+outdoor = outdoor_for(sc)
+engine = Engine(MemoryStore(), clock, outdoor)
+engine.seed()
+sim = SimDriver.start_of_day(engine, sc, outdoor)
+tapped = set()
+while clock.minute_of_day() < 10 * 60 + 15:
+    t[0] += step
+    sim.advance(clock.now())
+    engine.tick()
+    st = engine.store.get("ROOM#6B", "STATE")
+    if st and st["open_nudge"]:
+        n = engine.store.get("ROOM#6B", st["open_nudge"])
+        s = n["state"]
+        key = (n["nudge_id"], s["attempt"])
+        if s["status"] in ("issued", "follow_up") and key not in tapped:
+            tapped.add(key)
+            engine.ack(n["nudge_id"], "done")
+for n in engine.store.query("ROOM#6B", "NUDGE#"):
+    s = n["state"]
+    ev = n.get("evidence") or {}
+    print(n.get("issued_hm") or n.get("t") or n["nudge_id"], n["from"]["window"], "→", n["action"]["window"], "|", s["outcome"], "|", s["history"], "| λ", ev.get("implied_lam"), "exp", ev.get("expected_lam"), "inferred", ev.get("inferred"), ev.get("note", ""))
+print("sim log:", sim.log)

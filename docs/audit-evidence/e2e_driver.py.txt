@@ -1,0 +1,35 @@
+"""Drive the main flow through the HTTP API and print each transition."""
+import json, sys, time, urllib.request
+
+API = sys.argv[1].rstrip("/")
+LIMIT = float(sys.argv[2]) if len(sys.argv) > 2 else 240
+
+def req(method, path, body=None):
+    data = json.dumps(body).encode() if body is not None else None
+    r = urllib.request.Request(API + path, data=data, method=method, headers={"content-type": "application/json"})
+    with urllib.request.urlopen(r, timeout=40) as f:
+        return json.loads(f.read().decode() or "null")
+
+seen, acked, t0, plans = None, set(), time.time(), set()
+while time.time() - t0 < LIMIT:
+    try:
+        now = req("GET", "/v1/rooms/6B/now")
+    except Exception as exc:
+        print("ERR", exc); time.sleep(2); continue
+    card = now["card"]
+    key = (card.get("kind"), card.get("nudge_id"), card.get("status"))
+    pid = now.get("plan_id") or now.get("plan", {}).get("plan_id")
+    if pid and pid not in plans:
+        plans.add(pid)
+    if key != seen:
+        seen = key
+        clock = now.get("clock", {}).get("time") or now.get("time")
+        print(f"[{time.time()-t0:5.0f}s sim {clock}] card={card.get('kind')} status={card.get('status')} "
+              f"action={card.get('action')} co2={now['indoor']['co2']} inferred={now['window']['inferred']} last={now.get('last_outcome')} "
+              f"outcome={card.get('outcome')} en={str(card.get('text',{}).get('en') if isinstance(card.get('text'),dict) else card.get('title_en') or '')[:70]}")
+        if card.get("kind") == "action" and card.get("status") in ("issued", "follow_up") and key not in acked:
+            acked.add(key)
+            r = req("POST", f"/v1/nudges/{card['nudge_id']}/ack", {"result": "done"})
+            print("        → tapped 'done':", json.dumps(r)[:160])
+    time.sleep(1.0)
+print("plans seen:", len(plans))

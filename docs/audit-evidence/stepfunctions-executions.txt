@@ -1,0 +1,22 @@
+Khidki-NudgeSM executions started during the audit (Sat 10 Oct 2026, times UTC), from GetExecutionHistory.
+Totals after the audit: 21 executions, 20 SUCCEEDED, 1 FAILED (7 SUCCEEDED existed before the audit).
+
+Run 1, no taps (the tap driver could not reach the API; see AUDIT.md section 15)
+15:29:24 3A SUCCEEDED IssueNudge → NoTapInTime → WaitThenVerify → VerifyFromCO2 → AirChanged → NotFollowed_Replanned
+15:30:14 3A SUCCEEDED IssueNudge → NoTapInTime → WaitThenVerify → VerifyFromCO2 → AirChanged → NotFollowed_Replanned
+15:30:43 6B SUCCEEDED IssueNudge → NoTapInTime → WaitThenVerify → VerifyFromCO2 → AirChanged → Verified
+15:31:05 3A SUCCEEDED IssueNudge → NoTapInTime → WaitThenVerify → VerifyFromCO2 → AirChanged → FollowUpNudge → NoTapInTime → WaitThenVerify → VerifyFromCO2 → AirChanged → NotFollowed_Replanned
+15:32:49 3A SUCCEEDED IssueNudge → NoTapInTime → WaitThenVerify → VerifyFromCO2 → AirChanged → NotFollowed_Replanned
+15:33:39 3A SUCCEEDED IssueNudge → NoTapInTime → WaitThenVerify → VerifyFromCO2 → AirChanged → NotFollowed_Replanned
+15:34:30 3A SUCCEEDED IssueNudge → NoTapInTime → WaitThenVerify → VerifyFromCO2 → AirChanged → NotFollowed_Replanned
+15:35:46 6B SUCCEEDED IssueNudge → NoTapInTime → WaitThenVerify → VerifyFromCO2 → AirChanged → FollowUpNudge → NoTapInTime → WaitThenVerify → VerifyFromCO2 → AirChanged → NotFollowed_Replanned
+15:37:49 6B FAILED    IssueNudge → NoTapInTime → WaitThenVerify → VerifyFromCO2
+         KeyError '6B-1763436357' in handlers.py:323 (e.sf_verify): the demo was reset for run 2 while this execution was waiting, so its nudge no longer existed.
+
+Run 2, taps for 6B sent through the API
+15:38:35 3A SUCCEEDED IssueNudge → NoTapInTime → WaitThenVerify → VerifyFromCO2 → AirChanged → NotFollowed_Replanned
+15:39:24 3A SUCCEEDED IssueNudge → NoTapInTime → WaitThenVerify → VerifyFromCO2 → AirChanged → NotFollowed_Replanned
+15:40:01 6B SUCCEEDED IssueNudge → TeacherTapped → WaitThenVerify → VerifyFromCO2 → AirChanged → Verified
+15:40:15 3A SUCCEEDED IssueNudge → NoTapInTime → WaitThenVerify → VerifyFromCO2 → AirChanged → FollowUpNudge → NoTapInTime → WaitThenVerify → VerifyFromCO2 → AirChanged → Verified
+15:44:56 6B SUCCEEDED IssueNudge → TeacherTapped → WaitThenVerify → VerifyFromCO2 → AirChanged → Verified
+         (the simulator had opened only one side for this "open both sides" request; the follow-up branch was expected)

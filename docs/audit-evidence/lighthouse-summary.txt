@@ -1,0 +1,37 @@
+Lighthouse 13.5.0, default mobile emulation (slow 4G, 4x CPU), https://main.d3bl1gzeyloljx.amplifyapp.com, Sat 10 Oct 2026
+
+/
+  scores: {'performance': 67, 'accessibility': 95, 'best-practices': 100, 'seo': 100}
+  FCP 3.4 s | LCP 7.7 s | TBT 0 ms | CLS 0.003 | Total size was 1,020 KiB
+  failed: color-contrast - Background and foreground colors do not have a sufficient contrast ratio.
+  failed: landmark-one-main - Document does not have a main landmark.
+   709 KB Font evanagari/v17/jVyS7nP0CGrUsxB-QiRgw0NlLaVH8C3tUx_4Qa2K.woff2
+   112 KB Font kdevanagari/v17/jVyS7nP0CGrUsxB-QiRgw0NlLaVH8S3tUx_4QQ.woff2
+   101 KB Font ic.com/s/aneklatin/v11/co3DmWZulTRoU4a8dqrWo6TpplLh4Uw.woff2
+   78 KB Script /main.d3bl1gzeyloljx.amplifyapp.com/assets/index-DxcPegMo.js
+
+/teacher/6B
+  scores: {'performance': 79, 'accessibility': 100, 'best-practices': 100, 'seo': 100}
+  FCP 3.6 s | LCP 3.6 s | TBT 0 ms | CLS 0.001 | Total size was 1,026 KiB
+   710 KB Font evanagari/v17/jVyS7nP0CGrUsxB-QiRgw0NlLaVH8C3tUx_4Qa2K.woff2
+   112 KB Font kdevanagari/v17/jVyS7nP0CGrUsxB-QiRgw0NlLaVH8S3tUx_4QQ.woff2
+   102 KB Font ic.com/s/aneklatin/v11/co3DmWZulTRoU4a8dqrWo6TpplLh4Uw.woff2
+   78 KB Script /main.d3bl1gzeyloljx.amplifyapp.com/assets/index-DxcPegMo.js
+
+/school/dsv
+  scores: {'performance': 91, 'accessibility': 100, 'best-practices': 100, 'seo': 100}
+  FCP 1.9 s | LCP 3.1 s | TBT 0 ms | CLS 0 | Total size was 912 KiB
+   710 KB Font evanagari/v17/jVyS7nP0CGrUsxB-QiRgw0NlLaVH8C3tUx_4Qa2K.woff2
+   102 KB Font ic.com/s/aneklatin/v11/co3DmWZulTRoU4a8dqrWo6TpplLh4Uw.woff2
+   78 KB Script /main.d3bl1gzeyloljx.amplifyapp.com/assets/index-DxcPegMo.js
+   5 KB Script main.d3bl1gzeyloljx.amplifyapp.com/assets/School-BHWHbdiX.js
+
+/print/6B
+  scores: {'performance': 87, 'accessibility': 93, 'best-practices': 100, 'seo': 100}
+  FCP 2.1 s | LCP 3.4 s | TBT 0 ms | CLS 0.003 | Total size was 1,014 KiB
+  failed: color-contrast - Background and foreground colors do not have a sufficient contrast ratio.
+  failed: td-has-header - `<td>` elements in a large `<table>` do not have table headers.
+   710 KB Font evanagari/v17/jVyS7nP0CGrUsxB-QiRgw0NlLaVH8C3tUx_4Qa2K.woff2
+   112 KB Font kdevanagari/v17/jVyS7nP0CGrUsxB-QiRgw0NlLaVH8S3tUx_4QQ.woff2
+   102 KB Font ic.com/s/aneklatin/v11/co3DmWZulTRoU4a8dqrWo6TpplLh4Uw.woff2
+   78 KB Script /main.d3bl1gzeyloljx.amplifyapp.com/assets/index-DxcPegMo.js

@@ -1,0 +1,3095 @@
+[
+ {
+  "file": "local-landing-tablet-light.jpg",
+  "path": "/",
+  "vp": "tablet",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 3124,
+  "nav": {
+   "dcl": 407,
+   "load": 3117,
+   "fcp": 452,
+   "transferKb": 5349,
+   "resources": 24
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 3165,
+   "lowContrast": [
+    {
+     "text": "खिड़की",
+     "ratio": 1,
+     "need": 3,
+     "size": 25.008,
+     "cls": ""
+    },
+    {
+     "text": "Khidki",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "nav__latin"
+    },
+    {
+     "text": "How it works",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "Results",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "Teacher screen",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "हिंदी",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "lang-toggle"
+    },
+    {
+     "text": "+3,450",
+     "ratio": 1,
+     "need": 3,
+     "size": 51.2,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "ppm/h",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "CO₂ that 44 children add every hour to a",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "2,380",
+     "ratio": 1,
+     "need": 3,
+     "size": 51.2,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "ppm",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "After one 40-minute period with the wind",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    }
+   ],
+   "lowContrastCount": 65,
+   "smallTargets": [
+    {
+     "text": "खिड़की\nKhidki",
+     "w": 135,
+     "h": 44
+    },
+    {
+     "text": "How it works",
+     "w": 90,
+     "h": 26
+    },
+    {
+     "text": "Results",
+     "w": 51,
+     "h": 26
+    },
+    {
+     "text": "Teacher screen",
+     "w": 103,
+     "h": 26
+    },
+    {
+     "text": "हिंदी",
+     "w": 61,
+     "h": 40
+    }
+   ],
+   "smallCount": 5,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 2618
+  },
+  "focus": {
+   "tag": "A",
+   "text": "खिड़की\nKhidki",
+   "outline": "solid 2px rgb(31, 58, 48)",
+   "shadow": "rgb(217, 154, 30) 0px 0px 0px 6px"
+  }
+ },
+ {
+  "file": "local-landing-tablet-dark.jpg",
+  "path": "/",
+  "vp": "tablet",
+  "scheme": "dark",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 277,
+  "nav": {
+   "dcl": 272,
+   "load": 274,
+   "fcp": 308,
+   "transferKb": 5349,
+   "resources": 24
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 3165,
+   "lowContrast": [
+    {
+     "text": "+3,450",
+     "ratio": 1,
+     "need": 3,
+     "size": 51.2,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "ppm/h",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "CO₂ that 44 children add every hour to a",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "2,380",
+     "ratio": 1,
+     "need": 3,
+     "size": 51.2,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "ppm",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "After one 40-minute period with the wind",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "97%",
+     "ratio": 1,
+     "need": 3,
+     "size": 51.2,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "of outside",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "The PM2.5 a wide-open room ends up with.",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "In a 2025 classroom study, CO₂ alarms cu",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 20,
+     "cls": ""
+    },
+    {
+     "text": "Rawat, Kumar et al., Science of the Tota",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 13.3333,
+     "cls": ""
+    },
+    {
+     "text": "Every day, four steps",
+     "ratio": 1,
+     "need": 3,
+     "size": 47.104,
+     "cls": "section__title"
+    }
+   ],
+   "lowContrastCount": 59,
+   "smallTargets": [
+    {
+     "text": "खिड़की\nKhidki",
+     "w": 135,
+     "h": 44
+    },
+    {
+     "text": "How it works",
+     "w": 90,
+     "h": 26
+    },
+    {
+     "text": "Results",
+     "w": 51,
+     "h": 26
+    },
+    {
+     "text": "Teacher screen",
+     "w": 103,
+     "h": 26
+    },
+    {
+     "text": "हिंदी",
+     "w": 61,
+     "h": 40
+    }
+   ],
+   "smallCount": 5,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 2618
+  },
+  "focus": null
+ },
+ {
+  "file": "local-landing-phone-light.jpg",
+  "path": "/",
+  "vp": "phone",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 294,
+  "nav": {
+   "dcl": 290,
+   "load": 293,
+   "fcp": 320,
+   "transferKb": 5215,
+   "resources": 23
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 4986,
+   "lowContrast": [
+    {
+     "text": "खिड़की",
+     "ratio": 1,
+     "need": 3,
+     "size": 25.008,
+     "cls": ""
+    },
+    {
+     "text": "Khidki",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "nav__latin"
+    },
+    {
+     "text": "हिंदी",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "lang-toggle"
+    },
+    {
+     "text": "+3,450",
+     "ratio": 1,
+     "need": 3,
+     "size": 41.6,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "ppm/h",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "CO₂ that 44 children add every hour to a",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "2,380",
+     "ratio": 1,
+     "need": 3,
+     "size": 41.6,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "ppm",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "After one 40-minute period with the wind",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "97%",
+     "ratio": 1,
+     "need": 3,
+     "size": 41.6,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "of outside",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "The PM2.5 a wide-open room ends up with.",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    }
+   ],
+   "lowContrastCount": 62,
+   "smallTargets": [
+    {
+     "text": "खिड़की\nKhidki",
+     "w": 135,
+     "h": 44
+    },
+    {
+     "text": "हिंदी",
+     "w": 61,
+     "h": 40
+    }
+   ],
+   "smallCount": 2,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 2582
+  },
+  "focus": null
+ },
+ {
+  "file": "local-landing-phone-dark.jpg",
+  "path": "/",
+  "vp": "phone",
+  "scheme": "dark",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2925,
+  "nav": {
+   "dcl": 283,
+   "load": 2921,
+   "fcp": 300,
+   "transferKb": 5215,
+   "resources": 23
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 4986,
+   "lowContrast": [
+    {
+     "text": "+3,450",
+     "ratio": 1,
+     "need": 3,
+     "size": 41.6,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "ppm/h",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "CO₂ that 44 children add every hour to a",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "2,380",
+     "ratio": 1,
+     "need": 3,
+     "size": 41.6,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "ppm",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "After one 40-minute period with the wind",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "97%",
+     "ratio": 1,
+     "need": 3,
+     "size": 41.6,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "of outside",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "The PM2.5 a wide-open room ends up with.",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "In a 2025 classroom study, CO₂ alarms cu",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 20,
+     "cls": ""
+    },
+    {
+     "text": "Rawat, Kumar et al., Science of the Tota",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 13.3333,
+     "cls": ""
+    },
+    {
+     "text": "Every day, four steps",
+     "ratio": 1,
+     "need": 3,
+     "size": 35.2,
+     "cls": "section__title"
+    }
+   ],
+   "lowContrastCount": 59,
+   "smallTargets": [
+    {
+     "text": "खिड़की\nKhidki",
+     "w": 135,
+     "h": 44
+    },
+    {
+     "text": "हिंदी",
+     "w": 61,
+     "h": 40
+    }
+   ],
+   "smallCount": 2,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 2582
+  },
+  "focus": null
+ },
+ {
+  "file": "local-landing-desktop-light.jpg",
+  "path": "/",
+  "vp": "desktop",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2268,
+  "nav": {
+   "dcl": 279,
+   "load": 2264,
+   "fcp": 312,
+   "transferKb": 5349,
+   "resources": 24
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 3236,
+   "lowContrast": [
+    {
+     "text": "खिड़की",
+     "ratio": 1,
+     "need": 3,
+     "size": 25.008,
+     "cls": ""
+    },
+    {
+     "text": "Khidki",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "nav__latin"
+    },
+    {
+     "text": "How it works",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "Results",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "Teacher screen",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "हिंदी",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "lang-toggle"
+    },
+    {
+     "text": "+3,450",
+     "ratio": 1,
+     "need": 3,
+     "size": 70.4,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "ppm/h",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "CO₂ that 44 children add every hour to a",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "2,380",
+     "ratio": 1,
+     "need": 3,
+     "size": 70.4,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "ppm",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "After one 40-minute period with the wind",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    }
+   ],
+   "lowContrastCount": 65,
+   "smallTargets": [
+    {
+     "text": "खिड़की\nKhidki",
+     "w": 135,
+     "h": 44
+    },
+    {
+     "text": "How it works",
+     "w": 90,
+     "h": 26
+    },
+    {
+     "text": "Results",
+     "w": 51,
+     "h": 26
+    },
+    {
+     "text": "Teacher screen",
+     "w": 103,
+     "h": 26
+    },
+    {
+     "text": "हिंदी",
+     "w": 61,
+     "h": 40
+    }
+   ],
+   "smallCount": 5,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 2618
+  },
+  "focus": null
+ },
+ {
+  "file": "local-landing-desktop-dark.jpg",
+  "path": "/",
+  "vp": "desktop",
+  "scheme": "dark",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 3268,
+  "nav": {
+   "dcl": 276,
+   "load": 3263,
+   "fcp": 304,
+   "transferKb": 5349,
+   "resources": 24
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 3236,
+   "lowContrast": [
+    {
+     "text": "+3,450",
+     "ratio": 1,
+     "need": 3,
+     "size": 70.4,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "ppm/h",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "CO₂ that 44 children add every hour to a",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "2,380",
+     "ratio": 1,
+     "need": 3,
+     "size": 70.4,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "ppm",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "After one 40-minute period with the wind",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "97%",
+     "ratio": 1,
+     "need": 3,
+     "size": 70.4,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "of outside",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "The PM2.5 a wide-open room ends up with.",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "In a 2025 classroom study, CO₂ alarms cu",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 20,
+     "cls": ""
+    },
+    {
+     "text": "Rawat, Kumar et al., Science of the Tota",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 13.3333,
+     "cls": ""
+    },
+    {
+     "text": "Every day, four steps",
+     "ratio": 1,
+     "need": 3,
+     "size": 66.24,
+     "cls": "section__title"
+    }
+   ],
+   "lowContrastCount": 59,
+   "smallTargets": [
+    {
+     "text": "खिड़की\nKhidki",
+     "w": 135,
+     "h": 44
+    },
+    {
+     "text": "How it works",
+     "w": 90,
+     "h": 26
+    },
+    {
+     "text": "Results",
+     "w": 51,
+     "h": 26
+    },
+    {
+     "text": "Teacher screen",
+     "w": 103,
+     "h": 26
+    },
+    {
+     "text": "हिंदी",
+     "w": 61,
+     "h": 40
+    }
+   ],
+   "smallCount": 5,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 2618
+  },
+  "focus": null
+ },
+ {
+  "file": "local-landing-tablet-light-reduced.jpg",
+  "path": "/",
+  "vp": "tablet",
+  "scheme": "light",
+  "reduced": true,
+  "status": 200,
+  "loadMs": 2575,
+  "nav": {
+   "dcl": 278,
+   "load": 2570,
+   "fcp": 304,
+   "transferKb": 5349,
+   "resources": 24
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 3165,
+   "lowContrast": [
+    {
+     "text": "खिड़की",
+     "ratio": 1,
+     "need": 3,
+     "size": 25.008,
+     "cls": ""
+    },
+    {
+     "text": "Khidki",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "nav__latin"
+    },
+    {
+     "text": "How it works",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "Results",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "Teacher screen",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "हिंदी",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "lang-toggle"
+    }
+   ],
+   "lowContrastCount": 6,
+   "smallTargets": [
+    {
+     "text": "खिड़की\nKhidki",
+     "w": 135,
+     "h": 44
+    },
+    {
+     "text": "How it works",
+     "w": 90,
+     "h": 26
+    },
+    {
+     "text": "Results",
+     "w": 51,
+     "h": 26
+    },
+    {
+     "text": "Teacher screen",
+     "w": 103,
+     "h": 26
+    },
+    {
+     "text": "हिंदी",
+     "w": 61,
+     "h": 40
+    }
+   ],
+   "smallCount": 5,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 2618
+  },
+  "focus": null
+ },
+ {
+  "file": "local-landing-phone-light-toggled.jpg",
+  "path": "/",
+  "vp": "phone",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2618,
+  "nav": {
+   "dcl": 284,
+   "load": 2614,
+   "fcp": 304,
+   "transferKb": 5215,
+   "resources": 23
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 4756,
+   "lowContrast": [
+    {
+     "text": "खिड़की",
+     "ratio": 1,
+     "need": 3,
+     "size": 25.008,
+     "cls": ""
+    },
+    {
+     "text": "Khidki",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "nav__latin"
+    },
+    {
+     "text": "English",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "lang-toggle"
+    },
+    {
+     "text": "+3,450",
+     "ratio": 1,
+     "need": 3,
+     "size": 41.6,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "ppm/h",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "44 बच्चे हर घंटे इतना CO₂ जोड़ते हैं, एक",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "2,380",
+     "ratio": 1,
+     "need": 3,
+     "size": 41.6,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "ppm",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "खिड़कियाँ बंद रहें तो एक 40 मिनट के पीरि",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "97%",
+     "ratio": 1,
+     "need": 3,
+     "size": 41.6,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "बाहर का",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "खिड़कियाँ खुली रहें तो कमरे में इतना PM2",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    }
+   ],
+   "lowContrastCount": 62,
+   "smallTargets": [
+    {
+     "text": "खिड़की\nKhidki",
+     "w": 135,
+     "h": 44
+    },
+    {
+     "text": "English",
+     "w": 83,
+     "h": 40
+    }
+   ],
+   "smallCount": 2,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "hi",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 2398
+  },
+  "focus": null
+ },
+ {
+  "file": "local-teacher-tablet-light.jpg",
+  "path": "/teacher/6B",
+  "vp": "tablet",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2418,
+  "nav": {
+   "dcl": 304,
+   "load": 2415,
+   "fcp": 328,
+   "transferKb": 5281,
+   "resources": 32
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 0,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [
+    {
+     "text": "(Class 6B)",
+     "cls": "visually-hidden",
+     "sw": 107,
+     "cw": 1,
+     "sh": 28,
+     "ch": 1
+    }
+   ],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "hi",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 264
+  },
+  "focus": {
+   "tag": "BUTTON",
+   "text": "English",
+   "outline": "solid 2px rgb(31, 58, 48)",
+   "shadow": "rgb(217, 154, 30) 0px 0px 0px 6px"
+  }
+ },
+ {
+  "file": "local-teacher-tablet-dark.jpg",
+  "path": "/teacher/6B",
+  "vp": "tablet",
+  "scheme": "dark",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2440,
+  "nav": {
+   "dcl": 277,
+   "load": 2436,
+   "fcp": 300,
+   "transferKb": 5281,
+   "resources": 32
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 0,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [
+    {
+     "text": "(Class 6B)",
+     "cls": "visually-hidden",
+     "sw": 107,
+     "cw": 1,
+     "sh": 28,
+     "ch": 1
+    }
+   ],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "hi",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 402
+  },
+  "focus": null
+ },
+ {
+  "file": "local-teacher-phone-light.jpg",
+  "path": "/teacher/6B",
+  "vp": "phone",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2939,
+  "nav": {
+   "dcl": 297,
+   "load": 2936,
+   "fcp": 316,
+   "transferKb": 5282,
+   "resources": 32
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 274,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [
+    {
+     "text": "(Class 6B)",
+     "cls": "visually-hidden",
+     "sw": 107,
+     "cw": 1,
+     "sh": 28,
+     "ch": 1
+    }
+   ],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "hi",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 490
+  },
+  "focus": null
+ },
+ {
+  "file": "local-teacher-phone-dark.jpg",
+  "path": "/teacher/6B",
+  "vp": "phone",
+  "scheme": "dark",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2272,
+  "nav": {
+   "dcl": 296,
+   "load": 2267,
+   "fcp": 316,
+   "transferKb": 5282,
+   "resources": 32
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 0,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [
+    {
+     "text": "(Class 6B)",
+     "cls": "visually-hidden",
+     "sw": 107,
+     "cw": 1,
+     "sh": 28,
+     "ch": 1
+    }
+   ],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "hi",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 352
+  },
+  "focus": null
+ },
+ {
+  "file": "local-teacher-desktop-light.jpg",
+  "path": "/teacher/6B",
+  "vp": "desktop",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2668,
+  "nav": {
+   "dcl": 294,
+   "load": 2663,
+   "fcp": 324,
+   "transferKb": 5281,
+   "resources": 32
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 0,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [
+    {
+     "text": "(Class 6B)",
+     "cls": "visually-hidden",
+     "sw": 107,
+     "cw": 1,
+     "sh": 28,
+     "ch": 1
+    }
+   ],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "hi",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 441
+  },
+  "focus": null
+ },
+ {
+  "file": "local-teacher-desktop-dark.jpg",
+  "path": "/teacher/6B",
+  "vp": "desktop",
+  "scheme": "dark",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2331,
+  "nav": {
+   "dcl": 293,
+   "load": 2327,
+   "fcp": 324,
+   "transferKb": 5281,
+   "resources": 32
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 0,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [
+    {
+     "text": "(Class 6B)",
+     "cls": "visually-hidden",
+     "sw": 107,
+     "cw": 1,
+     "sh": 28,
+     "ch": 1
+    }
+   ],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "hi",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 441
+  },
+  "focus": null
+ },
+ {
+  "file": "local-teacher-tablet-light-reduced.jpg",
+  "path": "/teacher/6B",
+  "vp": "tablet",
+  "scheme": "light",
+  "reduced": true,
+  "status": 200,
+  "loadMs": 263,
+  "nav": {
+   "dcl": 257,
+   "load": 261,
+   "fcp": 296,
+   "transferKb": 5278,
+   "resources": 31
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 0,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [
+    {
+     "text": "(Class 6B)",
+     "cls": "visually-hidden",
+     "sw": 107,
+     "cw": 1,
+     "sh": 28,
+     "ch": 1
+    }
+   ],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "hi",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 321
+  },
+  "focus": null
+ },
+ {
+  "file": "local-teacher-phone-light-toggled.jpg",
+  "path": "/teacher/6B",
+  "vp": "phone",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2419,
+  "nav": {
+   "dcl": 305,
+   "load": 2415,
+   "fcp": 328,
+   "transferKb": 5281,
+   "resources": 32
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 139,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [
+    {
+     "text": "(Class 6B)",
+     "cls": "visually-hidden",
+     "sw": 107,
+     "cw": 1,
+     "sh": 28,
+     "ch": 1
+    }
+   ],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 412
+  },
+  "focus": null
+ },
+ {
+  "file": "local-school-tablet-light.jpg",
+  "path": "/school/dsv",
+  "vp": "tablet",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2205,
+  "nav": {
+   "dcl": 267,
+   "load": 2201,
+   "fcp": 288,
+   "transferKb": 5219,
+   "resources": 28
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 782,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [
+    {
+     "text": "DoE circulars",
+     "w": 68,
+     "h": 15
+    },
+    {
+     "text": "Class 6B",
+     "w": 74,
+     "h": 32
+    },
+    {
+     "text": "Class 3A",
+     "w": 73,
+     "h": 32
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Show as table",
+     "w": 95,
+     "h": 34
+    }
+   ],
+   "smallCount": 8,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 1760
+  },
+  "focus": {
+   "tag": "BUTTON",
+   "text": "हिंदी",
+   "outline": "solid 2px rgb(31, 58, 48)",
+   "shadow": "rgb(217, 154, 30) 0px 0px 0px 6px"
+  }
+ },
+ {
+  "file": "local-school-tablet-dark.jpg",
+  "path": "/school/dsv",
+  "vp": "tablet",
+  "scheme": "dark",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2516,
+  "nav": {
+   "dcl": 266,
+   "load": 2512,
+   "fcp": 288,
+   "transferKb": 5219,
+   "resources": 28
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 782,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [
+    {
+     "text": "DoE circulars",
+     "w": 68,
+     "h": 15
+    },
+    {
+     "text": "Class 6B",
+     "w": 74,
+     "h": 32
+    },
+    {
+     "text": "Class 3A",
+     "w": 73,
+     "h": 32
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Show as table",
+     "w": 95,
+     "h": 34
+    }
+   ],
+   "smallCount": 8,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 1760
+  },
+  "focus": null
+ },
+ {
+  "file": "local-school-phone-light.jpg",
+  "path": "/school/dsv",
+  "vp": "phone",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2786,
+  "nav": {
+   "dcl": 295,
+   "load": 2780,
+   "fcp": 316,
+   "transferKb": 5219,
+   "resources": 28
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 1433,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [
+    {
+     "text": "DoE circulars",
+     "w": 275,
+     "h": 35
+    },
+    {
+     "text": "Class 6B",
+     "w": 74,
+     "h": 32
+    },
+    {
+     "text": "Class 3A",
+     "w": 73,
+     "h": 32
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Show as table",
+     "w": 95,
+     "h": 34
+    }
+   ],
+   "smallCount": 8,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 1760
+  },
+  "focus": null
+ },
+ {
+  "file": "local-school-phone-dark.jpg",
+  "path": "/school/dsv",
+  "vp": "phone",
+  "scheme": "dark",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2651,
+  "nav": {
+   "dcl": 268,
+   "load": 2646,
+   "fcp": 288,
+   "transferKb": 5219,
+   "resources": 28
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 1433,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [
+    {
+     "text": "DoE circulars",
+     "w": 275,
+     "h": 35
+    },
+    {
+     "text": "Class 6B",
+     "w": 74,
+     "h": 32
+    },
+    {
+     "text": "Class 3A",
+     "w": 73,
+     "h": 32
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Show as table",
+     "w": 95,
+     "h": 34
+    }
+   ],
+   "smallCount": 8,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 1760
+  },
+  "focus": null
+ },
+ {
+  "file": "local-school-desktop-light.jpg",
+  "path": "/school/dsv",
+  "vp": "desktop",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 278,
+  "nav": {
+   "dcl": 275,
+   "load": 277,
+   "fcp": 304,
+   "transferKb": 5215,
+   "resources": 27
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 458,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [
+    {
+     "text": "DoE circulars",
+     "w": 68,
+     "h": 15
+    },
+    {
+     "text": "Class 6B",
+     "w": 74,
+     "h": 32
+    },
+    {
+     "text": "Class 3A",
+     "w": 73,
+     "h": 32
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Show as table",
+     "w": 95,
+     "h": 34
+    }
+   ],
+   "smallCount": 8,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 1760
+  },
+  "focus": null
+ },
+ {
+  "file": "local-school-desktop-dark.jpg",
+  "path": "/school/dsv",
+  "vp": "desktop",
+  "scheme": "dark",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2133,
+  "nav": {
+   "dcl": 275,
+   "load": 2128,
+   "fcp": 312,
+   "transferKb": 5221,
+   "resources": 28
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 458,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [
+    {
+     "text": "DoE circulars",
+     "w": 68,
+     "h": 15
+    },
+    {
+     "text": "Class 6B",
+     "w": 74,
+     "h": 32
+    },
+    {
+     "text": "Class 3A",
+     "w": 73,
+     "h": 32
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Show as table",
+     "w": 95,
+     "h": 34
+    }
+   ],
+   "smallCount": 8,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 1798
+  },
+  "focus": null
+ },
+ {
+  "file": "local-school-tablet-light-reduced.jpg",
+  "path": "/school/dsv",
+  "vp": "tablet",
+  "scheme": "light",
+  "reduced": true,
+  "status": 200,
+  "loadMs": 2351,
+  "nav": {
+   "dcl": 285,
+   "load": 2346,
+   "fcp": 308,
+   "transferKb": 5221,
+   "resources": 28
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 782,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [
+    {
+     "text": "DoE circulars",
+     "w": 68,
+     "h": 15
+    },
+    {
+     "text": "Class 6B",
+     "w": 74,
+     "h": 32
+    },
+    {
+     "text": "Class 3A",
+     "w": 73,
+     "h": 32
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Override",
+     "w": 59,
+     "h": 34
+    },
+    {
+     "text": "Show as table",
+     "w": 95,
+     "h": 34
+    }
+   ],
+   "smallCount": 8,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 1798
+  },
+  "focus": null
+ },
+ {
+  "file": "local-school-phone-light-toggled.jpg",
+  "path": "/school/dsv",
+  "vp": "phone",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2199,
+  "nav": {
+   "dcl": 290,
+   "load": 2195,
+   "fcp": 312,
+   "transferKb": 5221,
+   "resources": 28
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 1467,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [
+    {
+     "text": "DoE परिपत्र",
+     "w": 55,
+     "h": 22
+    },
+    {
+     "text": "Class 6B",
+     "w": 74,
+     "h": 32
+    },
+    {
+     "text": "Class 3A",
+     "w": 73,
+     "h": 32
+    },
+    {
+     "text": "बदलें",
+     "w": 31,
+     "h": 34
+    },
+    {
+     "text": "बदलें",
+     "w": 31,
+     "h": 34
+    },
+    {
+     "text": "बदलें",
+     "w": 31,
+     "h": 34
+    },
+    {
+     "text": "बदलें",
+     "w": 31,
+     "h": 34
+    },
+    {
+     "text": "तालिका देखें",
+     "w": 73,
+     "h": 34
+    }
+   ],
+   "smallCount": 8,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "hi",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 1760
+  },
+  "focus": null
+ },
+ {
+  "file": "local-print-tablet-light.jpg",
+  "path": "/print/6B",
+  "vp": "tablet",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2196,
+  "nav": {
+   "dcl": 254,
+   "load": 2191,
+   "fcp": 276,
+   "transferKb": 5135,
+   "resources": 23
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 12,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 1005
+  },
+  "focus": {
+   "tag": "BUTTON",
+   "text": "Print / प्रिंट करें",
+   "outline": "solid 2px rgb(31, 58, 48)",
+   "shadow": "rgb(217, 154, 30) 0px 0px 0px 6px"
+  }
+ },
+ {
+  "file": "local-print-tablet-dark.jpg",
+  "path": "/print/6B",
+  "vp": "tablet",
+  "scheme": "dark",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 283,
+  "nav": {
+   "dcl": 277,
+   "load": 281,
+   "fcp": 316,
+   "transferKb": 5136,
+   "resources": 23
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 12,
+   "lowContrast": [
+    {
+     "text": "Print / प्रिंट करें",
+     "ratio": 1.85,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    }
+   ],
+   "lowContrastCount": 1,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 1005
+  },
+  "focus": null
+ },
+ {
+  "file": "local-print-phone-light.jpg",
+  "path": "/print/6B",
+  "vp": "phone",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2265,
+  "nav": {
+   "dcl": 253,
+   "load": 2261,
+   "fcp": 272,
+   "transferKb": 5136,
+   "resources": 23
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 199,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 1005
+  },
+  "focus": null
+ },
+ {
+  "file": "local-print-phone-dark.jpg",
+  "path": "/print/6B",
+  "vp": "phone",
+  "scheme": "dark",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2332,
+  "nav": {
+   "dcl": 258,
+   "load": 2252,
+   "fcp": 280,
+   "transferKb": 5136,
+   "resources": 23
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 199,
+   "lowContrast": [
+    {
+     "text": "Print / प्रिंट करें",
+     "ratio": 1.85,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    }
+   ],
+   "lowContrastCount": 1,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 1005
+  },
+  "focus": null
+ },
+ {
+  "file": "local-print-desktop-light.jpg",
+  "path": "/print/6B",
+  "vp": "desktop",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 246,
+  "nav": {
+   "dcl": 242,
+   "load": 244,
+   "fcp": 268,
+   "transferKb": 5136,
+   "resources": 23
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 0,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 1005
+  },
+  "focus": null
+ },
+ {
+  "file": "local-print-desktop-dark.jpg",
+  "path": "/print/6B",
+  "vp": "desktop",
+  "scheme": "dark",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 299,
+  "nav": {
+   "dcl": 293,
+   "load": 297,
+   "fcp": 336,
+   "transferKb": 5136,
+   "resources": 23
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 0,
+   "lowContrast": [
+    {
+     "text": "Print / प्रिंट करें",
+     "ratio": 1.85,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    }
+   ],
+   "lowContrastCount": 1,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 1005
+  },
+  "focus": null
+ },
+ {
+  "file": "local-print-tablet-light-reduced.jpg",
+  "path": "/print/6B",
+  "vp": "tablet",
+  "scheme": "light",
+  "reduced": true,
+  "status": 200,
+  "loadMs": 3182,
+  "nav": {
+   "dcl": 276,
+   "load": 3177,
+   "fcp": 300,
+   "transferKb": 5136,
+   "resources": 23
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 12,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 1005
+  },
+  "focus": null
+ },
+ {
+  "file": "local-print-phone-light-toggled.jpg",
+  "path": "/print/6B",
+  "vp": "phone",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 3267,
+  "nav": {
+   "dcl": 264,
+   "load": 3262,
+   "fcp": 288,
+   "transferKb": 5136,
+   "resources": 23
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 199,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 1005
+  },
+  "focus": null
+ },
+ {
+  "file": "local-devwindow-tablet-light.jpg",
+  "path": "/dev/window",
+  "vp": "tablet",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 771,
+  "nav": {
+   "dcl": 325,
+   "load": 767,
+   "fcp": 352,
+   "transferKb": 5126,
+   "resources": 19
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 169,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [
+    {
+     "text": "INPUT",
+     "w": 668,
+     "h": 16
+    },
+    {
+     "text": "INPUT",
+     "w": 668,
+     "h": 16
+    },
+    {
+     "text": "INPUT",
+     "w": 668,
+     "h": 16
+    },
+    {
+     "text": "closed\ncracked\nopen_one\nopen_b",
+     "w": 672,
+     "h": 19
+    },
+    {
+     "text": "hero\ncalm\nmini\ncompare",
+     "w": 672,
+     "h": 19
+    }
+   ],
+   "smallCount": 5,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 223
+  },
+  "focus": {
+   "tag": "INPUT",
+   "text": "",
+   "outline": "solid 2px rgb(31, 58, 48)",
+   "shadow": "rgb(217, 154, 30) 0px 0px 0px 6px"
+  }
+ },
+ {
+  "file": "local-devwindow-tablet-dark.jpg",
+  "path": "/dev/window",
+  "vp": "tablet",
+  "scheme": "dark",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 850,
+  "nav": {
+   "dcl": 314,
+   "load": 847,
+   "fcp": 336,
+   "transferKb": 5126,
+   "resources": 19
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 169,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [
+    {
+     "text": "INPUT",
+     "w": 668,
+     "h": 16
+    },
+    {
+     "text": "INPUT",
+     "w": 668,
+     "h": 16
+    },
+    {
+     "text": "INPUT",
+     "w": 668,
+     "h": 16
+    },
+    {
+     "text": "closed\ncracked\nopen_one\nopen_b",
+     "w": 672,
+     "h": 19
+    },
+    {
+     "text": "hero\ncalm\nmini\ncompare",
+     "w": 672,
+     "h": 19
+    }
+   ],
+   "smallCount": 5,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 223
+  },
+  "focus": null
+ },
+ {
+  "file": "local-devwindow-phone-light.jpg",
+  "path": "/dev/window",
+  "vp": "phone",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 295,
+  "nav": {
+   "dcl": 290,
+   "load": 293,
+   "fcp": 312,
+   "transferKb": 5126,
+   "resources": 19
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 15,
+   "vScroll": 0,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [
+    {
+     "text": "INPUT",
+     "w": 129,
+     "h": 16
+    },
+    {
+     "text": "INPUT",
+     "w": 129,
+     "h": 16
+    },
+    {
+     "text": "INPUT",
+     "w": 129,
+     "h": 16
+    },
+    {
+     "text": "closed\ncracked\nopen_one\nopen_b",
+     "w": 133,
+     "h": 19
+    },
+    {
+     "text": "hero\ncalm\nmini\ncompare",
+     "w": 133,
+     "h": 19
+    }
+   ],
+   "smallCount": 5,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 223
+  },
+  "focus": null
+ },
+ {
+  "file": "local-devwindow-phone-dark.jpg",
+  "path": "/dev/window",
+  "vp": "phone",
+  "scheme": "dark",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 276,
+  "nav": {
+   "dcl": 273,
+   "load": 275,
+   "fcp": 304,
+   "transferKb": 5126,
+   "resources": 19
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 15,
+   "vScroll": 0,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [
+    {
+     "text": "INPUT",
+     "w": 129,
+     "h": 16
+    },
+    {
+     "text": "INPUT",
+     "w": 129,
+     "h": 16
+    },
+    {
+     "text": "INPUT",
+     "w": 129,
+     "h": 16
+    },
+    {
+     "text": "closed\ncracked\nopen_one\nopen_b",
+     "w": 133,
+     "h": 19
+    },
+    {
+     "text": "hero\ncalm\nmini\ncompare",
+     "w": 133,
+     "h": 19
+    }
+   ],
+   "smallCount": 5,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 223
+  },
+  "focus": null
+ },
+ {
+  "file": "local-devwindow-desktop-light.jpg",
+  "path": "/dev/window",
+  "vp": "desktop",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 296,
+  "nav": {
+   "dcl": 290,
+   "load": 294,
+   "fcp": 332,
+   "transferKb": 5126,
+   "resources": 19
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 0,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [
+    {
+     "text": "INPUT",
+     "w": 668,
+     "h": 16
+    },
+    {
+     "text": "INPUT",
+     "w": 668,
+     "h": 16
+    },
+    {
+     "text": "INPUT",
+     "w": 668,
+     "h": 16
+    },
+    {
+     "text": "closed\ncracked\nopen_one\nopen_b",
+     "w": 672,
+     "h": 19
+    },
+    {
+     "text": "hero\ncalm\nmini\ncompare",
+     "w": 672,
+     "h": 19
+    }
+   ],
+   "smallCount": 5,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 223
+  },
+  "focus": null
+ },
+ {
+  "file": "local-devwindow-desktop-dark.jpg",
+  "path": "/dev/window",
+  "vp": "desktop",
+  "scheme": "dark",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 803,
+  "nav": {
+   "dcl": 280,
+   "load": 801,
+   "fcp": 308,
+   "transferKb": 5126,
+   "resources": 19
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 0,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [
+    {
+     "text": "INPUT",
+     "w": 668,
+     "h": 16
+    },
+    {
+     "text": "INPUT",
+     "w": 668,
+     "h": 16
+    },
+    {
+     "text": "INPUT",
+     "w": 668,
+     "h": 16
+    },
+    {
+     "text": "closed\ncracked\nopen_one\nopen_b",
+     "w": 672,
+     "h": 19
+    },
+    {
+     "text": "hero\ncalm\nmini\ncompare",
+     "w": 672,
+     "h": 19
+    }
+   ],
+   "smallCount": 5,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 223
+  },
+  "focus": null
+ },
+ {
+  "file": "local-devwindow-tablet-light-reduced.jpg",
+  "path": "/dev/window",
+  "vp": "tablet",
+  "scheme": "light",
+  "reduced": true,
+  "status": 200,
+  "loadMs": 762,
+  "nav": {
+   "dcl": 275,
+   "load": 759,
+   "fcp": 300,
+   "transferKb": 5126,
+   "resources": 19
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 169,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [
+    {
+     "text": "INPUT",
+     "w": 668,
+     "h": 16
+    },
+    {
+     "text": "INPUT",
+     "w": 668,
+     "h": 16
+    },
+    {
+     "text": "INPUT",
+     "w": 668,
+     "h": 16
+    },
+    {
+     "text": "closed\ncracked\nopen_one\nopen_b",
+     "w": 672,
+     "h": 19
+    },
+    {
+     "text": "hero\ncalm\nmini\ncompare",
+     "w": 672,
+     "h": 19
+    }
+   ],
+   "smallCount": 5,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 223
+  },
+  "focus": null
+ },
+ {
+  "file": "local-teacher-unknown-room-tablet-light.jpg",
+  "path": "/teacher/9Z",
+  "vp": "tablet",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 2921,
+  "nav": {
+   "dcl": 277,
+   "load": 2915,
+   "fcp": 300,
+   "transferKb": 5225,
+   "resources": 33
+  },
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ],
+  "failed": [
+   "404 http://localhost:5173/v1/rooms/9Z/now",
+   "500 http://localhost:5173/v1/rooms/9Z/plan"
+  ],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 0,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 0,
+   "lang": "hi",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 30
+  },
+  "focus": null
+ },
+ {
+  "file": "local-school-unknown-tablet-light.jpg",
+  "path": "/school/nope",
+  "vp": "tablet",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 770,
+  "nav": {
+   "dcl": 279,
+   "load": 766,
+   "fcp": 304,
+   "transferKb": 5207,
+   "resources": 28
+  },
+  "errors": [
+   "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "failed": [
+   "404 http://localhost:5173/v1/schools/nope/today"
+  ],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 0,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 0,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 34
+  },
+  "focus": null
+ },
+ {
+  "file": "local-not-found-tablet-light.jpg",
+  "path": "/parent/abc",
+  "vp": "tablet",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 764,
+  "nav": {
+   "dcl": 258,
+   "load": 760,
+   "fcp": 280,
+   "transferKb": 5048,
+   "resources": 15
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 0,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 0,
+   "lang": "hi",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 0
+  },
+  "focus": null
+ },
+ {
+  "file": "local-lab-tablet-light.jpg",
+  "path": "/lab",
+  "vp": "tablet",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 804,
+  "nav": {
+   "dcl": 252,
+   "load": 795,
+   "fcp": 276,
+   "transferKb": 5048,
+   "resources": 15
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 0,
+   "lowContrast": [],
+   "lowContrastCount": 0,
+   "smallTargets": [],
+   "smallCount": 0,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 0,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 0
+  },
+  "focus": null
+ },
+ {
+  "file": "local-landing-full-desktop-light.jpg",
+  "path": "/",
+  "vp": "desktop",
+  "scheme": "light",
+  "reduced": false,
+  "status": 200,
+  "loadMs": 276,
+  "nav": {
+   "dcl": 273,
+   "load": 275,
+   "fcp": 304,
+   "transferKb": 5349,
+   "resources": 24
+  },
+  "errors": [],
+  "failed": [],
+  "checks": {
+   "hOverflow": 0,
+   "vScroll": 3236,
+   "lowContrast": [
+    {
+     "text": "खिड़की",
+     "ratio": 1,
+     "need": 3,
+     "size": 25.008,
+     "cls": ""
+    },
+    {
+     "text": "Khidki",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "nav__latin"
+    },
+    {
+     "text": "How it works",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "Results",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "Teacher screen",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "हिंदी",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "lang-toggle"
+    },
+    {
+     "text": "+3,450",
+     "ratio": 1,
+     "need": 3,
+     "size": 70.4,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "ppm/h",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "CO₂ that 44 children add every hour to a",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    },
+    {
+     "text": "2,380",
+     "ratio": 1,
+     "need": 3,
+     "size": 70.4,
+     "cls": "fact__num num"
+    },
+    {
+     "text": "ppm",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": "fact__unit"
+    },
+    {
+     "text": "After one 40-minute period with the wind",
+     "ratio": 1,
+     "need": 4.5,
+     "size": 16,
+     "cls": ""
+    }
+   ],
+   "lowContrastCount": 65,
+   "smallTargets": [
+    {
+     "text": "खिड़की\nKhidki",
+     "w": 135,
+     "h": 44
+    },
+    {
+     "text": "How it works",
+     "w": 90,
+     "h": 26
+    },
+    {
+     "text": "Results",
+     "w": 51,
+     "h": 26
+    },
+    {
+     "text": "Teacher screen",
+     "w": 103,
+     "h": 26
+    },
+    {
+     "text": "हिंदी",
+     "w": 61,
+     "h": 40
+    }
+   ],
+   "smallCount": 5,
+   "clipped": [],
+   "unlabeled": [],
+   "imgsNoAlt": 0,
+   "canvasNoLabel": 0,
+   "h1": 1,
+   "lang": "en",
+   "title": "Khidki · खिड़की",
+   "bodyTextLen": 2618
+  },
+  "focus": null
+ }
+]

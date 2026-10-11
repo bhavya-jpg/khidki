@@ -1,0 +1,11 @@
+[    1s sim 09:01] card=action status=verifying action={'window': 'open_both', 'purifier': 'off'} co2=900 inferred=open_both last={'at': 1763435861.793685, 'nudge_id': '6B-1763435133', 'status': 'not_followed'} outcome=None en=Open both sides
+[    4s sim 07:30] card=keep status=None action=None co2=550 inferred=closed last=None outcome=None en=All fine, keep them as they are
+[  100s sim 07:46] card=action status=issued action={'purifier': 'off', 'window': 'open_one'} co2=1330 inferred=closed last=None outcome=None en=Open the road-side windows
+        → tapped 'done': {"nudge_id": "6B-1763432162", "state": {"verifiable": true, "status": "verifying", "cant_reason": null, "deadline": 1763432370.9817958, "history": ["issued", "d
+[  103s sim 07:46] card=action status=verifying action={'purifier': 'off', 'window': 'open_one'} co2=1330 inferred=closed last=None outcome=None en=Open the road-side windows
+[  120s sim 07:49] card=keep status=None action=None co2=1381 inferred=closed last={'status': 'verified', 'at': 1763432373.1099987, 'nudge_id': '6B-1763432162'} outcome=None en=All fine, keep them as they are
+[  395s sim 08:35] card=action status=issued action={'purifier': 'off', 'window': 'open_both'} co2=1148 inferred=open_one last={'nudge_id': '6B-1763432162', 'status': 'verified', 'at': 1763432373.1099987} outcome=None en=Open both sides
+        → tapped 'done': {"nudge_id": "6B-1763435115", "state": {"follow_up": null, "outcome": null, "cant_reason": null, "ack": "done", "deadline": 1763435329.189651, "attempt": 1, "st
+[  399s sim 08:36] card=action status=verifying action={'window': 'open_both', 'purifier': 'off'} co2=1148 inferred=open_one last={'nudge_id': '6B-1763432162', 'status': 'verified', 'at': 1763432373.1099987} outcome=None en=Open both sides
+[  417s sim 08:39] card=keep status=None action=None co2=1146 inferred=open_one last={'nudge_id': '6B-1763435115', 'status': 'verified', 'at': 1763435331.6504335} outcome=None en=All fine, keep them as they are
+plans seen: 0

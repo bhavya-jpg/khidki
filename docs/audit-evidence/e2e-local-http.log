@@ -1,0 +1,18 @@
+[    0s sim 07:34] card=keep status=None action=None co2=762 inferred=closed last=None outcome=None en=All fine, keep them as they are
+[   65s sim 07:45] card=action status=issued action={'window': 'open_one', 'purifier': 'off'} co2=1294 inferred=closed last=None outcome=None en=Open the road-side windows
+        → tapped 'done': {"nudge_id": "6B-1763432107", "state": {"status": "verifying", "attempt": 1, "ack": "done", "cant_reason": null, "deadline": 1763432292.6370788, "follow_up": nu
+[   66s sim 07:45] card=action status=verifying action={'window': 'open_one', 'purifier': 'off'} co2=1294 inferred=closed last=None outcome=None en=Open the road-side windows
+[   84s sim 07:48] card=keep status=None action=None co2=1279 inferred=cracked last={'status': 'verified', 'at': 1763432300.806489, 'nudge_id': '6B-1763432107'} outcome=None en=All fine, keep them as they are
+[   85s sim 07:48] card=action status=issued action={'window': 'closed', 'purifier': 'off'} co2=1279 inferred=cracked last={'status': 'verified', 'at': 1763432300.806489, 'nudge_id': '6B-1763432107'} outcome=None en=Close the windows
+        → tapped 'done': {"nudge_id": "6B-1763432310", "state": {"status": "verifying", "attempt": 1, "ack": "done", "cant_reason": null, "deadline": 1763432494.2078185, "follow_up": nu
+[   86s sim 07:48] card=action status=verifying action={'window': 'closed', 'purifier': 'off'} co2=1272 inferred=open_one last={'status': 'verified', 'at': 1763432300.806489, 'nudge_id': '6B-1763432107'} outcome=None en=Close the windows
+[  104s sim 07:51] card=keep status=None action=None co2=1396 inferred=cracked last={'status': 'verified', 'at': 1763432504.61478, 'nudge_id': '6B-1763432310'} outcome=None en=All fine, keep them as they are
+[  105s sim 07:51] card=action status=issued action={'window': 'open_one', 'purifier': 'off'} co2=1396 inferred=cracked last={'status': 'verified', 'at': 1763432504.61478, 'nudge_id': '6B-1763432310'} outcome=None en=Open the road-side windows
+        → tapped 'done': {"nudge_id": "6B-1763432514", "state": {"status": "verifying", "attempt": 1, "ack": "done", "cant_reason": null, "deadline": 1763432695.9356904, "follow_up": nu
+[  106s sim 07:52] card=action status=verifying action={'window': 'open_one', 'purifier': 'off'} co2=1396 inferred=cracked last={'status': 'verified', 'at': 1763432504.61478, 'nudge_id': '6B-1763432310'} outcome=None en=Open the road-side windows
+[  124s sim 07:55] card=keep status=None action=None co2=1373 inferred=cracked last={'status': 'verified', 'at': 1763432705.04102, 'nudge_id': '6B-1763432514'} outcome=None en=All fine, keep them as they are
+[  364s sim 08:35] card=action status=issued action={'window': 'open_both', 'purifier': 'off'} co2=1150 inferred=open_one last={'status': 'verified', 'at': 1763432705.04102, 'nudge_id': '6B-1763432514'} outcome=None en=Open both sides
+        → tapped 'done': {"nudge_id": "6B-1763435107", "state": {"status": "verifying", "attempt": 1, "ack": "done", "cant_reason": null, "deadline": 1763435287.7564812, "follow_up": nu
+[  365s sim 08:35] card=action status=verifying action={'window': 'open_both', 'purifier': 'off'} co2=1153 inferred=open_one last={'status': 'verified', 'at': 1763432705.04102, 'nudge_id': '6B-1763432514'} outcome=None en=Open both sides
+[  383s sim 08:38] card=keep status=None action=None co2=1147 inferred=open_one last={'status': 'verified', 'at': 1763435288.8989592, 'nudge_id': '6B-1763435107'} outcome=None en=All fine, keep them as they are
+plans seen: 0

@@ -1,0 +1,22 @@
+### partial_open step 15
+6B-1763432100 closed → open_one | verified | ('issued', 'done', 'verdict:verified') | λ 4.58 exp 6.0 inferred open_one 
+6B-1763432295 open_one → closed | verified | ('issued', 'done', 'verdict:verified') | λ None exp None inferred None air data inconclusive (too few readings, or an empty room at outdoor CO₂); went by the teacher's tap
+6B-1763432490 closed → open_one | verified | ('issued', 'done', 'verdict:verified') | λ 5.03 exp 6.0 inferred open_one 
+6B-1763434815 open_one → open_both | verified | ('issued', 'done', 'verdict:verified') | λ None exp None inferred None air data inconclusive (too few readings, or an empty room at outdoor CO₂); went by the teacher's tap
+sim log: ['6B: windows open_one, purifier off', '6B: windows closed, purifier off', '6B: windows open_one, purifier off', '6B: only the road side opened', '6B: windows open_one, purifier off']
+### partial_open step 5
+6B-1763432100 closed → open_one | verified | ('issued', 'done', 'verdict:verified') | λ 4.58 exp 6.0 inferred open_one 
+6B-1763432285 open_one → closed | verified | ('issued', 'done', 'verdict:verified') | λ 0.64 exp 0.7 inferred closed 
+6B-1763432470 closed → open_one | verified | ('issued', 'done', 'verdict:verified') | λ 4.95 exp 6.0 inferred open_one 
+6B-1763435100 open_one → open_both | verified | ('issued', 'done', 'verdict:partial', 'done', 'verdict:verified') | λ 8.27 exp 10.0 inferred open_both 
+sim log: ['6B: windows open_one, purifier off', '6B: windows closed, purifier off', '6B: windows open_one, purifier off', '6B: only the road side opened', '6B: windows open_one, purifier off', '6B: windows open_both, purifier off']
+### partial_open step 30
+6B-1763432100 closed → open_one | verified | ('issued', 'done', 'verdict:verified') | λ 4.58 exp 6.0 inferred open_one 
+6B-1763435100 open_one → open_both | verified | ('issued', 'done', 'verdict:partial', 'done', 'verdict:verified') | λ 8.27 exp 10.0 inferred open_both 
+sim log: ['6B: windows open_one, purifier off', '6B: only the road side opened', '6B: windows open_one, purifier off', '6B: windows open_both, purifier off']
+### severe_morning step 10
+6B-1763432100 closed → open_one | verified | ('issued', 'done', 'verdict:verified') | λ 4.51 exp 6.0 inferred open_one 
+6B-1763432290 open_one → closed | verified | ('issued', 'done', 'verdict:verified') | λ 0.75 exp 0.7 inferred closed 
+6B-1763432480 closed → open_one | verified | ('issued', 'done', 'verdict:verified') | λ None exp None inferred None air data inconclusive (too few readings, or an empty room at outdoor CO₂); went by the teacher's tap
+6B-1763435100 open_one → open_both | verified | ('issued', 'done', 'verdict:verified') | λ 8.02 exp 10.0 inferred open_both 
+sim log: ['3A: windows closed, purifier on', '6B: windows open_one, purifier off', '6B: windows closed, purifier off', '6B: windows open_one, purifier off', '3A: windows open_one, purifier on', '6B: windows open_both, purifier off']
