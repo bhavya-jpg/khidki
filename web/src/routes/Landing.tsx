@@ -111,10 +111,20 @@ export default function Landing() {
           <p className="hero__kicker">
             {lang === "hi" ? "दिल्ली की कक्षाओं के लिए, ख़राब हवा वाले दिनों में" : "For Delhi classrooms, on bad-air days"}
           </p>
-          <h1 className="hero__title" style={{ fontStretch: `${s.stretch}%` }}>
-            <span lang="hi">खिड़की खोलें,</span>
-            <span lang="hi">या बंद रखें?</span>
-          </h1>
+          {lang === "hi" ? (
+            <h1 className="hero__title" style={{ fontStretch: `${s.stretch}%` }}>
+              <span lang="hi">खिड़की खोलें,</span>
+              <span lang="hi">या बंद रखें?</span>
+            </h1>
+          ) : (
+            <h1 className="hero__title hero__title--en" style={{ fontStretch: `${s.stretch}%` }}>
+              <span lang="en">Open the window,</span>
+              <span lang="en">or keep it shut?</span>
+            </h1>
+          )}
+          <p className="hero__other" lang={lang === "hi" ? "en" : "hi"}>
+            {lang === "hi" ? "Open the window, or keep it shut?" : "खिड़की खोलें, या बंद रखें?"}
+          </p>
           <p className="hero__sub">
             {lang === "hi"
               ? "Khidki शिक्षक को बताता है कि खिड़कियाँ ठीक किस मिनट खोलें और बंद करें, ताकि बच्चे कम धुआँ साँस में लें और CO₂ भी काबू में रहे। फिर CO₂ की रेखा से जाँचता है कि हवा सच में बदली।"
@@ -128,6 +138,11 @@ export default function Landing() {
               {lang === "hi" ? "कैसे काम करता है" : "How it works"}
             </a>
           </div>
+          <p className="hero__live" lang={lang}>
+            {lang === "hi"
+              ? "लाइव डेमो: पेज खुला रहने तक सिम्युलेटेड कक्षा चलती है, और शिक्षक आप हैं। निर्देश आए तो बटन दबाइए।"
+              : "Live demo: the simulated classroom runs while the page is open, and you are the teacher. Tap the button when an instruction arrives."}
+          </p>
         </div>
 
         <figure className="hero__stage">

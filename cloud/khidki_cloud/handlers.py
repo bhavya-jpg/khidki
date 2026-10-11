@@ -205,6 +205,14 @@ def list_scenarios() -> list[dict[str, Any]]:
     ]
 
 
+@app.post("/v1/sim/pulse")
+def sim_pulse() -> dict[str, Any]:
+    """Called by an open page every few seconds: the live classroom runs only while someone is watching."""
+    from khidki_cloud import autopilot
+
+    return autopilot.pulse(metrics)
+
+
 @app.post("/v1/sim/control")
 def sim_control() -> dict[str, Any]:
     if not _secret_ok("x-khidki-admin", "/khidki/admin_key"):
@@ -267,6 +275,9 @@ def ingest_route() -> dict[str, Any]:
         )
         rooms.add(rid)
     e.tick(room_ids=sorted(rooms))
+    from khidki_cloud import autopilot
+
+    autopilot.mark_external()  # a real or laptop-simulated sensor is posting: the autopilot stands back
     metrics.add_metric(name="ReadingsIngested", unit="Count", value=len(readings))
     return {"stored": len(readings), "clock": e.clock_view()}
 
@@ -315,6 +326,15 @@ OUTCOME_METRIC = {
 def nudge_task(event: dict[str, Any], context: Any) -> dict[str, Any]:
     e = runtime.engine(metrics)
     mode, nid = event["mode"], event["nudge_id"]
+    if mode not in ("await_ack", "timeout", "verify"):
+        raise ValueError(f"unknown mode {mode}")
+    try:
+        e.find_nudge(nid)
+    except KeyError:
+        # The demo was restarted while this execution was waiting, so its instruction no longer exists.
+        # End quietly (the state machine's default branch) instead of failing the execution.
+        logger.info("nudge step", extra={"mode": mode, "nudge_id": nid, "status": "gone"})
+        return {"nudge_id": nid, "status": "gone", "outcome": None, "follow_up": None}
     if mode == "await_ack":
         view = e.sf_await_ack(nid, event["token"])
     elif mode == "timeout":

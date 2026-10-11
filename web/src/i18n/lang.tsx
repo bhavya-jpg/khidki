@@ -48,16 +48,17 @@ export function Bi({ t, className, secondary = true }: { t: Bilingual; className
   );
 }
 
+/** Both languages are always visible and the current one is filled, so it is clear which one you are in. */
 export function LangToggle() {
   const { lang, setLang } = useLang();
   return (
-    <button
-      type="button"
-      className="lang-toggle"
-      onClick={() => setLang(lang === "hi" ? "en" : "hi")}
-      aria-label={lang === "hi" ? "Switch to English" : "हिंदी में देखें"}
-    >
-      {lang === "hi" ? "English" : "हिंदी"}
-    </button>
+    <div className="lang-toggle" role="group" aria-label="Language / भाषा">
+      <button type="button" lang="hi" className={lang === "hi" ? "is-on" : ""} aria-pressed={lang === "hi"} onClick={() => setLang("hi")}>
+        हिंदी
+      </button>
+      <button type="button" lang="en" className={lang === "en" ? "is-on" : ""} aria-pressed={lang === "en"} onClick={() => setLang("en")}>
+        English
+      </button>
+    </div>
   );
 }

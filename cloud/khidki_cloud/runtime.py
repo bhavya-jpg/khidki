@@ -130,6 +130,9 @@ def engine(metrics: Any | None = None) -> Engine:
                     {"nudge_id": nudge["nudge_id"], "room_id": room_id, **_engine.nudge_seconds()}
                 ),
             )
+            from khidki_cloud import autopilot
+
+            autopilot.count_execution()  # the live demo stops itself before the month's free tier runs out
             if _metrics is not None:
                 _metrics.add_metric(name="NudgesIssued", unit="Count", value=1)
 

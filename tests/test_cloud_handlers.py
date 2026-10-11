@@ -132,5 +132,68 @@ def test_nudge_task_steps(cloud: Any) -> None:
             {"x-khidki-admin": "admin-pass"},
         ),
     )
-    with pytest.raises(KeyError):
-        cloud.nudge_task({"mode": "verify", "nudge_id": "6B-1"}, Ctx())
+    # an instruction that no longer exists (the demo was restarted mid-execution) ends quietly, not in failure
+    gone = cloud.nudge_task({"mode": "verify", "nudge_id": "6B-1"}, Ctx())
+    assert gone["status"] == "gone" and gone["outcome"] is None
+
+
+def test_autopilot_runs_the_classroom_while_someone_watches(
+    cloud: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The live demo: a page's pulses start a morning, readings arrive, an instruction falls due, the visitor
+    taps, the true window opens and the CO₂ curve verifies it. No laptop simulator involved."""
+    import time
+
+    real, ahead = time.time, [0.0]
+    monkeypatch.setattr(time, "time", lambda: real() + ahead[0])
+
+    def pulse(after_s: float = 3.0) -> Any:
+        ahead[0] += after_s
+        code, body = call(cloud.api, http("POST", "/v1/sim/pulse"))
+        assert code == 200, body
+        return body
+
+    first = pulse()
+    assert first["state"] == "running" and first["fresh"] and first["clock"]["time"] >= "07:42"
+    assert pulse(0.2)["stepped"] == 0  # a second page pulsing at the same moment does no extra work
+    _, now = call(cloud.api, http("GET", "/v1/rooms/6B/now"))
+    assert now["indoor"]["co2"] > 800 and now["indoor"]["stale_s"] < 120 and len(now["series"]) > 5
+
+    card = now["card"]
+    for _ in range(40):  # up to two real minutes: 20 simulated minutes
+        if card["kind"] == "action":
+            break
+        pulse()
+        _, now = call(cloud.api, http("GET", "/v1/rooms/6B/now"))
+        card = now["card"]
+    assert card["kind"] == "action" and card["status"] == "issued", now["clock"]
+    month = cloud.runtime.store().get("SIM", "BUDGET#" + time.strftime("%Y-%m", time.gmtime()))
+    assert month and int(month["executions"]) >= 1  # the Step Functions execution was counted
+
+    co2_before = now["indoor"]["co2"]
+    code, _ = call(cloud.api, http("POST", f"/v1/nudges/{card['nudge_id']}/ack", {"result": "done"}))
+    assert code == 200
+    for _ in range(7):  # 21 real seconds: three and a half simulated minutes with the window open
+        pulse()
+    view = cloud.nudge_task({"mode": "verify", "nudge_id": card["nudge_id"]}, Ctx())
+    assert view["outcome"] == "verified", view
+    _, now = call(cloud.api, http("GET", "/v1/rooms/6B/now"))
+    assert now["indoor"]["co2"] < co2_before + 60  # the room really was opened, so CO₂ stopped climbing
+
+    # the laptop simulator takes over: the autopilot stands back
+    call(
+        cloud.ingest,
+        http("POST", "/v1/ingest", {"room_id": "6B", "co2": 900}, {"x-khidki-device-key": "device-pass"}),
+    )
+    assert pulse()["state"] == "external"
+
+
+def test_autopilot_rests_at_the_monthly_cap(cloud: Any) -> None:
+    import time
+
+    from khidki_cloud import autopilot
+
+    pk, sk = autopilot.budget_key(time.time())
+    cloud.runtime.store().put(pk, sk, {"executions": autopilot.MONTHLY_EXECUTION_CAP})
+    code, body = call(cloud.api, http("POST", "/v1/sim/pulse"))
+    assert code == 200 and body["state"] == "resting"

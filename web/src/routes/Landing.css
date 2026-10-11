@@ -47,14 +47,15 @@
   text-underline-offset: 6px;
 }
 .nav .lang-toggle {
-  min-height: 40px;
-  padding: 0 var(--s-4);
-  border-radius: var(--r-chip);
-  border: 1px solid rgba(238, 240, 230, 0.35);
+  border-color: rgba(238, 240, 230, 0.35);
   background: transparent;
-  color: var(--chalk);
-  font-weight: 560;
-  cursor: pointer;
+}
+.nav .lang-toggle button {
+  color: rgba(238, 240, 230, 0.85);
+}
+.nav .lang-toggle button.is-on {
+  background: var(--chalk);
+  color: #1f3a30;
 }
 
 /* ── hero ── */
@@ -97,6 +98,22 @@
 .hero__title span {
   display: block;
   line-height: 1.18;
+}
+/* In English the headline is English, a little smaller because the line is longer, with the Hindi beneath. */
+.hero__title--en {
+  font-size: clamp(2.5rem, 5.4vw, 5.2rem);
+}
+.hero__other {
+  margin: var(--s-3) 0 0;
+  font-size: var(--step-2);
+  font-weight: 700;
+  color: rgba(238, 240, 230, 0.78);
+}
+.hero__live {
+  margin: var(--s-4) 0 0;
+  max-width: 50ch;
+  font-size: var(--step-0);
+  color: rgba(238, 240, 230, 0.78);
 }
 .hero__title {
   min-height: calc(3 * 1.18em); /* the headline widens with the window; don't let the page jump */

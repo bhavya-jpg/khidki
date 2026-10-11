@@ -131,11 +131,36 @@ body::before {
 }
 
 .lang-toggle {
-  min-height: 44px;
-  padding: 0 var(--s-4);
+  display: inline-flex;
+  flex: none;
+  gap: 2px;
+  padding: 3px;
   border: 1px solid var(--rule);
   border-radius: var(--r-chip);
   background: var(--raised);
+}
+.lang-toggle button {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: var(--r-chip);
+  background: transparent;
+  color: var(--ink-2);
+  font: inherit;
   font-weight: 560;
   cursor: pointer;
+}
+.lang-toggle button.is-on {
+  background: var(--ink);
+  color: var(--surface);
+}
+/* the live demo's own notices */
+.demo-note {
+  margin: 0;
+  padding: var(--s-3) var(--s-4);
+  border-radius: 14px;
+  background: var(--raised);
+  border: 1px solid var(--rule);
+  color: var(--ink-2);
+  font-size: var(--step-0);
 }

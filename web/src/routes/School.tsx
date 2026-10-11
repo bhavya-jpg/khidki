@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { api, ApiError, usePoll } from "../api";
+import { api, ApiError, usePoll, usePulse } from "../api";
 import { AirWindow } from "../components/AirWindow/AirWindow";
 import { SimBadge } from "../components/ui/Badges";
 import { co2Status } from "../components/ui/co2";
@@ -17,6 +17,7 @@ const WINDOW_WORD = {
 } as const;
 
 export default function School() {
+  usePulse(); // keep the live demo's classroom moving while this page is open
   const { schoolId = "dsv" } = useParams();
   const { data, error, refresh } = usePoll<SchoolToday>(`/v1/schools/${schoolId}/today`, 4000);
   const audit = usePoll<AuditEntry[]>(`/v1/schools/${schoolId}/audit`, 15000);

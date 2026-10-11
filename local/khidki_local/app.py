@@ -249,6 +249,12 @@ def list_scenarios() -> list[dict[str, Any]]:
     return out
 
 
+@app.post("/v1/sim/pulse")
+def sim_pulse() -> dict[str, Any]:
+    """The deployed demo is driven by its open pages. Local mode runs its own simulator: a no-op here."""
+    return {"state": "local"}
+
+
 @app.post("/v1/sim/control")
 def sim_control(body: SimControl) -> dict[str, Any]:
     r = rt()

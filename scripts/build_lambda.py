@@ -31,6 +31,7 @@ PACKAGES = [
     "services/khidki_services",
     "agent/khidki_agent",
     "cloud/khidki_cloud",
+    "sim/khidki_sim",  # the true-room model, for the live demo's autopilot (cloud/khidki_cloud/autopilot.py)
 ]
 
 

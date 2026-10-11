@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { api, usePoll } from "../api";
+import { api, usePoll, usePulse } from "../api";
 import { AirWindow } from "../components/AirWindow/AirWindow";
 import { AirRibbon } from "../components/ui/AirRibbon";
 import { SimBadge } from "../components/ui/Badges";
@@ -40,6 +40,7 @@ export default function Teacher() {
   const { data, error, lastOk, refresh } = usePoll<RoomNow>(`/v1/rooms/${roomId}/now`, 2000);
   const plan = usePoll<PlanView>(`/v1/rooms/${roomId}/plan`, 15000);
   const { lang } = useLang();
+  const pulse = usePulse();
   const [showCant, setShowCant] = useState(false);
   const [busy, setBusy] = useState(false);
   const [flash, setFlash] = useState<{ t: Bilingual; sub: Bilingual } | null>(null);
@@ -103,8 +104,7 @@ export default function Teacher() {
         <div className="teacher__id">
           <span className="teacher__brand" lang="hi">खिड़की</span>
           <h1 className="teacher__room">
-            <span lang="hi">कक्षा {data.room_id}</span>
-            <span className="visually-hidden"> (Class {data.room_id})</span>
+            <span lang={lang}>{lang === "hi" ? `कक्षा ${data.room_id}` : `Class ${data.room_id}`}</span>
           </h1>
         </div>
         <span className="teacher__clock num">{data.clock.time}</span>
@@ -112,6 +112,13 @@ export default function Teacher() {
         <LangToggle />
       </header>
 
+      {pulse === "resting" && (
+        <p className="demo-note" role="status" lang={lang} style={{ gridColumn: "1 / -1" }}>
+          {lang === "hi"
+            ? "लाइव कक्षा अभी रुकी है, ताकि AWS के मुफ़्त दायरे में रहे। वीडियो देखिए या लैपटॉप पर चलाइए।"
+            : "The live classroom is resting to stay inside the AWS free tier. Watch the video, or run it on a laptop."}
+        </p>
+      )}
       <section className="teacher__stage" data-due={due ? "true" : undefined}>
         <div className="wall">
           <AirWindow
