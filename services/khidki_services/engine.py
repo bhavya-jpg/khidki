@@ -321,7 +321,10 @@ class Engine:
             "pm25": None if reading.get("pm25") is None else float(reading["pm25"]),
             "temp": reading.get("temp"),
             "simulated": bool(reading.get("simulated", True)),
-            "ttl": int(ts + TEL_TTL_S),
+            # Expiry counts from the real clock. A replayed day's timestamps are in the past, and an expiry
+            # based on them made DynamoDB delete every demo reading within minutes, so verification on the
+            # deployed stack found no readings and fell back to trusting the tap.
+            "ttl": int(time.time() + TEL_TTL_S),
         }
         self.store.put(f"ROOM#{room_id}", f"TEL#{iso(ts)}", item)
         st = self._state(room_id)

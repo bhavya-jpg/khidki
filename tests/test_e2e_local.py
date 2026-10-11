@@ -91,3 +91,14 @@ def test_an_instruction_never_gives_keep_steady_as_its_reason() -> None:
         assert view is not None
         keep_en = "All fine. Keep things as they are."
         assert all(row["reason"]["en"] != keep_en for row in view["timetable"]), view["timetable"]
+
+
+def test_readings_expire_by_the_real_clock_not_the_simulated_one() -> None:
+    """A replayed day is months in the past. If a reading's expiry were based on its own timestamp, DynamoDB
+    would delete it at once and verification would have nothing to fit (found on the deployed stack)."""
+    import time
+
+    engine, _ = run("severe_morning", "07:40")
+    rows = engine.telemetry("6B", 0)
+    assert rows and all(r["ts"] < time.time() - 86400 for r in rows)  # the replay really is in the past
+    assert all(r["ttl"] > time.time() + 3600 for r in rows)
