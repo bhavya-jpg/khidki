@@ -7,8 +7,16 @@ children breathe less PM2.5 *and* stay below the CO₂ levels that wreck concent
 physics twin of the room, nudges the teacher with one calm instruction, and checks from the CO₂ curve
 that the air really changed.
 
-Built for **Environmental Hacks (Bharat Builds Tour), Air track**, 8 to 11 Oct 2026. Work in progress:
-see [`docs/SPEC.md`](docs/SPEC.md) for the plan and the git history for progress.
+Built for **Environmental Hacks (Bharat Builds Tour), Air track**, 8 to 11 Oct 2026.
+
+**Live demo: <https://main.d3bl1gzeyloljx.amplifyapp.com>** (open "Teacher screen"). The simulated classroom
+runs while the page is open and you play the teacher: an instruction arrives within about half a minute, you
+tap, and Khidki checks the CO₂ curve. About five minutes in it asks for both sides; the simulator opens only
+one, and Khidki asks for the other. The classroom and its CO₂ meter are simulated; the outdoor air is a real
+Delhi day. Hosted on AWS in `ap-southeast-2`.
+
+What was built and what was cut is in [`docs/SCOPE.md`](docs/SCOPE.md) (the original plan,
+[`docs/SPEC.md`](docs/SPEC.md), was written before kickoff and is larger than what shipped).
 
 ## What it does, in one breath
 Every morning Khidki plans each classroom's ventilation in 5-minute steps from the outdoor forecast, the
@@ -52,13 +60,14 @@ on [LocalStack](https://github.com/localstack/localstack):
 
 ```bash
 docker run -d -p 4566:4566 localstack/localstack
-KHIDKI_STORE=dynamo AWS_ENDPOINT_URL=http://localhost:4566 AWS_DEFAULT_REGION=ap-south-1 \
+KHIDKI_STORE=dynamo AWS_ENDPOINT_URL=http://localhost:4566 AWS_DEFAULT_REGION=ap-southeast-2 \
   AWS_ACCESS_KEY_ID=test AWS_SECRET_ACCESS_KEY=test python tasks.py local
 ```
 
 The policies are [Cedar](https://www.cedarpolicy.com/) (`core/khidki_core/policy/khidki.cedar`), and "Ask
-Khidki" is a [Strands Agents](https://strandsagents.com/) agent; set `KHIDKI_BEDROCK=1` to let it phrase answers
-with Amazon Bedrock, otherwise it answers from verified templates.
+Khidki" is written with [Strands Agents](https://strandsagents.com/); set `KHIDKI_BEDROCK=1` to let it phrase
+answers with Amazon Bedrock. Bedrock is blocked on our new AWS account, so the deployed version answers from
+verified templates and says so.
 
 ```bash
 python tasks.py test             # Python tests
