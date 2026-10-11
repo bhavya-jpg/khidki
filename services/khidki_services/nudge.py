@@ -20,7 +20,9 @@ from enum import StrEnum
 from khidki_core.inference import Verdict
 
 ACK_TIMEOUT_S = 180.0
-VERIFY_WAIT_S = 180.0
+# The fit needs six readings and sensors report every 30 s. A 3-minute wait gave five or six depending on
+# when the tap landed, so about half the checks came back "inconclusive" and fell back to trusting the tap.
+VERIFY_WAIT_S = 240.0
 
 
 class Status(StrEnum):

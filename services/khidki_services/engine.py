@@ -195,8 +195,12 @@ class Engine:
         assert st is not None
         return st
 
-    def _put_state(self, room_id: str, st: Item) -> None:
-        self.store.put(f"ROOM#{room_id}", "STATE", st)
+    def _put_state(self, room_id: str, st: Item, fields: tuple[str, ...]) -> None:
+        """Save only the fields this caller owns. In the cloud, sensor ingest, the planner and the Step
+        Functions task run in different Lambdas and all touch a room's state; writing the whole item back
+        let a slow ingest overwrite a verification that had just finished (the room then showed a finished
+        instruction for ever). Each writer now leaves the others' fields alone."""
+        self.store.update(f"ROOM#{room_id}", "STATE", {k: st[k] for k in fields})
 
     # ── the day: forecast, GRAP, activity decisions ──────────────────────────────────────────────────
     def forecast(self, date: str) -> OutdoorDay:
@@ -366,7 +370,7 @@ class Engine:
             else:
                 inf["pending"] = guess.window.value
             inf["lam"] = round(fit.lam, 2)
-        self._put_state(room_id, st)
+        self._put_state(room_id, st, ("co2", "pm25", "estimate_at", "last_ingest", "inferred"))
         return item
 
     def telemetry(self, room_id: str, since: float, until: float | None = None) -> list[Item]:
@@ -452,7 +456,7 @@ class Engine:
         )
         st = self._state(room_id)
         st["plan_sk"], st["last_replan_at"] = sk, now
-        self._put_state(room_id, st)
+        self._put_state(room_id, st, ("plan_sk", "last_replan_at"))
         return plan
 
     def current_plan(self, room_id: str) -> Item | None:
@@ -534,7 +538,7 @@ class Engine:
         self.store.put(f"ROOM#{room_id}", f"NUDGE#{iso(now)}", nudge)
         st["open_nudge"] = f"NUDGE#{iso(now)}"
         st["counts"][f"issued:{plan.date}"] = int(st["counts"].get(f"issued:{plan.date}", 0)) + 1
-        self._put_state(room_id, st)
+        self._put_state(room_id, st, ("open_nudge", "counts"))
         for hook in self.on_nudge:
             hook(room_id, nudge)
 
@@ -726,7 +730,7 @@ class Engine:
             }
             key = f"outcome:{outcome.value if outcome else 'none'}"
             st["counts"][key] = int(st["counts"].get(key, 0)) + 1
-        self._put_state(room_id, st)
+        self._put_state(room_id, st, ("believed", "cooldown_until", "open_nudge", "last_outcome", "counts"))
         if nsm.Effect.REPLAN in effects:
             self.replan(room_id, reason=f"nudge {state.outcome.value if state.outcome else 'update'}")
 

@@ -28,6 +28,10 @@ class Store(Protocol):
         sk_from: str | None = None,
     ) -> list[Item]: ...
 
+    def update(self, pk: str, sk: str, fields: Item) -> None:
+        """Write only these fields, leaving the rest of the item as another writer may just have set it."""
+        ...
+
     def delete(self, pk: str, sk: str) -> None: ...
 
 
@@ -68,6 +72,11 @@ class MemoryStore:
             if limit is not None:
                 keys = keys[:limit]
             return [copy.deepcopy(self._data[pk][k]) for k in keys]
+
+    def update(self, pk: str, sk: str, fields: Item) -> None:
+        with self._lock:
+            current = self._data.get(pk, {}).get(sk) or {}
+            self.put(pk, sk, {**current, **fields})
 
     def delete(self, pk: str, sk: str) -> None:
         with self._lock:

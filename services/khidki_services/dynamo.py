@@ -99,5 +99,15 @@ class DynamoStore:
                 return out
             kwargs["ExclusiveStartKey"] = resp["LastEvaluatedKey"]
 
+    def update(self, pk: str, sk: str, fields: Item) -> None:
+        names = {f"#f{i}": k for i, k in enumerate(fields)}
+        values = {f":v{i}": to_dynamo(v) for i, v in enumerate(fields.values())}
+        self.table.update_item(
+            Key={"pk": pk, "sk": sk},
+            UpdateExpression="SET " + ", ".join(f"#f{i} = :v{i}" for i in range(len(fields))),
+            ExpressionAttributeNames=names,
+            ExpressionAttributeValues=values,
+        )
+
     def delete(self, pk: str, sk: str) -> None:
         self.table.delete_item(Key={"pk": pk, "sk": sk})

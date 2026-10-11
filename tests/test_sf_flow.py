@@ -3,10 +3,13 @@ sf_* entry points, on the same simulated room as local mode."""
 
 from khidki_core.clock import SimClock
 from khidki_core.optimizer import Grid
+from khidki_services import nudge as nsm
 from khidki_services.engine import Engine
 from khidki_services.store import MemoryStore
 from khidki_sim import scenario as scenarios
 from khidki_sim.driver import SimDriver, outdoor_for
+
+WAIT = int(nsm.VERIFY_WAIT_S)  # how long Step Functions waits before reading the CO₂ curve
 
 
 def setup(name: str):  # type: ignore[no-untyped-def]
@@ -54,7 +57,7 @@ def test_step_functions_path_catches_partial_open_then_verifies() -> None:
         for _ in range(2):
             engine.sf_await_ack(nid, f"t-{nid}")
             engine.ack(nid, "done")
-            advance(180)
+            advance(WAIT)
             if engine.sf_verify(nid)["status"] == "done":
                 return
 
@@ -70,18 +73,18 @@ def test_step_functions_path_catches_partial_open_then_verifies() -> None:
         nid = None
     assert nid, "no open-both instruction was issued"
     secs = engine.sf_await_ack(nid, "token-1")
-    assert secs["status"] == "issued" and secs["verify_wait_s"] == 180
+    assert secs["status"] == "issued" and secs["verify_wait_s"] == WAIT
 
     engine.ack(nid, "done")  # the teacher taps; the sim opens only the road side
     assert sent[-1][0] == "token-1" and sent[-1][1]["result"] == "done"
-    advance(180)
+    advance(WAIT)
     v = engine.sf_verify(nid)
     assert v["status"] == "follow_up" and v["follow_up"] == "other_side", v
 
     engine.sf_await_ack(nid, "token-2")
     engine.ack(nid, "done")  # the corridor side opens too
     assert sent[-1][0] == "token-2"
-    advance(180)
+    advance(WAIT)
     v = engine.sf_verify(nid)
     assert v["status"] == "done" and v["outcome"] == "verified", v
     assert any("only the road side" in line for line in sim.log)
