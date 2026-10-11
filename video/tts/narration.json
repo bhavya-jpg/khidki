@@ -1,44 +1,190 @@
 [
-  {"id": "s1_question", "lines": [
-    {"say": "On a bad-air morning in Delhi, a teacher with forty-four children has one question.", "show": "On a bad-air morning in Delhi, a teacher with 44 children has one question."},
-    {"say": "Open the window, or keep it shut?", "show": "Open the window, or keep it shut?"}
-  ]},
-  {"id": "s2_dilemma", "lines": [
-    {"say": "Keep it shut, and the children's own breath pushes carbon dioxide past two thousand parts per million in a single period.", "show": "Keep it shut, and the children's own breath pushes CO₂ past 2,000 ppm in a single period."},
-    {"say": "The room turns stuffy, and attention drops.", "show": "The room turns stuffy, and attention drops."},
-    {"say": "Open it, and almost all of the smog outside comes in.", "show": "Open it, and almost all of the smog outside comes in."}
-  ]},
-  {"id": "s3_khidki", "lines": [
-    {"say": "Khidkee, the Hindi word for window, answers that question minute by minute.", "show": "Khidki, the Hindi word for window, answers that question minute by minute."},
-    {"say": "It tells the teacher exactly when to open or close, and then checks that the air really changed.", "show": "It tells the teacher exactly when to open or close, and then checks that the air really changed."}
-  ]},
-  {"id": "s4_plan", "lines": [
-    {"say": "Every morning at six, it plans the day in five-minute steps, from the outdoor air forecast, the school timetable, and a physics model of the room.", "show": "Every morning at six, it plans the day in five-minute steps, from the outdoor air forecast, the school timetable and a physics model of the room."},
-    {"say": "School safety rules are written as Cedar policies, so every decision shows the rule and the number behind it.", "show": "School safety rules are written as Cedar policies, so every decision shows the rule and the number behind it."}
-  ]},
-  {"id": "s5_instruction", "lines": [
-    {"say": "During the day, the teacher sees one calm instruction, in Hindi and English.", "show": "During the day, the teacher sees one calm instruction, in Hindi and English."},
-    {"say": "One tap says it's done.", "show": "One tap says it's done."},
-    {"say": "Khidkee never asks more than six times a day.", "show": "Khidki never asks more than six times a day."}
-  ]},
-  {"id": "s6_verify", "lines": [
-    {"say": "Then comes the part we like most. The children's breath is a tracer gas.", "show": "Then comes the part we like most. The children's breath is a tracer gas."},
-    {"say": "How fast carbon dioxide falls tells Khidkee whether the window really opened.", "show": "How fast CO₂ falls tells Khidki whether the window really opened."},
-    {"say": "If only one side did, it asks for the other.", "show": "If only one side did, it asks for the other."},
-    {"say": "An A W S Step Functions workflow waits for the tap, waits for the air, and then verifies.", "show": "An AWS Step Functions workflow waits for the tap, waits for the air, and then verifies."}
-  ]},
-  {"id": "s7_aws", "lines": [
-    {"say": "It runs on A W S. Lambda, A P I Gateway and DynamoDB hold the plan and the readings.", "show": "It runs on AWS. Lambda, API Gateway and DynamoDB hold the plan and the readings."},
-    {"say": "EventBridge starts the six A M plan, Polly speaks Hindi, and Cedar decides the policies.", "show": "EventBridge starts the 6 AM plan, Polly speaks Hindi, and Cedar decides the policies."},
-    {"say": "All of it is infrastructure as code.", "show": "All of it is infrastructure as code."}
-  ]},
-  {"id": "s8_results", "lines": [
-    {"say": "We tested it on forty-eight real Delhi school days from last winter, in a simulated classroom.", "show": "We tested it on 48 real Delhi school days from last winter, in a simulated classroom."},
-    {"say": "Against a carbon dioxide alarm, Khidkee cut stuffy minutes from sixty-five a day to seventeen, with four requests to the teacher instead of fifteen.", "show": "Against a CO₂ alarm, Khidki cut stuffy minutes from 65 a day to 17, with 4 requests to the teacher instead of 15."},
-    {"say": "It lets in a little more smog to do that, and we say so plainly.", "show": "It lets in a little more smog to do that, and we say so plainly."}
-  ]},
-  {"id": "s9_close", "lines": [
-    {"say": "And for a school with no sensor at all, there is a window timetable to print.", "show": "And for a school with no sensor at all, there is a window timetable to print."},
-    {"say": "Khidkee. Open the window at the right minute.", "show": "Khidki. Open the window at the right minute."}
-  ]}
+ {
+  "id": "s1_question",
+  "lines": [
+   {
+    "say": "On a bad-air morning in Delhi, a teacher with forty-four children has one question.",
+    "show": "On a bad-air morning in Delhi, a teacher with 44 children has one question."
+   },
+   {
+    "say": "Open the window, or keep it shut?",
+    "show": "Open the window, or keep it shut?"
+   }
+  ]
+ },
+ {
+  "id": "s2_dilemma",
+  "lines": [
+   {
+    "say": "Keep it shut, and the children's own breath pushes carbon dioxide past two thousand parts per million in a single period.",
+    "show": "Keep it shut, and the children's own breath pushes CO₂ past 2,000 ppm in a single period."
+   },
+   {
+    "say": "The room turns stuffy, and attention drops.",
+    "show": "The room turns stuffy, and attention drops."
+   },
+   {
+    "say": "Open it, and almost all of the smog outside comes in.",
+    "show": "Open it, and almost all of the smog outside comes in."
+   }
+  ]
+ },
+ {
+  "id": "s3_khidki",
+  "lines": [
+   {
+    "say": "Khidkee, the Hindi word for window, answers that question minute by minute.",
+    "show": "Khidki, the Hindi word for window, answers that question minute by minute."
+   },
+   {
+    "say": "It tells the teacher exactly when to open, and when to close.",
+    "show": "It tells the teacher exactly when to open, and when to close."
+   },
+   {
+    "say": "Children breathe fresher air, the teacher is interrupted less, and the principal sees every classroom on one page.",
+    "show": "Children breathe fresher air, the teacher is interrupted less, and the principal sees every classroom on one page."
+   }
+  ]
+ },
+ {
+  "id": "s4_decide",
+  "lines": [
+   {
+    "say": "How does it know when, without extra hardware?",
+    "show": "How does it know when, without extra hardware?"
+   },
+   {
+    "say": "Khidkee keeps a physics twin of the classroom: how fast forty-four children add carbon dioxide, and how much smog each window setting lets in.",
+    "show": "Khidki keeps a physics twin of the classroom: how fast 44 children add CO₂, and how much smog each window setting lets in."
+   },
+   {
+    "say": "Every morning at six, it takes the outdoor air forecast and the timetable, tests the day in five-minute steps, and keeps the plan with the best balance.",
+    "show": "Every morning at six, it takes the outdoor air forecast and the timetable, tests the day in five-minute steps, and keeps the plan with the best balance."
+   }
+  ]
+ },
+ {
+  "id": "s4b_rules",
+  "lines": [
+   {
+    "say": "School safety rules are written as Cedar policies, so every decision shows the rule and the number behind it.",
+    "show": "School safety rules are written as Cedar policies, so every decision shows the rule and the number behind it."
+   }
+  ]
+ },
+ {
+  "id": "s5_instruction",
+  "lines": [
+   {
+    "say": "During the day, the teacher sees one calm instruction, in Hindi and English.",
+    "show": "During the day, the teacher sees one calm instruction, in Hindi and English."
+   },
+   {
+    "say": "One tap says it's done.",
+    "show": "One tap says it's done."
+   },
+   {
+    "say": "Khidkee never asks more than six times a day.",
+    "show": "Khidki never asks more than six times a day."
+   }
+  ]
+ },
+ {
+  "id": "s6_verify",
+  "lines": [
+   {
+    "say": "Did the window really open? There is no sensor on the window.",
+    "show": "Did the window really open? There is no sensor on the window."
+   },
+   {
+    "say": "The children's breath is the tracer gas, so one ordinary carbon dioxide meter is enough.",
+    "show": "The children's breath is the tracer gas, so one ordinary CO₂ meter is enough."
+   },
+   {
+    "say": "How fast the level falls tells Khidkee how open the room is.",
+    "show": "How fast the level falls tells Khidki how open the room is."
+   },
+   {
+    "say": "If only one side opened, it asks for the other.",
+    "show": "If only one side opened, it asks for the other."
+   },
+   {
+    "say": "An A W S Step Functions workflow waits for the tap, waits for the air, and then verifies.",
+    "show": "An AWS Step Functions workflow waits for the tap, waits for the air, and then verifies."
+   }
+  ]
+ },
+ {
+  "id": "s7_arch",
+  "lines": [
+   {
+    "say": "Here is how it is built. Readings come in through A P I Gateway to Lambda, and live in DynamoDB.",
+    "show": "Here is how it is built. Readings come in through API Gateway to Lambda, and live in DynamoDB."
+   },
+   {
+    "say": "EventBridge starts the six A M plan, Step Functions runs every instruction, and Polly speaks it in Hindi.",
+    "show": "EventBridge starts the 6 AM plan, Step Functions runs every instruction, and Polly speaks it in Hindi."
+   },
+   {
+    "say": "The whole stack is one C D K app.",
+    "show": "The whole stack is one CDK app."
+   }
+  ]
+ },
+ {
+  "id": "s7b_stack",
+  "lines": [
+   {
+    "say": "Under the hood, the twin and the planner are Python and NumPy: dynamic programming for the plan, a least-squares fit for the window check.",
+    "show": "Under the hood, the twin and the planner are Python and NumPy: dynamic programming for the plan, a least-squares fit for the window check."
+   },
+   {
+    "say": "The screens are React and TypeScript.",
+    "show": "The screens are React and TypeScript."
+   },
+   {
+    "say": "One hundred and thirty-one automated tests keep it honest, and everything also runs on a laptop with no cloud.",
+    "show": "131 automated tests keep it honest, and everything also runs on a laptop with no cloud."
+   }
+  ]
+ },
+ {
+  "id": "s8_results",
+  "lines": [
+   {
+    "say": "We tested it on forty-eight real Delhi school days from last winter, in a simulated classroom.",
+    "show": "We tested it on 48 real Delhi school days from last winter, in a simulated classroom."
+   },
+   {
+    "say": "Against a carbon dioxide alarm, Khidkee cut stuffy minutes from sixty-five a day to seventeen, with four requests to the teacher instead of fifteen.",
+    "show": "Against a CO₂ alarm, Khidki cut stuffy minutes from 65 a day to 17, with 4 requests to the teacher instead of 15."
+   },
+   {
+    "say": "It lets in a little more smog to do that, and we say so plainly.",
+    "show": "It lets in a little more smog to do that, and we say so plainly."
+   }
+  ]
+ },
+ {
+  "id": "s9_built",
+  "lines": [
+   {
+    "say": "In this hackathon we built the teacher's screen, the principal's page, and a timetable any school can print with no sensor at all.",
+    "show": "In this hackathon we built the teacher's screen, the principal's page, and a timetable any school can print with no sensor at all."
+   },
+   {
+    "say": "It is deployed on A W S, and the code is open.",
+    "show": "It is deployed on AWS, and the code is open."
+   }
+  ]
+ },
+ {
+  "id": "s10_close",
+  "lines": [
+   {
+    "say": "Khidkee. Open the window at the right minute.",
+    "show": "Khidki. Open the window at the right minute."
+   }
+  ]
+ }
 ]

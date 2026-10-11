@@ -20,12 +20,16 @@ export type SceneId = keyof typeof voJson;
 type Line = { text: string; start: number; end: number };
 export const VO = voJson as Record<SceneId, { seconds: number; lines: Line[] }>;
 
-export const SCENES: SceneId[] = ["s1_question", "s2_dilemma", "s3_khidki", "s4_plan", "s5_instruction", "s6_verify", "s7_aws", "s8_results", "s9_close"];
+export const SCENES: SceneId[] = [
+  "s1_question", "s2_dilemma", "s3_khidki", "s4_decide", "s4b_rules", "s5_instruction",
+  "s6_verify", "s7_arch", "s7b_stack", "s8_results", "s9_built", "s10_close",
+];
 export const FPS = 30;
 export const TRANSITION = 12; // frames of cross-fade between scenes
-const HOLD = 0.55; // seconds a scene stays after its last word
+const HOLD = 0.45; // seconds a scene stays after its last word
 
-export const sceneFrames = (id: SceneId) => Math.ceil((VO[id].seconds + HOLD) * FPS);
+const END_HOLD = 1.8; // the last scene stays long enough to read what is real and what is not
+export const sceneFrames = (id: SceneId) => Math.ceil((VO[id].seconds + (id === "s10_close" ? END_HOLD : HOLD)) * FPS);
 export const totalFrames = () => SCENES.reduce((s, id) => s + sceneFrames(id), 0) - TRANSITION * (SCENES.length - 1);
 /** Frame at which narration line `i` of a scene starts (or ends). */
 export const lineAt = (id: SceneId, i: number, edge: "start" | "end" = "start") => Math.round(VO[id].lines[Math.min(i, VO[id].lines.length - 1)][edge] * FPS);

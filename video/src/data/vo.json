@@ -35,7 +35,7 @@
   ]
  },
  "s3_khidki": {
-  "seconds": 11.26,
+  "seconds": 16.651,
   "lines": [
    {
     "text": "Khidki, the Hindi word for window, answers that question minute by minute.",
@@ -43,24 +43,44 @@
     "end": 4.783
    },
    {
-    "text": "It tells the teacher exactly when to open or close, and then checks that the air really changed.",
+    "text": "It tells the teacher exactly when to open, and when to close.",
     "start": 5.103,
-    "end": 10.81
+    "end": 9.199
+   },
+   {
+    "text": "Children breathe fresher air, the teacher is interrupted less, and the principal sees every classroom on one page.",
+    "start": 9.519,
+    "end": 16.201
    }
   ]
  },
- "s4_plan": {
-  "seconds": 15.136,
+ "s4_decide": {
+  "seconds": 21.843,
   "lines": [
    {
-    "text": "Every morning at six, it plans the day in five-minute steps, from the outdoor air forecast, the school timetable and a physics model of the room.",
+    "text": "How does it know when, without extra hardware?",
     "start": 0.25,
-    "end": 8.314
+    "end": 3.566
    },
    {
+    "text": "Khidki keeps a physics twin of the classroom: how fast 44 children add CO₂, and how much smog each window setting lets in.",
+    "start": 3.886,
+    "end": 11.977
+   },
+   {
+    "text": "Every morning at six, it takes the outdoor air forecast and the timetable, tests the day in five-minute steps, and keeps the plan with the best balance.",
+    "start": 12.297,
+    "end": 21.393
+   }
+  ]
+ },
+ "s4b_rules": {
+  "seconds": 6.278,
+  "lines": [
+   {
     "text": "School safety rules are written as Cedar policies, so every decision shows the rule and the number behind it.",
-    "start": 8.634,
-    "end": 14.686
+    "start": 0.25,
+    "end": 5.828
    }
   ]
  },
@@ -85,47 +105,72 @@
   ]
  },
  "s6_verify": {
-  "seconds": 18.951,
+  "seconds": 23.687,
   "lines": [
    {
-    "text": "Then comes the part we like most. The children's breath is a tracer gas.",
+    "text": "Did the window really open? There is no sensor on the window.",
     "start": 0.25,
-    "end": 4.669
+    "end": 3.91
    },
    {
-    "text": "How fast CO₂ falls tells Khidki whether the window really opened.",
-    "start": 4.989,
-    "end": 9.564
+    "text": "The children's breath is the tracer gas, so one ordinary CO₂ meter is enough.",
+    "start": 4.23,
+    "end": 9.445
    },
    {
-    "text": "If only one side did, it asks for the other.",
-    "start": 9.884,
-    "end": 12.627
+    "text": "How fast the level falls tells Khidki how open the room is.",
+    "start": 9.765,
+    "end": 13.447
+   },
+   {
+    "text": "If only one side opened, it asks for the other.",
+    "start": 13.767,
+    "end": 16.614
    },
    {
     "text": "An AWS Step Functions workflow waits for the tap, waits for the air, and then verifies.",
-    "start": 12.947,
-    "end": 18.501
+    "start": 16.934,
+    "end": 23.237
    }
   ]
  },
- "s7_aws": {
-  "seconds": 14.583,
+ "s7_arch": {
+  "seconds": 16.67,
   "lines": [
    {
-    "text": "It runs on AWS. Lambda, API Gateway and DynamoDB hold the plan and the readings.",
+    "text": "Here is how it is built. Readings come in through API Gateway to Lambda, and live in DynamoDB.",
     "start": 0.25,
-    "end": 6.137
+    "end": 6.817
    },
    {
-    "text": "EventBridge starts the 6 AM plan, Polly speaks Hindi, and Cedar decides the policies.",
-    "start": 6.457,
-    "end": 11.654
+    "text": "EventBridge starts the 6 AM plan, Step Functions runs every instruction, and Polly speaks it in Hindi.",
+    "start": 7.137,
+    "end": 13.737
    },
    {
-    "text": "All of it is infrastructure as code.",
-    "start": 11.974,
-    "end": 14.133
+    "text": "The whole stack is one CDK app.",
+    "start": 14.057,
+    "end": 16.22
+   }
+  ]
+ },
+ "s7b_stack": {
+  "seconds": 17.86,
+  "lines": [
+   {
+    "text": "Under the hood, the twin and the planner are Python and NumPy: dynamic programming for the plan, a least-squares fit for the window check.",
+    "start": 0.25,
+    "end": 7.937
+   },
+   {
+    "text": "The screens are React and TypeScript.",
+    "start": 8.257,
+    "end": 10.855
+   },
+   {
+    "text": "131 automated tests keep it honest, and everything also runs on a laptop with no cloud.",
+    "start": 11.175,
+    "end": 17.41
    }
   ]
  },
@@ -149,18 +194,28 @@
    }
   ]
  },
- "s9_close": {
-  "seconds": 7.797,
+ "s9_built": {
+  "seconds": 11.099,
   "lines": [
    {
-    "text": "And for a school with no sensor at all, there is a window timetable to print.",
+    "text": "In this hackathon we built the teacher's screen, the principal's page, and a timetable any school can print with no sensor at all.",
     "start": 0.25,
-    "end": 4.476
+    "end": 7.007
    },
    {
+    "text": "It is deployed on AWS, and the code is open.",
+    "start": 7.327,
+    "end": 10.649
+   }
+  ]
+ },
+ "s10_close": {
+  "seconds": 3.128,
+  "lines": [
+   {
     "text": "Khidki. Open the window at the right minute.",
-    "start": 4.796,
-    "end": 7.347
+    "start": 0.25,
+    "end": 2.678
    }
   ]
  }

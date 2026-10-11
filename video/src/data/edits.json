@@ -1,12 +1,12 @@
 {
  "instruction": {
   "tapAt": 173,
-  "frames": 345
+  "frames": 342
  },
  "verify": {
-  "bannerAt": 290,
-  "secondTapAt": 385,
-  "tickAt": 540,
-  "frames": 604
+  "bannerAt": 406,
+  "secondTapAt": 505,
+  "tickAt": 682,
+  "frames": 743
  }
 }

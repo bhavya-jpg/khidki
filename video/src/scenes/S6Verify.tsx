@@ -24,13 +24,21 @@ const BOTH = hhmm(ASKED_MIN + Math.round(((f.tap2 - f.instruction) * CAPTURE_SPE
  */
 export const S6Verify: React.FC = () => {
   const frame = useCurrentFrame();
-  const curveAt = lineAt(ID, 1) - 12;
-  const sf = lineAt(ID, 3);
-  const sfSpan = lineAt(ID, 3, "end") - sf;
+  const curveAt = lineAt(ID, 2) - 12;
+  const sf = lineAt(ID, 4);
+  const sfSpan = lineAt(ID, 4, "end") - sf;
   return (
     <Shell>
       <Audio src={staticFile("vo/s6_verify.wav")} />
-      <Tag>Real screen and readings from this run. Simulated sensor.</Tag>
+      <Tag>Real screen and readings. The meter is simulated.</Tag>
+      <div style={{ position: "absolute", left: 110, top: 42, display: "flex", gap: 16 }}>
+        <span style={{ padding: "10px 24px", borderRadius: 999, background: C.blackboard, color: C.chalk, fontSize: 32, fontWeight: 700, ...rise(frame, lineAt(ID, 0) + 40, 14, 20) }}>
+          No sensor on the window
+        </span>
+        <span style={{ padding: "10px 24px", borderRadius: 999, background: C.breathInk, color: C.chalk, fontSize: 32, fontWeight: 700, ...rise(frame, lineAt(ID, 1) + 50, 14, 20) }}>
+          One ordinary CO₂ meter
+        </span>
+      </div>
       <div style={{ position: "absolute", left: 110, top: 122 }}>
         <Device width={900} clips={[{ src: "footage/verify-edit.mp4" }]} />
         <div style={{ marginTop: 12, fontSize: 24, color: C.ink2 }}>The minutes of waiting for the air are played faster than real time.</div>
@@ -38,7 +46,7 @@ export const S6Verify: React.FC = () => {
       <div style={{ position: "absolute", left: 1060, top: 122, width: 750, padding: "26px 28px 18px", borderRadius: 28, background: C.raised, boxShadow: "0 40px 80px -46px rgba(31,58,48,0.5)", ...rise(frame, curveAt - 10, 18, 40) }}>
         <div style={{ fontSize: 40, fontWeight: 800 }}>CO₂ in the room, ppm</div>
         <div style={{ fontSize: 26, color: C.ink2, marginBottom: 6 }}>The children's breath is the tracer gas</div>
-        <Curve width={694} height={400} frame={frame} from={curveAt} over={lineAt(ID, 2, "end") - curveAt} askedAt={ASKED} bothAt={BOTH} />
+        <Curve width={694} height={400} frame={frame} from={curveAt} over={lineAt(ID, 3, "end") - curveAt} askedAt={ASKED} bothAt={BOTH} />
       </div>
       <div style={{ position: "absolute", left: 110, top: 752, ...rise(frame, sf - 8, 16, 30) }}>
         <div style={{ fontSize: 30, fontWeight: 700, marginBottom: 14 }}>

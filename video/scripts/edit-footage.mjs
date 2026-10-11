@@ -8,7 +8,7 @@ import path from "node:path";
 const ROOT = path.resolve(new URL("..", import.meta.url).pathname);
 const vo = JSON.parse(fs.readFileSync(`${ROOT}/src/data/vo.json`, "utf8"));
 const cap = JSON.parse(fs.readFileSync(`${ROOT}/src/data/capture.json`, "utf8"));
-const FPS = 30, HOLD = 0.55, TRANSITION = 12;
+const FPS = 30, HOLD = 0.45, TRANSITION = 12;
 const lineAt = (id, i, edge = "start") => Math.round(vo[id].lines[i][edge] * FPS);
 const sceneFrames = (id) => Math.ceil((vo[id].seconds + HOLD) * FPS);
 
@@ -38,7 +38,7 @@ const edits = {};
   const id = "s6_verify";
   const m = cap.clips.followup.marks;
   const T = { start: 3.0, banner: m.follow_up + 1.2, tap2: m.tap2 + 0.5, tick: m.verified + 1.8, end: cap.clips.followup.seconds - 0.1 };
-  const a = lineAt(id, 2) - 7, b = lineAt(id, 3) - 3, c = lineAt(id, 3, "end") - 15;
+  const a = lineAt(id, 3) - 7, b = lineAt(id, 4) - 3, c = lineAt(id, 4, "end") - 15; // banner, second tap, tick
   const rest = sceneFrames(id) - c + TRANSITION + 6;
   edits.verify = { bannerAt: a, secondTapAt: b, tickAt: c, frames: cut("followup.mp4", "verify-edit.mp4", [[T.start, T.banner, a], [T.banner, T.tap2, b - a], [T.tap2, T.tick, c - b], [T.tick, T.end, rest]]) };
 }

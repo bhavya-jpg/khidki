@@ -6,32 +6,23 @@ import run from "../data/run.json";
 import { lineAt, rise } from "../lib";
 import { C } from "../theme";
 
-const ID = "s4_plan" as const;
+const ID = "s4b_rules" as const;
 const pe = run.decisions.find((d) => d.key === "pe:6B") ?? run.decisions[0];
 
-/** 06:00: the plan for the day, then the rule behind a decision. Plan and decision are the real ones from this run. */
-export const S4Plan: React.FC = () => {
+/** The rule behind a decision. The plan and the decision are the real ones from this run. */
+export const S4bRules: React.FC = () => {
   const frame = useCurrentFrame();
-  const l1end = lineAt(ID, 0, "end");
-  const cedar = lineAt(ID, 1);
-  const inputs = ["Outdoor air forecast", "School timetable", "Physics model of the room"];
+  const cedar = lineAt(ID, 0) + 6;
   return (
     <Shell>
-      <Audio src={staticFile("vo/s4_plan.wav")} />
+      <Audio src={staticFile("vo/s4b_rules.wav")} />
       <Tag>Class 6B, the plan from this run</Tag>
-      <div style={{ position: "absolute", left: 110, top: 76, display: "flex", alignItems: "baseline", gap: 30, ...rise(frame, 0) }}>
-        <span style={{ fontSize: 130, fontWeight: 800, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>06:00</span>
-        <span style={{ fontSize: 50, fontWeight: 600, color: C.ink2 }}>Khidki plans the day</span>
-      </div>
-      <div style={{ position: "absolute", left: 110, top: 232, display: "flex", gap: 18 }}>
-        {inputs.map((t, i) => (
-          <span key={t} style={{ padding: "12px 26px", borderRadius: 999, background: C.raised, border: `2px solid ${C.rule}`, fontSize: 34, fontWeight: 600, ...rise(frame, 22 + i * (l1end / 5), 14, 24) }}>
-            {t}
-          </span>
-        ))}
+      <div style={{ position: "absolute", left: 110, top: 84, ...rise(frame, 0) }}>
+        <div style={{ fontSize: 110, fontWeight: 800, lineHeight: 1.05 }}>School rules, as code</div>
+        <div style={{ marginTop: 6, fontSize: 44, fontWeight: 600, color: C.ink2 }}>Today's plan for Class 6B, and one decision with its policy</div>
       </div>
       <div style={{ position: "absolute", left: 110, top: 330 }}>
-        <Ribbon width={1700} frame={frame} from={30} over={Math.max(l1end - 50, 60)} />
+        <Ribbon width={1700} frame={frame} from={-200} over={10} />
       </div>
       <div
         style={{
